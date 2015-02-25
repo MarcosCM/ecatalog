@@ -1,5 +1,6 @@
 # ecatalog
-========
+Catálogo electrónico de coches de una marca concreta
+
 Autores
 --------
 - Carlos Escuín Blasco: Director del proyecto. 545003@unizar.es
@@ -7,7 +8,3 @@ Autores
 - Alejandro Dieste Cortés: Gestor de desarrollo. 541892@unizar.es
 - Christian García Artero: Gestor de planificación. 597578@unizar.es
 - Íñigo Alonso Ruiz: Gestor de calidad. 665959@unizar.es
-
-Descripión
---------
-Catálogo electrónico de coches de una marca concreta
