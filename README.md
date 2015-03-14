@@ -1,5 +1,5 @@
 # ecatalog
-Catálogo electrónico de coches de una marca concreta
+Catálogo electrónico de coches de la marca Volkswagen - Audi España, S.A.
 
 Autores
 --------
