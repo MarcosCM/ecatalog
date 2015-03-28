@@ -1,0 +1,3 @@
+atributos: Nombre modelo, tipo combustible, potencia, categoria (familiar, deportivo.), numero pertas, precio,consumo numero asientos
+
+Medidas pantallas: 800x500

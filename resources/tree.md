@@ -1,0 +1,3 @@
+# Resources
+Recursos:
+* **images**: Imágenes
