@@ -1,0 +1,173 @@
+package Database;
+
+import java.sql.*;
+import java.util.Properties;
+
+/**
+ * Gestiona una conexión a una base de datos Oracle
+ */
+public class JDBCTemplate {
+    
+    /**
+     * Sólo una conexión por usuario
+     */
+    private static JDBCTemplate singleton = null;
+    
+    /**
+     * Cadena de caracteres con el nombre de usuario, o login, a emplear para
+     * conectarse a la BD
+     */
+    private String user = "";
+
+    /**
+     * Cadena de caracteres con el password, o contraseña, a emplear para
+     * conectarse a la BD
+     */
+    private String password = "";
+
+    /**
+     * Conexión con la BD
+     */
+    private Connection connection = null;
+
+    /**
+     * Configuración del driver
+     */
+    private OracleConfiguration config = null;
+
+    /**
+     * Asigna los valores de usuario, password, host, puerto y nombre de la
+     * base de datos, para que posteriormente pueda hacerse la conexión
+     */
+    private JDBCTemplate(OracleConfiguration config, String user, String password)
+            throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+            this.config = config;
+            this.user = user;
+            this.password = password;
+
+            Class.forName(config.getDriver()).newInstance();
+    }
+    
+    /**
+     * Conecta con la base de datos si no había conexión previa
+     * @return Conexión con la base de datos
+     */
+    public static JDBCTemplate getJDBCTemplate(){
+        return getJDBCTemplate(false);
+    }
+    
+    /**
+     * Conecta con la base de datos si no había conexión previa o reinicia la
+     * conexión
+     * @param forceRestart true para reiniciar la conexión, false en caso contrario
+     * @return Conexión con la base de datos
+     */
+    public static JDBCTemplate getJDBCTemplate(boolean forceRestart){
+        if (forceRestart){
+            singleton.disconnect();
+            singleton = null;
+        }
+        if (singleton == null){
+            Properties prop = new Properties();
+            try {
+                prop.load(JDBCTemplate.class.getResourceAsStream("database.properties"));
+                singleton = configureOracle(prop);
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+        }
+        return singleton;
+    }
+    
+    /**
+     * Establece una conexión con la base de datos Oracle a partir de un
+     * fichero de configuración
+     * @param prop Propiedades del fichero de configuración
+     * @return Conexión con la base de datos
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
+   private static JDBCTemplate configureOracle(Properties prop)
+       throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+        JDBCTemplate oracle = new JDBCTemplate(new OracleConfiguration(prop.getProperty("database.oracle.host"),
+                        prop.getProperty("database.oracle.port"),
+                        prop.getProperty("database.oracle.sid")),
+                        prop.getProperty("database.oracle.user"),
+                        prop.getProperty("database.oracle.password")
+                        );
+        oracle.connect();
+        return oracle;
+   }
+
+    /**
+     * Establece la conexión con la BD
+     * @throws SQLException
+     */
+    public void connect() throws SQLException {
+        connection = DriverManager.getConnection(config.getURL(), user, password);
+    }
+
+    /**
+     * Cierra la conexión con la BD
+     */
+    public void disconnect() {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+            connection = null;
+        } catch (SQLException sqlE) {
+            connection = null;
+        }
+    }
+    
+    /**
+     * Realiza una consulta SQL a la BD (una sentencia SELECT)
+     * @param sql sentencia SQL
+     * @return Resultado de la consulta
+     */
+    public Cursor executeQuery(String sql) {
+        Statement stmt = null;
+        try {
+            stmt = connection.createStatement();
+            return new Cursor(stmt.executeQuery(sql));
+        } catch (SQLException e1) {
+            System.err.println(e1.getMessage());
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e2) {}
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Ejecuta una sentencia SQL que no sea una consulta, es decir, que no
+     * devuelva una tabla como resultado (INSERT, UPDATE, DELETE, ...)
+     * @param sql sentencia SQL
+     */
+    public void executeSentence(String sql) {
+        Statement stmt = null;
+        try {
+            stmt = connection.createStatement();
+            int resultado = stmt.executeUpdate(sql);
+            System.out.println(resultado);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {}
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return config.getURL();
+    }
+}
