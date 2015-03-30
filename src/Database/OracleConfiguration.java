@@ -5,34 +5,36 @@ package Database;
  */
 public class OracleConfiguration {
 
-	private String host;
-	private String port;
-	private String sid;
+    private static final int defaultPort = 1521;
+    
+    private final String host;
+    private final String port;
+    private final String sid;
 
-	public OracleConfiguration(String host, String port, String sid) {
-		this.host = host;
-		this.port = port;
-		this.sid = sid;
-	}
-	
-	public String getDriver() {
-		return "oracle.jdbc.driver.OracleDriver";
-	}
+    public OracleConfiguration(String host, String port, String sid) {
+        this.host = host;
+        this.port = port;
+        this.sid = sid;
+    }
 
-	public String getURL() {
-		return "jdbc:oracle:thin:@" + getHost() + ":" + getPort() +":" + getSid();
-	}
+    public String getDriver() {
+        return "oracle.jdbc.driver.OracleDriver";
+    }
 
-	private String getSid() {
-		return sid;
-	}
+    public String getURL() {
+        return "jdbc:oracle:thin:@" + getHost() + ":" + getPort() +":" + getSid();
+    }
 
-	private String getPort() {
-		return port == null?"1521":port;
-	}
+    private String getSid() {
+        return sid;
+    }
 
-	private String getHost() {
-		return host;
-	}
+    private String getPort() {
+        return (port == null) ? ""+defaultPort : port;
+    }
+
+    private String getHost() {
+        return host;
+    }
 
 }

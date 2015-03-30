@@ -44,7 +44,6 @@ public class JDBCTemplate {
             this.config = config;
             this.user = user;
             this.password = password;
-
             Class.forName(config.getDriver()).newInstance();
     }
     
@@ -59,12 +58,12 @@ public class JDBCTemplate {
     /**
      * Conecta con la base de datos si no había conexión previa o reinicia la
      * conexión
-     * @param forceRestart true para reiniciar la conexión, false en caso contrario
+     * @param forceReload true para reiniciar la conexión, false en caso contrario
      * @return Conexión con la base de datos
      */
-    public static JDBCTemplate getJDBCTemplate(boolean forceRestart){
-        if (forceRestart){
-            singleton.disconnect();
+    public static JDBCTemplate getJDBCTemplate(boolean forceReload){
+        if (forceReload){
+            singleton.close();
             singleton = null;
         }
         if (singleton == null){
@@ -105,22 +104,21 @@ public class JDBCTemplate {
      * Establece la conexión con la BD
      * @throws SQLException
      */
-    public void connect() throws SQLException {
+    private void connect() throws SQLException {
         connection = DriverManager.getConnection(config.getURL(), user, password);
     }
 
     /**
-     * Cierra la conexión con la BD
+     * Cierra la conexión con la BD para liberar recursos
      */
-    public void disconnect() {
+    public void close() {
         try {
             if (connection != null) {
                 connection.close();
             }
-            connection = null;
-        } catch (SQLException sqlE) {
-            connection = null;
-        }
+        } catch (SQLException sqlE) {}
+        connection = null;
+        singleton = null;
     }
     
     /**
@@ -148,13 +146,14 @@ public class JDBCTemplate {
      * Ejecuta una sentencia SQL que no sea una consulta, es decir, que no
      * devuelva una tabla como resultado (INSERT, UPDATE, DELETE, ...)
      * @param sql sentencia SQL
+     * @return Resultado de la operación
      */
-    public void executeSentence(String sql) {
+    public int executeSentence(String sql) {
         Statement stmt = null;
+        int res = -1;
         try {
             stmt = connection.createStatement();
-            int resultado = stmt.executeUpdate(sql);
-            System.out.println(resultado);
+            res = stmt.executeUpdate(sql);
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         } finally {
@@ -164,6 +163,7 @@ public class JDBCTemplate {
                 } catch (SQLException e) {}
             }
         }
+        return res;
     }
 
     @Override
