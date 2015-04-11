@@ -41,10 +41,10 @@ public class JDBCTemplate {
      */
     private JDBCTemplate(OracleConfiguration config, String user, String password)
             throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-            this.config = config;
-            this.user = user;
-            this.password = password;
-            Class.forName(config.getDriver()).newInstance();
+        this.config = config;
+        this.user = user;
+        this.password = password;
+        Class.forName(config.getDriver()).newInstance();
     }
     
     /**
