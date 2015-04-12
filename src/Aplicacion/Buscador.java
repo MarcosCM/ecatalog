@@ -315,7 +315,7 @@ public class Buscador extends javax.swing.JFrame {
             }
         });
 
-        cb_asientos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cb_asientos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "2", "3", "4", "5", "6", "7", "8", "9"  }));
         cb_asientos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_asientosActionPerformed(evt);
@@ -435,6 +435,7 @@ public class Buscador extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cb_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+
                                     .addComponent(modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -605,37 +606,34 @@ public class Buscador extends javax.swing.JFrame {
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
         // TODO add your handling code here:
         //IAR- Van a tener valores y ser enteros si o si
-        filtro.put("ConsumoMax", this.txt_consumoMax.getText());
-        filtro.put("ConsumoMin", this.txt_consumoMin.getText());
-        filtro.put("PotenciaMax", this.txt_potenciaMax.getText());
-        filtro.put("PotenciaMin", this.txt_potenciaMin.getText());
-        filtro.put("PrecioMax", this.txt_precioMax.getText());
-        filtro.put("PrecioMin", this.txt_precioMin.getText());
+	     filtro.put("consumptionMax", this.txt_consumoMax.getText());
+             filtro.put("consumptionMin", this.txt_consumoMin.getText());
+             filtro.put("powerMax", this.txt_potenciaMax.getText());
+             filtro.put("powerMin", this.txt_potenciaMin.getText());
+             filtro.put("costMax", this.txt_precioMax.getText());
+             filtro.put("costMin", this.txt_precioMin.getText());
+   
 
-
-        boolean tieneValor = !(this.cb_asientos.getSelectedItem().toString().equals("Todos") || 
-                this.cb_asientos.getSelectedItem().toString().equals("Cualquiera"));
-        if(tieneValor) filtro.put("Asientos", this.cb_asientos.getSelectedItem().toString());
-
-        tieneValor = !(this.cb_combustible.getSelectedItem().toString().equals("Todos") || 
-                this.cb_combustible.getSelectedItem().toString().equals("Cualquiera"));
-        if(tieneValor) filtro.put("Combustible", this.cb_combustible.getSelectedItem().toString());
-
-        tieneValor = !(this.cb_modelo.getSelectedItem().toString().equals("Todos") || 
-                this.cb_modelo.getSelectedItem().toString().equals("Cualquiera"));
-        if(tieneValor) filtro.put("Modelo", this.cb_modelo.getSelectedItem().toString());
-
-        tieneValor = !(this.cb_asientos.getSelectedItem().toString().equals("Todos") || 
-                this.cb_asientos.getSelectedItem().toString().equals("Cualquiera"));
-        if(tieneValor) filtro.put("Asientos", this.cb_asientos.getSelectedItem().toString());
-
-        tieneValor = !(this.cb_puertas.getSelectedItem().toString().equals("Todos") || 
-                this.cb_puertas.getSelectedItem().toString().equals("Cualquiera"));
-        if(tieneValor) filtro.put("Puertas", this.cb_puertas.getSelectedItem().toString());
-
-        tieneValor = !(this.cb_tipo.getSelectedItem().toString().equals("Todos") || 
-                this.cb_tipo.getSelectedItem().toString().equals("Cualquiera"));
-        if(tieneValor) filtro.put("Tipo", this.cb_tipo.getSelectedItem().toString());
+            boolean tieneValor=!(this.cb_asientos.getSelectedItem().toString().equals("Todos") || 
+                    this.cb_asientos.getSelectedItem().toString().equals("Cualquiera"));
+            if(tieneValor) filtro.put("numberSeats", this.cb_asientos.getSelectedItem().toString());
+       
+            tieneValor=!(this.cb_combustible.getSelectedItem().toString().equals("Todos") || 
+                    this.cb_combustible.getSelectedItem().toString().equals("Cualquiera"));
+            if(tieneValor) filtro.put("fuelType", this.cb_combustible.getSelectedItem().toString());
+        
+            tieneValor=!(this.cb_modelo.getSelectedItem().toString().equals("Todos") || 
+                    this.cb_modelo.getSelectedItem().toString().equals("Cualquiera"));
+            if(tieneValor) filtro.put("name", this.cb_modelo.getSelectedItem().toString());
+         
+            
+            tieneValor=!(this.cb_puertas.getSelectedItem().toString().equals("Todos") || 
+                    this.cb_puertas.getSelectedItem().toString().equals("Cualquiera"));
+            if(tieneValor) filtro.put("numberDoors", this.cb_puertas.getSelectedItem().toString());
+            
+            tieneValor=!(this.cb_tipo.getSelectedItem().toString().equals("Todos") || 
+                    this.cb_tipo.getSelectedItem().toString().equals("Cualquiera"));
+            if(tieneValor) filtro.put("category", this.cb_tipo.getSelectedItem().toString());
 
         String texto="";
         Iterator iter = (Iterator) filtro.keySet().iterator();
