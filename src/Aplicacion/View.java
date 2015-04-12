@@ -14,15 +14,15 @@ public class View {
      * Visualiza una lista de coches
      * @param models Lista de coches
      */
-    public static void list(Car_Model[] models){
+    public static void list(CarModel[] models){
         
     }
     
     /**
      * Muestra la ficha de un coche
-     * @param models Coche a mostrar
+     * @param model Coche a mostrar
      */
-    public static void view(Car_Model models){
+    public static void view(CarModel model){
         
     }
     
@@ -30,7 +30,7 @@ public class View {
      * Muestra la pantalla de edición de un coche
      * @param model Coche a editar
      */
-    public static void edit(Car_Model model){
+    public static void edit(CarModel model){
         
     }
 }

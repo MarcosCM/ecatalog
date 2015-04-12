@@ -6,19 +6,18 @@ package Database;
  */
 public class Manager {
     
-    private static JDBCTemplate template;
-    
     public static void main(String[] args){
-        template = JDBCTemplate.getJDBCTemplate();
-        dropTables();
-        createTables();
+        JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
+        dropTables(template);
+        createTables(template);
         template.close();
     }
     
     /**
      * Crea las tablas de la base de datos
+     * @param template Conexión con la base de datos
      */
-    public static void createTables(){
+    public static void createTables(JDBCTemplate template){
         int res;
         
         res = template.executeSentence("CREATE TABLE Fuel_Types("
@@ -63,7 +62,11 @@ public class Manager {
         System.out.println("CREATE SEQUENCE requests_id: "+res);
     }
     
-    public static void dropTables(){
+    /**
+     * Borra las tablas de la base de datos
+     * @param template Conexión con la base de datos
+     */
+    public static void dropTables(JDBCTemplate template){
         int res;
         
         res = template.executeSentence("DROP SEQUENCE requests_id");

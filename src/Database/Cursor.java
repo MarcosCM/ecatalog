@@ -9,39 +9,42 @@ import java.util.Iterator;
  */
 public class Cursor implements Iterable<Cursor> {
 
-	private final ResultSet rs;
+    private final ResultSet rs;
 	
-	public Cursor(ResultSet rs) {
-		this.rs = rs;
-	}
+    public Cursor(ResultSet rs) {
+        this.rs = rs;
+    }
 
-	public Iterator<Cursor> iterator() {
-            return new Iterator<Cursor>() {
+    @Override
+    public Iterator<Cursor> iterator() {
+        return new Iterator<Cursor>() {
 
-                public boolean hasNext() {
+            @Override
+            public boolean hasNext() {
+                try {
+                    if (rs.next())
+                        return true;
+                    rs.close();
+                } catch (SQLException e) {
                     try {
-                        if (rs.next())
-                            return true;
                         rs.close();
-                    } catch (SQLException e) {
-                        try {
-                            rs.close();
-                        } catch (SQLException e2) {}
-                    }
-                    return false;
+                    } catch (SQLException e2) {}
                 }
+                return false;
+            }
 
-                public Cursor next() {
-                    return new Cursor(rs);
-                }
+            @Override
+            public Cursor next() {
+                return new Cursor(rs);
+            }
 
-                public void remove() {
-                }
+            @Override
+            public void remove() {
+            }
+        };
+    }
 
-            };
-	}
-
-	public ResultSet getResultSet(){
-            return rs;
-        }
+    public ResultSet getResultSet(){
+        return rs;
+    }
 }
