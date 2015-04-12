@@ -7,6 +7,7 @@
 package Aplicacion;
 import java.util.HashMap;import java.util.Iterator;
 import java.util.Set;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -22,6 +23,10 @@ HashMap<String,String>filtro=new HashMap();
 
     }
 
+    public JScrollPane getListPane(){
+        return jScrollPane2;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,16 +67,15 @@ HashMap<String,String>filtro=new HashMap();
         modelo4 = new java.awt.Label();
         cb_puertas = new javax.swing.JComboBox();
         cb_asientos = new javax.swing.JComboBox();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        Ejemplo = new javax.swing.JTextArea();
         jSpinner1 = new javax.swing.JSpinner();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
 
         jScrollPane1.setViewportView(jTextPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setExtendedState(200);
-        setPreferredSize(new java.awt.Dimension(1100, 700));
 
         modelo.setName("Modelo"); // NOI18N
         modelo.setText("Modelo");
@@ -319,22 +323,29 @@ HashMap<String,String>filtro=new HashMap();
             }
         });
 
-        Ejemplo.setColumns(20);
-        Ejemplo.setRows(5);
-        jScrollPane2.setViewportView(Ejemplo);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1098, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 369, Short.MAX_VALUE)
+        );
+
+        jScrollPane2.setViewportView(jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(296, 296, 296)
+                .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -383,7 +394,7 @@ HashMap<String,String>filtro=new HashMap();
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txt_precioMin, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
                             .addComponent(txt_precioMax))
-                        .addGap(0, 249, Short.MAX_VALUE))
+                        .addGap(0, 258, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -401,6 +412,7 @@ HashMap<String,String>filtro=new HashMap();
                                 .addGap(18, 18, 18)
                                 .addComponent(txt_consumoMax, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(215, 215, 215))))
+            .addComponent(jScrollPane2)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -467,8 +479,7 @@ HashMap<String,String>filtro=new HashMap();
                 .addGap(22, 22, 22)
                 .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         modelo.getAccessibleContext().setAccessibleName("txt_modelo");
@@ -591,52 +602,50 @@ HashMap<String,String>filtro=new HashMap();
 
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
         // TODO add your handling code here:
-       //IAR- Van a tener valores y ser enteros si o si
-             filtro.put("ConsumoMax", this.txt_consumoMax.getText());
-             filtro.put("ConsumoMin", this.txt_consumoMin.getText());
-             filtro.put("PotenciaMax", this.txt_potenciaMax.getText());
-             filtro.put("PotenciaMin", this.txt_potenciaMin.getText());
-             filtro.put("PrecioMax", this.txt_precioMax.getText());
-             filtro.put("PrecioMin", this.txt_precioMin.getText());
-   
+        //IAR- Van a tener valores y ser enteros si o si
+        filtro.put("ConsumoMax", this.txt_consumoMax.getText());
+        filtro.put("ConsumoMin", this.txt_consumoMin.getText());
+        filtro.put("PotenciaMax", this.txt_potenciaMax.getText());
+        filtro.put("PotenciaMin", this.txt_potenciaMin.getText());
+        filtro.put("PrecioMax", this.txt_precioMax.getText());
+        filtro.put("PrecioMin", this.txt_precioMin.getText());
 
-            boolean tieneValor=!(this.cb_asientos.getSelectedItem().toString().equals("Todos") || 
-                    this.cb_asientos.getSelectedItem().toString().equals("Cualquiera"));
-            if(tieneValor) filtro.put("Asientos", this.cb_asientos.getSelectedItem().toString());
-       
-            tieneValor=!(this.cb_combustible.getSelectedItem().toString().equals("Todos") || 
-                    this.cb_combustible.getSelectedItem().toString().equals("Cualquiera"));
-            if(tieneValor) filtro.put("Combustible", this.cb_combustible.getSelectedItem().toString());
-        
-            tieneValor=!(this.cb_modelo.getSelectedItem().toString().equals("Todos") || 
-                    this.cb_modelo.getSelectedItem().toString().equals("Cualquiera"));
-            if(tieneValor) filtro.put("Modelo", this.cb_modelo.getSelectedItem().toString());
-            
-            tieneValor=!(this.cb_asientos.getSelectedItem().toString().equals("Todos") || 
-                    this.cb_asientos.getSelectedItem().toString().equals("Cualquiera"));
-            if(tieneValor) filtro.put("Asientos", this.cb_asientos.getSelectedItem().toString());
-            
-            tieneValor=!(this.cb_puertas.getSelectedItem().toString().equals("Todos") || 
-                    this.cb_puertas.getSelectedItem().toString().equals("Cualquiera"));
-            if(tieneValor) filtro.put("Puertas", this.cb_puertas.getSelectedItem().toString());
-            
-            tieneValor=!(this.cb_tipo.getSelectedItem().toString().equals("Todos") || 
-                    this.cb_tipo.getSelectedItem().toString().equals("Cualquiera"));
-            if(tieneValor) filtro.put("Tipo", this.cb_tipo.getSelectedItem().toString());
-            String texto="";
+
+        boolean tieneValor = !(this.cb_asientos.getSelectedItem().toString().equals("Todos") || 
+                this.cb_asientos.getSelectedItem().toString().equals("Cualquiera"));
+        if(tieneValor) filtro.put("Asientos", this.cb_asientos.getSelectedItem().toString());
+
+        tieneValor = !(this.cb_combustible.getSelectedItem().toString().equals("Todos") || 
+                this.cb_combustible.getSelectedItem().toString().equals("Cualquiera"));
+        if(tieneValor) filtro.put("Combustible", this.cb_combustible.getSelectedItem().toString());
+
+        tieneValor = !(this.cb_modelo.getSelectedItem().toString().equals("Todos") || 
+                this.cb_modelo.getSelectedItem().toString().equals("Cualquiera"));
+        if(tieneValor) filtro.put("Modelo", this.cb_modelo.getSelectedItem().toString());
+
+        tieneValor = !(this.cb_asientos.getSelectedItem().toString().equals("Todos") || 
+                this.cb_asientos.getSelectedItem().toString().equals("Cualquiera"));
+        if(tieneValor) filtro.put("Asientos", this.cb_asientos.getSelectedItem().toString());
+
+        tieneValor = !(this.cb_puertas.getSelectedItem().toString().equals("Todos") || 
+                this.cb_puertas.getSelectedItem().toString().equals("Cualquiera"));
+        if(tieneValor) filtro.put("Puertas", this.cb_puertas.getSelectedItem().toString());
+
+        tieneValor = !(this.cb_tipo.getSelectedItem().toString().equals("Todos") || 
+                this.cb_tipo.getSelectedItem().toString().equals("Cualquiera"));
+        if(tieneValor) filtro.put("Tipo", this.cb_tipo.getSelectedItem().toString());
+
+        String texto="";
         Iterator iter = (Iterator) filtro.keySet().iterator();
-Set<String> keySet = filtro.keySet();
-Iterator<String> keySetIterator = keySet.iterator();
+        Set<String> keySet = filtro.keySet();
+        Iterator<String> keySetIterator = keySet.iterator();
 
-    while(keySetIterator.hasNext()) {
-
-        String key = keySetIterator.next();
-        texto+=key + " - " + filtro.get(key)+" \n";
-    }
+        while(keySetIterator.hasNext()) {
+            String key = keySetIterator.next();
+            texto+=key + " - " + filtro.get(key)+" \n";
+        }
          
-       Ejemplo.setText(texto);
-       filtro=new HashMap();
-       
+        filtro=new HashMap<String, String>();
     }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void sld_potenciaMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_potenciaMinMouseClicked
@@ -711,13 +720,13 @@ Iterator<String> keySetIterator = keySet.iterator();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea Ejemplo;
     private java.awt.Button btn_buscar;
     private javax.swing.JComboBox cb_asientos;
     private javax.swing.JComboBox cb_combustible;
     private javax.swing.JComboBox cb_modelo;
     private javax.swing.JComboBox cb_puertas;
     private javax.swing.JComboBox cb_tipo;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jSpinner1;

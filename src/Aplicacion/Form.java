@@ -63,6 +63,10 @@ public class Form {
         formParams.put(key, value);
     }
     
+    /**
+     * Determina si el filtro está vacío o no
+     * @return true si, y solo si, está vacío, false en caso contrario
+     */
     public boolean isEmpty(){
         return formParams.isEmpty();
     }
