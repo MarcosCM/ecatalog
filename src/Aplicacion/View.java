@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Aplicacion;
 
 import javax.swing.JButton;
@@ -19,8 +14,9 @@ public class View {
      * Visualiza una lista de coches
      * @param models Lista de coches
      * @param panel Panel donde se carga la lista
+     * @param panelFicha Panel donde se carga la ficha de un coche
      */
-    public static void list(CarModel[] models, JScrollPane panel){
+    public static void list(CarModel[] models, JScrollPane panel, final JScrollPane panelFicha){
         JPanel model;
         JTextPane name, cost;
         JButton view;
@@ -32,7 +28,7 @@ public class View {
             view.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    btn_masDetallesActionPerformed(evt, c);
+                    btn_masDetallesActionPerformed(evt, c, panelFicha);
                 }
             });
             name.setText(c.getName());
@@ -46,25 +42,20 @@ public class View {
     
     /**
      * Cuando se pulsa el botón de más detalles se ejecuta este método
-     * @param evt 
+     * @param evt evento
+     * @param c Coche a mostrar
+     * @param panelFicha Panel en el que se mostrará el coche
      */
-    private static void btn_masDetallesActionPerformed(java.awt.event.ActionEvent evt, CarModel c) {
-         view(c);
+    private static void btn_masDetallesActionPerformed(java.awt.event.ActionEvent evt, CarModel c, JScrollPane panelFicha) {
+         view(c, panelFicha);
     }
      
     /**
      * Muestra la ficha de un coche
      * @param model Coche a mostrar
+     * @param panel Panel en el que se mostrará el coche
      */
-    public static void view(CarModel model){
-        
-    }
-    
-    /**
-     * Muestra la pantalla de edición de un coche
-     * @param model Coche a editar
-     */
-    public static void edit(CarModel model){
+    public static void view(CarModel model, JScrollPane panel){
         
     }
 }

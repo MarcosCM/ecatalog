@@ -1,18 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Aplicacion;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
-import javax.swing.JScrollPane;
 
 /**
- *
- * @author inigo
+ * Ventana del buscador
  */
 public class Buscador extends javax.swing.JFrame {
     HashMap<String,String>filtro=new HashMap();
@@ -22,10 +15,6 @@ public class Buscador extends javax.swing.JFrame {
     public Buscador() {
         initComponents();                
 
-    }
-
-    public JScrollPane getListPane(){
-        return jScrollPane2;
     }
     
     /**
@@ -646,7 +635,7 @@ public class Buscador extends javax.swing.JFrame {
         }
         
         Form formulario_filtro=new Form(filtro);
-        Controller.list(formulario_filtro);
+        Controller.list(formulario_filtro, jScrollPane2, jScrollPane1);
         filtro=new HashMap<String, String>();
     }//GEN-LAST:event_btn_buscarActionPerformed
 
