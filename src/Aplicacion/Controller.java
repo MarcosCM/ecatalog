@@ -1,6 +1,7 @@
 package Aplicacion;
 
 import Database.JDBCTemplate;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
@@ -34,7 +35,32 @@ public class Controller {
      * @param form Filtro de parámetros
      */
     public static void list(Form form){
+    	JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
+    	String options = getSQLOptions(form);
+    	String query = "SELECT * FROM Car "+options;
+    	ResultSet rs = template.executeQuery(query).getResultSet();
+    	CarModel car;
+    	CarModel[] models = null;
+    	int sizeVector=0;
+    	try {
+            rs.first();
+            //calculamos el tamaño que tendrá el vector de modelos
+            while(rs.next()){
+                sizeVector++;
+            }
+            models=new CarModel[sizeVector];
+            rs.first();
+            //introducimos cada coche en el vector
+            for(int i=0; i<sizeVector; i++){
+                car = new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
+                        rs.getInt("number_doors"), rs.getInt("cost"), rs.getDouble("consumption"), rs.getInt("number_seats"));
+                models[i] = car;
+                rs.next();
+            }
+        } catch (SQLException e){}
         
+    	//pasamos el vector de modelos a la vista
+    	View.list(models);
     }
     
     /**
@@ -71,6 +97,18 @@ public class Controller {
      * @param carName Nombre identificador del coche que desea ver el cliente
      */
     public static void contactRequest(Form form, String carName){
-        
+        JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
+        String insert="INSERT INTO Request VALUES (requests_id.nextval, ";
+        Map.Entry<String, String> aux;
+        Iterator<Map.Entry<String, String>> iterator = form.getIterator();
+        insert+=iterator.next();
+        //requester_name y requester_mail
+        while (iterator.hasNext()){
+            aux = iterator.next();
+            insert+=aux.getValue()+", ";
+        }
+        //momento de la compra
+        insert+=carName+", CURRENT_STAMP);";
+        template.executeQuery(insert);
     }
 }
