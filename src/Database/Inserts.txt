@@ -1,0 +1,29 @@
+
+INSERT INTO Fuel_Types
+VALUES ('Gasolina');
+INSERT INTO Fuel_Types
+VALUES ('Gasoil');
+INSERT INTO Categories
+VALUES ('Familiar');
+INSERT INTO Categories
+VALUES ('Deportivo');
+INSERT INTO Categories
+VALUES ('Monovolumen');
+INSERT INTO Categories
+VALUES ('Todo-terreno');
+INSERT INTO Categories
+VALUES ('Mini'); 
+INSERT INTO Car
+VALUES ('Coche de Jalamon', 'Gasoil',135,'Familiar',5,12000,8.50,6); 
+
+INSERT INTO Car
+VALUES ('Coche de Christian', 'Gasolina',90,'Monovolumen',2,17000,11.50,3); 
+
+INSERT INTO Car
+VALUES ('Coche de Dieestex', 'Gasolina',135,'Deportivo',4,15000,12.50,2); 
+
+INSERT INTO Car
+VALUES ('Coche de Xarlie', 'Gasolina',120,'Mini',3,10000,12.50,4); 
+
+INSERT INTO Car
+VALUES ('Coche de Inigol', 'Gasoil',105,'Todo-terreno',4,9000,9,5); 
