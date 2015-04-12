@@ -1,9 +1,11 @@
 package Aplicacion;
 
+import Database.JDBCTemplate;
+
 /**
  * Modelo lógico de un coche
  */
-public class Car_Model {
+public class CarModel {
 
     private String name;	// nombre del coche
     private String fuelType;	// tipo de combustible
@@ -21,10 +23,11 @@ public class Car_Model {
      * @param power Potencia
      * @param category Categoría del coche
      * @param numberDoors Número de puertas
-     * @param numberSeats Número de asientos
+     * @param cost Precio
      * @param consumption Consumo
+     * @param numberSeats Número de asientos
      */
-    public Car_Model(String name, String fuelType, int power, String category,
+    public CarModel(String name, String fuelType, int power, String category,
                 int numberDoors, int cost, double consumption, int numberSeats) {
         this.name = name;
         this.fuelType=fuelType;
@@ -146,5 +149,26 @@ public class Car_Model {
      */
     public void setNumberSeats(int numberSeats) {
         this.numberSeats = numberSeats;
+    }
+    
+    /**
+     * Almacena el coche en la base de datos
+     * @return true si se ha almacenado correctamente, false en caso contrario
+     */
+    public boolean store(){
+        JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
+        
+        //probamos a insertar
+        String query = "INSERT INTO Car VALUES ('"+getName()+"', '"+getFuelType()+"', '"+getPower()+"', '"+getCategory()+"', "
+                + "'"+getNumberDoors()+"', '"+getCost()+"', '"+getConsumption()+"', '"+getNumberSeats()+"')";
+        int res = template.executeSentence(query);
+        //si ya existe entonces actualizamos
+        if (res == -1){
+            query = "UPDATE Car SET name='"+getName()+"', fuel_type='"+getFuelType()+"', power='"+getPower()+"', category='"+getCategory()+"', "
+                + "number_doors='"+getNumberDoors()+"', cost='"+getCost()+"', consumption='"+getConsumption()+"', number_seats='"+getNumberSeats()+"' "
+                + "WHERE name=''";
+            res = template.executeSentence(query);
+        }
+        return res != -1;
     }
 }

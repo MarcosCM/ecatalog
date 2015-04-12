@@ -1,6 +1,7 @@
 package Aplicacion;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -29,6 +30,14 @@ public class Form {
     }
     
     /**
+     * Devuelve un iterador sobre los pares clave => valor
+     * @return Iterador sobre pares clave => valor
+     */
+    public Iterator<Map.Entry<String, String>> getIterator(){
+        return formParams.entrySet().iterator();
+    }
+    
+    /**
      * Obtiene el objeto que gestiona el filtro
      * @return Objeto con datos clave => valor
      */
@@ -52,5 +61,9 @@ public class Form {
      */
     public void setParam(String key, String value){
         formParams.put(key, value);
+    }
+    
+    public boolean isEmpty(){
+        return formParams.isEmpty();
     }
 }
