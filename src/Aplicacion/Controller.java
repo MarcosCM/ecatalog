@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Map;
+import javax.swing.JScrollPane;
 
 /**
  * Controlador de la aplicación
@@ -33,8 +34,9 @@ public class Controller {
     /**
      * Accede al listado de coches
      * @param form Filtro de parámetros
+     * @param panel Panel en el que se mostrarán los resultados
      */
-    public static void list(Form form){
+    public static void list(Form form, JScrollPane panel, final JScrollPane panelFicha){
     	JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
     	String options = getSQLOptions(form);
     	String query = "SELECT * FROM Car "+options;
@@ -60,14 +62,15 @@ public class Controller {
         } catch (SQLException e){}
         
     	//pasamos el vector de modelos a la vista
-    	View.list(models);
+    	View.list(models, panel, panelFicha);
     }
     
     /**
      * Accede a la ficha de un coche
      * @param carName Nombre identificador del coche
+     * @param panel Panel en el que se mostrará el coche
      */
-    public static void view(String carName){
+    public static void view(String carName, JScrollPane panel){
         JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
         
         String query = "SELECT * FROM Car WHERE name='"+carName+"'";
@@ -80,15 +83,7 @@ public class Controller {
         } catch(SQLException e){}
         
         //pasamos el coche a la vista
-        View.view(car);
-    }
-    
-    /**
-     * Accede a la pantalla de edición de un coche
-     * @param carName Nombre identificador del coche
-     */
-    public static void edit(String carName){
-        
+        View.view(car, panel);
     }
     
     /**
