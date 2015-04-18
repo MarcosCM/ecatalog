@@ -26,99 +26,81 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel6" min="-2" pref="26" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="216" max="-2" attributes="0"/>
-                      <Component id="jLabel8" min="-2" pref="26" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Puertas" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Asientos" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Precio" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Nombre" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
-                          <Component id="Combustible" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Potencia" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Categoria" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Consumo" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="campoNombre" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
-                          <Component id="campoCombustible" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
-                          <Component id="campoPotencia" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
-                          <Component id="campoCategoria" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
-                          <Component id="campoConsumo" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
-                          <Component id="campoPuertas" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
-                          <Component id="campoAsientos" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
-                          <Component id="campoPrecio" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="Puertas" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="Asientos" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="Precio" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="Nombre" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
+                  <Component id="Combustible" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="Potencia" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="Categoria" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="Consumo" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="campoNombre" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
+                  <Component id="campoCombustible" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
+                  <Component id="campoPotencia" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
+                  <Component id="campoCategoria" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
+                  <Component id="campoConsumo" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
+                  <Component id="campoPuertas" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
+                  <Component id="campoAsientos" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
+                  <Component id="campoPrecio" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="362" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Nombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="campoNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Combustible" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="campoCombustible" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Potencia" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="campoPotencia" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Categoria" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="campoCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Consumo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="campoConsumo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Puertas" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="campoPuertas" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Asientos" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="campoAsientos" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Precio" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="campoPrecio" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                  </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="70" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Nombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoNombre" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel6" max="32767" attributes="0"/>
-                  <Component id="jLabel8" pref="23" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Combustible" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoCombustible" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Potencia" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoPotencia" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Categoria" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Consumo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoConsumo" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Puertas" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoPuertas" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Asientos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoAsientos" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Precio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoPrecio" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -140,22 +122,6 @@
       <Properties>
         <Property name="horizontalAlignment" type="int" value="2"/>
         <Property name="text" type="java.lang.String" value="Potencia:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel6">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/anterior.png"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel8">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/next.png"/>
-        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="Categoria">

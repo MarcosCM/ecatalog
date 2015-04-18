@@ -36,20 +36,11 @@ public class View {
                 int row = Integer.valueOf(e.getActionCommand());
                 String name = (String) tableModel.getValueAt(row, 0);
                 CarModel car = new CarModel(name);
-                //Descripcion.openWindow(car);
+                Descripcion.openWindow(car);
             }
         };
         ButtonColumn buttonColumn = new ButtonColumn(modelsList, viewMore, tableModel.getColumnCount() - 1);
         buttonColumn.setMnemonic(KeyEvent.VK_D);
-    }
-    
-    /**
-     * Cuando se pulsa el botón de más detalles se ejecuta este método
-     * @param evt evento
-     * @param c Coche a mostrar
-     */
-    private static void btn_masDetallesActionPerformed(java.awt.event.ActionEvent evt, CarModel c) {
-        //Descripcion.openWindow(c);
     }
      
     /**

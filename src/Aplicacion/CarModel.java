@@ -25,18 +25,20 @@ public class CarModel {
      * @param name Nombre (clave) del modelo de coche
      */
     public CarModel(String name){
+        this.name = name;
         JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
         String query = "SELECT * FROM Car WHERE name='"+name+"'";
         Cursor c = template.executeQuery(query);
         ResultSet rs = c.getResultSet();
         try {
+            rs.next();
             fuelType = rs.getString("fuel_type");
-            fuelType = rs.getString("power");
-            fuelType = rs.getString("category");
-            fuelType = rs.getString("number_doors");
-            fuelType = rs.getString("cost");
-            fuelType = rs.getString("consumption");
-            fuelType = rs.getString("number_seats");
+            power = Integer.parseInt(rs.getString("power"));
+            category = rs.getString("category");
+            numberDoors = Integer.parseInt(rs.getString("number_doors"));
+            cost = Integer.parseInt(rs.getString("cost"));
+            consumption = Double.parseDouble(rs.getString("consumption"));
+            numberSeats = Integer.parseInt(rs.getString("number_seats"));
         } catch (SQLException ex) {}
     }
     
