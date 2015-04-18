@@ -17,7 +17,6 @@ public class Descripcion extends javax.swing.JFrame {
      */
     public Descripcion(CarModel car) {
         initComponents();
-        System.out.println(car);
         campoNombre.setText(car.getName());
         campoAsientos.setText(""+car.getNumberSeats());
         campoCategoria.setText(car.getCategory());
