@@ -98,16 +98,16 @@ public class Buscador extends javax.swing.JFrame {
 
         sld_potenciaMax.setMaximum(200);
         sld_potenciaMax.setToolTipText("");
-        sld_potenciaMax.setValue(100);
+        sld_potenciaMax.setValue(200);
         sld_potenciaMax.setValueIsAdjusting(true);
-        sld_potenciaMax.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                sld_potenciaMaxMouseDragged(evt);
-            }
-        });
         sld_potenciaMax.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sld_potenciaMaxMouseClicked(evt);
+            }
+        });
+        sld_potenciaMax.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                sld_potenciaMaxMouseDragged(evt);
             }
         });
         sld_potenciaMax.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -117,7 +117,7 @@ public class Buscador extends javax.swing.JFrame {
         });
 
         txt_potenciaMax.setEditable(false);
-        txt_potenciaMax.setText("100");
+        txt_potenciaMax.setText("200");
         txt_potenciaMax.setToolTipText("Ej:  V20");
         txt_potenciaMax.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,16 +127,16 @@ public class Buscador extends javax.swing.JFrame {
 
         sld_potenciaMin.setMaximum(200);
         sld_potenciaMin.setToolTipText("");
-        sld_potenciaMin.setValue(100);
+        sld_potenciaMin.setValue(0);
         sld_potenciaMin.setValueIsAdjusting(true);
-        sld_potenciaMin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                sld_potenciaMinMouseDragged(evt);
-            }
-        });
         sld_potenciaMin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sld_potenciaMinMouseClicked(evt);
+            }
+        });
+        sld_potenciaMin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                sld_potenciaMinMouseDragged(evt);
             }
         });
         sld_potenciaMin.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -146,7 +146,7 @@ public class Buscador extends javax.swing.JFrame {
         });
 
         txt_potenciaMin.setEditable(false);
-        txt_potenciaMin.setText("100");
+        txt_potenciaMin.setText("0");
         txt_potenciaMin.setToolTipText("Ej:  V20");
         txt_potenciaMin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,16 +173,16 @@ public class Buscador extends javax.swing.JFrame {
 
         sld_precioMin.setMaximum(100000);
         sld_precioMin.setToolTipText("");
-        sld_precioMin.setValue(10000);
+        sld_precioMin.setValue(0);
         sld_precioMin.setValueIsAdjusting(true);
-        sld_precioMin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                sld_precioMinMouseDragged(evt);
-            }
-        });
         sld_precioMin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sld_precioMinMouseClicked(evt);
+            }
+        });
+        sld_precioMin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                sld_precioMinMouseDragged(evt);
             }
         });
         sld_precioMin.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -192,7 +192,7 @@ public class Buscador extends javax.swing.JFrame {
         });
 
         txt_precioMin.setEditable(false);
-        txt_precioMin.setText("10000");
+        txt_precioMin.setText("0");
         txt_precioMin.setToolTipText("Ej:  V20");
         txt_precioMin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,16 +202,16 @@ public class Buscador extends javax.swing.JFrame {
 
         sld_precioMax.setMaximum(100000);
         sld_precioMax.setToolTipText("");
-        sld_precioMax.setValue(10000);
+        sld_precioMax.setValue(100000);
         sld_precioMax.setValueIsAdjusting(true);
-        sld_precioMax.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                sld_precioMaxMouseDragged(evt);
-            }
-        });
         sld_precioMax.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sld_precioMaxMouseClicked(evt);
+            }
+        });
+        sld_precioMax.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                sld_precioMaxMouseDragged(evt);
             }
         });
         sld_precioMax.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -221,7 +221,7 @@ public class Buscador extends javax.swing.JFrame {
         });
 
         txt_precioMax.setEditable(false);
-        txt_precioMax.setText("10000");
+        txt_precioMax.setText("100000");
         txt_precioMax.setToolTipText("Ej:  V20");
         txt_precioMax.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,7 +237,7 @@ public class Buscador extends javax.swing.JFrame {
 
         sld_consumoMin.setMaximum(20);
         sld_consumoMin.setToolTipText("");
-        sld_consumoMin.setValue(5);
+        sld_consumoMin.setValue(0);
         sld_consumoMin.setValueIsAdjusting(true);
         sld_consumoMin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -256,7 +256,7 @@ public class Buscador extends javax.swing.JFrame {
         });
 
         txt_consumoMax.setEditable(false);
-        txt_consumoMax.setText("5");
+        txt_consumoMax.setText("20");
         txt_consumoMax.setToolTipText("Ej:  V20");
         txt_consumoMax.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,16 +266,15 @@ public class Buscador extends javax.swing.JFrame {
 
         sld_consumoMax.setMaximum(20);
         sld_consumoMax.setToolTipText("");
-        sld_consumoMax.setValue(5);
         sld_consumoMax.setValueIsAdjusting(true);
-        sld_consumoMax.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                sld_consumoMaxMouseDragged(evt);
-            }
-        });
         sld_consumoMax.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sld_consumoMaxMouseClicked(evt);
+            }
+        });
+        sld_consumoMax.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                sld_consumoMaxMouseDragged(evt);
             }
         });
         sld_consumoMax.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -285,7 +284,7 @@ public class Buscador extends javax.swing.JFrame {
         });
 
         txt_consumoMin.setEditable(false);
-        txt_consumoMin.setText("5");
+        txt_consumoMin.setText("0");
         txt_consumoMin.setToolTipText("Ej:  V20");
         txt_consumoMin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -466,7 +465,6 @@ public class Buscador extends javax.swing.JFrame {
         );
 
         modelo.getAccessibleContext().setAccessibleName("txt_modelo");
-        modelo10.getAccessibleContext().setAccessibleName("Potencia Min");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -586,34 +584,33 @@ public class Buscador extends javax.swing.JFrame {
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
         // TODO add your handling code here:
         //IAR- Van a tener valores y ser enteros si o si
-	     filtro.put("consumptionMax", this.txt_consumoMax.getText());
-             filtro.put("consumptionMin", this.txt_consumoMin.getText());
-             filtro.put("powerMax", this.txt_potenciaMax.getText());
-             filtro.put("powerMin", this.txt_potenciaMin.getText());
-             filtro.put("costMax", this.txt_precioMax.getText());
-             filtro.put("costMin", this.txt_precioMin.getText());
-   
+        filtro.put("consumptionMax", this.txt_consumoMax.getText());
+        filtro.put("consumptionMin", this.txt_consumoMin.getText());
+        filtro.put("powerMax", this.txt_potenciaMax.getText());
+        filtro.put("powerMin", this.txt_potenciaMin.getText());
+        filtro.put("costMax", this.txt_precioMax.getText());
+        filtro.put("costMin", this.txt_precioMin.getText());
 
-            boolean tieneValor=!(this.cb_asientos.getSelectedItem().toString().equals("Todos") || 
-                    this.cb_asientos.getSelectedItem().toString().equals("Cualquiera"));
-            if(tieneValor) filtro.put("numberSeats", this.cb_asientos.getSelectedItem().toString());
-       
-            tieneValor=!(this.cb_combustible.getSelectedItem().toString().equals("Todos") || 
-                    this.cb_combustible.getSelectedItem().toString().equals("Cualquiera"));
-            if(tieneValor) filtro.put("fuelType", this.cb_combustible.getSelectedItem().toString());
-        
-            tieneValor=!(this.cb_modelo.getSelectedItem().toString().equals("Todos") || 
-                    this.cb_modelo.getSelectedItem().toString().equals("Cualquiera"));
-            if(tieneValor) filtro.put("name", this.cb_modelo.getSelectedItem().toString());
-         
-            
-            tieneValor=!(this.cb_puertas.getSelectedItem().toString().equals("Todos") || 
-                    this.cb_puertas.getSelectedItem().toString().equals("Cualquiera"));
-            if(tieneValor) filtro.put("numberDoors", this.cb_puertas.getSelectedItem().toString());
-            
-            tieneValor=!(this.cb_tipo.getSelectedItem().toString().equals("Todos") || 
-                    this.cb_tipo.getSelectedItem().toString().equals("Cualquiera"));
-            if(tieneValor) filtro.put("category", this.cb_tipo.getSelectedItem().toString());
+        boolean tieneValor=!(this.cb_asientos.getSelectedItem().toString().equals("Todos") || 
+                this.cb_asientos.getSelectedItem().toString().equals("Cualquiera"));
+        if(tieneValor) filtro.put("numberSeats", this.cb_asientos.getSelectedItem().toString());
+
+        tieneValor=!(this.cb_combustible.getSelectedItem().toString().equals("Todos") || 
+                this.cb_combustible.getSelectedItem().toString().equals("Cualquiera"));
+        if(tieneValor) filtro.put("fuelType", this.cb_combustible.getSelectedItem().toString());
+
+        tieneValor=!(this.cb_modelo.getSelectedItem().toString().equals("Todos") || 
+                this.cb_modelo.getSelectedItem().toString().equals("Cualquiera"));
+        if(tieneValor) filtro.put("name", this.cb_modelo.getSelectedItem().toString());
+
+
+        tieneValor=!(this.cb_puertas.getSelectedItem().toString().equals("Todos") || 
+                this.cb_puertas.getSelectedItem().toString().equals("Cualquiera"));
+        if(tieneValor) filtro.put("numberDoors", this.cb_puertas.getSelectedItem().toString());
+
+        tieneValor=!(this.cb_tipo.getSelectedItem().toString().equals("Todos") || 
+                this.cb_tipo.getSelectedItem().toString().equals("Cualquiera"));
+        if(tieneValor) filtro.put("category", this.cb_tipo.getSelectedItem().toString());
 
         String texto = "";
         Iterator iter = (Iterator) filtro.keySet().iterator();

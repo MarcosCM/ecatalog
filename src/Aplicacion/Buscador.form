@@ -304,19 +304,19 @@
       <Properties>
         <Property name="maximum" type="int" value="200"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="value" type="int" value="100"/>
+        <Property name="value" type="int" value="200"/>
         <Property name="valueIsAdjusting" type="boolean" value="true"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="sld_potenciaMaxMouseDragged"/>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sld_potenciaMaxMouseClicked"/>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="sld_potenciaMaxMouseDragged"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sld_potenciaMaxKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_potenciaMax">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="text" type="java.lang.String" value="100"/>
+        <Property name="text" type="java.lang.String" value="200"/>
         <Property name="toolTipText" type="java.lang.String" value="Ej:  V20"/>
       </Properties>
       <Events>
@@ -327,19 +327,19 @@
       <Properties>
         <Property name="maximum" type="int" value="200"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="value" type="int" value="100"/>
+        <Property name="value" type="int" value="0"/>
         <Property name="valueIsAdjusting" type="boolean" value="true"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="sld_potenciaMinMouseDragged"/>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sld_potenciaMinMouseClicked"/>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="sld_potenciaMinMouseDragged"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sld_potenciaMinKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_potenciaMin">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="text" type="java.lang.String" value="100"/>
+        <Property name="text" type="java.lang.String" value="0"/>
         <Property name="toolTipText" type="java.lang.String" value="Ej:  V20"/>
       </Properties>
       <Events>
@@ -351,9 +351,6 @@
         <Property name="name" type="java.lang.String" value="Potencia Min" noResource="true"/>
         <Property name="text" type="java.lang.String" value="Potencia Min"/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Potencia Min"/>
-      </AccessibilityProperties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
       </AuxValues>
@@ -398,19 +395,19 @@
       <Properties>
         <Property name="maximum" type="int" value="100000"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="value" type="int" value="10000"/>
+        <Property name="value" type="int" value="0"/>
         <Property name="valueIsAdjusting" type="boolean" value="true"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="sld_precioMinMouseDragged"/>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sld_precioMinMouseClicked"/>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="sld_precioMinMouseDragged"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sld_precioMinKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_precioMin">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="text" type="java.lang.String" value="10000"/>
+        <Property name="text" type="java.lang.String" value="0"/>
         <Property name="toolTipText" type="java.lang.String" value="Ej:  V20"/>
       </Properties>
       <Events>
@@ -421,19 +418,19 @@
       <Properties>
         <Property name="maximum" type="int" value="100000"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="value" type="int" value="10000"/>
+        <Property name="value" type="int" value="100000"/>
         <Property name="valueIsAdjusting" type="boolean" value="true"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="sld_precioMaxMouseDragged"/>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sld_precioMaxMouseClicked"/>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="sld_precioMaxMouseDragged"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sld_precioMaxKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_precioMax">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="text" type="java.lang.String" value="10000"/>
+        <Property name="text" type="java.lang.String" value="100000"/>
         <Property name="toolTipText" type="java.lang.String" value="Ej:  V20"/>
       </Properties>
       <Events>
@@ -462,7 +459,7 @@
       <Properties>
         <Property name="maximum" type="int" value="20"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="value" type="int" value="5"/>
+        <Property name="value" type="int" value="0"/>
         <Property name="valueIsAdjusting" type="boolean" value="true"/>
       </Properties>
       <Events>
@@ -474,7 +471,7 @@
     <Component class="javax.swing.JTextField" name="txt_consumoMax">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="text" type="java.lang.String" value="5"/>
+        <Property name="text" type="java.lang.String" value="20"/>
         <Property name="toolTipText" type="java.lang.String" value="Ej:  V20"/>
       </Properties>
       <Events>
@@ -485,19 +482,18 @@
       <Properties>
         <Property name="maximum" type="int" value="20"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="value" type="int" value="5"/>
         <Property name="valueIsAdjusting" type="boolean" value="true"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="sld_consumoMaxMouseDragged"/>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sld_consumoMaxMouseClicked"/>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="sld_consumoMaxMouseDragged"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sld_consumoMaxKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_consumoMin">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="text" type="java.lang.String" value="5"/>
+        <Property name="text" type="java.lang.String" value="0"/>
         <Property name="toolTipText" type="java.lang.String" value="Ej:  V20"/>
       </Properties>
       <Events>

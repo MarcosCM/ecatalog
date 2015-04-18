@@ -5,8 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-
-import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -43,15 +41,6 @@ public class View {
         };
         ButtonColumn buttonColumn = new ButtonColumn(modelsList, viewMore, tableModel.getColumnCount() - 1);
         buttonColumn.setMnemonic(KeyEvent.VK_D);
-    }
-    
-    /**
-     * Cuando se pulsa el botón de más detalles se ejecuta este método
-     * @param evt evento
-     * @param c Coche a mostrar
-     */
-    private static void btn_masDetallesActionPerformed(java.awt.event.ActionEvent evt, CarModel c) {
-        Descripcion.openWindow(c);
     }
      
     /**
