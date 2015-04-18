@@ -5,8 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-
-import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -38,7 +36,7 @@ public class View {
                 int row = Integer.valueOf(e.getActionCommand());
                 String name = (String) tableModel.getValueAt(row, 0);
                 CarModel car = new CarModel(name);
-                Descripcion.openWindow(car);
+                //Descripcion.openWindow(car);
             }
         };
         ButtonColumn buttonColumn = new ButtonColumn(modelsList, viewMore, tableModel.getColumnCount() - 1);
@@ -51,7 +49,7 @@ public class View {
      * @param c Coche a mostrar
      */
     private static void btn_masDetallesActionPerformed(java.awt.event.ActionEvent evt, CarModel c) {
-        Descripcion.openWindow(c);
+        //Descripcion.openWindow(c);
     }
      
     /**
