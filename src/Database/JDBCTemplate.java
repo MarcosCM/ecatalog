@@ -124,7 +124,7 @@ public class JDBCTemplate {
     /**
      * Realiza una consulta SQL a la BD (una sentencia SELECT)
      * @param sql sentencia SQL
-     * @return Resultado de la consulta
+     * @return Cursor sobre el resultado de la consulta
      */
     public Cursor executeQuery(String sql) {
         Statement stmt = null;
@@ -146,7 +146,7 @@ public class JDBCTemplate {
      * Ejecuta una sentencia SQL que no sea una consulta, es decir, que no
      * devuelva una tabla como resultado (INSERT, UPDATE, DELETE, ...)
      * @param sql sentencia SQL
-     * @return Resultado de la operación
+     * @return -1 si ha habido algún error, y otro en caso contrario
      */
     public int executeSentence(String sql) {
         Statement stmt = null;

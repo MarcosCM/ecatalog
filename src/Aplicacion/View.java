@@ -1,9 +1,15 @@
 package Aplicacion;
 
+import External.ButtonColumn;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * Vista de la aplicación
@@ -13,41 +19,39 @@ public class View {
     /**
      * Visualiza una lista de coches
      * @param models Lista de coches
-     * @param panel Panel donde se carga la lista
-     * @param panelFicha Panel donde se carga la ficha de un coche
+     * @param modelsList Lista que contiene los resultados de la búsqueda
      */
-    public static void list(CarModel[] models, JScrollPane panel, final JScrollPane panelFicha){
-        JPanel model;
-        JTextPane name, cost;
-        JButton view;
+    public static void list(CarModel[] models, JTable modelsList){
+        final DefaultTableModel tableModel = (DefaultTableModel) modelsList.getModel();
+        //limpia la lista
+        tableModel.setRowCount(0);
+        
+        //actualiza la tabla con nuevos coches
         for (final CarModel c : models){
-            model = new JPanel();
-            name = new JTextPane();
-            cost = new JTextPane();
-            view = new JButton("Más detalles...");
-            view.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    btn_masDetallesActionPerformed(evt, c, panelFicha);
-                }
-            });
-            name.setText(c.getName());
-            cost.setText(""+c.getCost());
-            model.add(name);
-            model.add(cost);
-            model.add(view);
-            panel.add(model);
+            tableModel.addRow(new Object[]{c.getName(), c.getCategory(), c.getCost(), c.getPower(), c.getFuelType(), c.getConsumption(), "Ver más"});
         }
+        
+        Action viewMore = new AbstractAction(){
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                int row = Integer.valueOf(e.getActionCommand());
+                String name = (String) tableModel.getValueAt(row, 0);
+                CarModel car = new CarModel(name);
+                Descripcion.openWindow(car);
+            }
+        };
+        ButtonColumn buttonColumn = new ButtonColumn(modelsList, viewMore, tableModel.getColumnCount() - 1);
+        buttonColumn.setMnemonic(KeyEvent.VK_D);
     }
     
     /**
      * Cuando se pulsa el botón de más detalles se ejecuta este método
      * @param evt evento
      * @param c Coche a mostrar
-     * @param panelFicha Panel en el que se mostrará el coche
      */
-    private static void btn_masDetallesActionPerformed(java.awt.event.ActionEvent evt, CarModel c, JScrollPane panelFicha) {
-         view(c, panelFicha);
+    private static void btn_masDetallesActionPerformed(java.awt.event.ActionEvent evt, CarModel c) {
+        Descripcion.openWindow(c);
     }
      
     /**

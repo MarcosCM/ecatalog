@@ -1,6 +1,9 @@
 package Aplicacion;
 
+import Database.Cursor;
 import Database.JDBCTemplate;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Modelo lógico de un coche
@@ -16,6 +19,27 @@ public class CarModel {
     private double consumption;	// consumo (l/100km)
     private int numberSeats;	// número de asientos
 
+    /**
+     * Crea una instancia del modelo lógico a partir de datos existentes en
+     * la base de datos.
+     * @param name Nombre (clave) del modelo de coche
+     */
+    public CarModel(String name){
+        JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
+        String query = "SELECT * FROM Car WHERE name='"+name+"'";
+        Cursor c = template.executeQuery(query);
+        ResultSet rs = c.getResultSet();
+        try {
+            fuelType = rs.getString("fuel_type");
+            fuelType = rs.getString("power");
+            fuelType = rs.getString("category");
+            fuelType = rs.getString("number_doors");
+            fuelType = rs.getString("cost");
+            fuelType = rs.getString("consumption");
+            fuelType = rs.getString("number_seats");
+        } catch (SQLException ex) {}
+    }
+    
     /**
      * Crea una instancia del modelo lógico
      * @param name Nombre del coche
@@ -170,5 +194,12 @@ public class CarModel {
             res = template.executeSentence(query);
         }
         return res != -1;
+    }
+    
+    @Override
+    public String toString(){
+        return name + " - " + category + " - " + cost + " euros - " + power + " CV - " +
+                fuelType + " - " + consumption + " l/100 km - " + numberDoors + " puertas - " + 
+                numberSeats + " asientos";
     }
 }
