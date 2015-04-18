@@ -3,18 +3,22 @@ package Aplicacion;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * Ventana del buscador
  */
 public class Buscador extends javax.swing.JFrame {
-    HashMap<String,String>filtro=new HashMap();
+    
+    private final HashMap<String,String> filtro = new HashMap<String, String>();
+    private final DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"Modelo", "Categoría", "Coste", "Potencia", "Combustible", "Consumo", ""}, 0);
+    private final javax.swing.JTable modelsList = new javax.swing.JTable(tableModel);
+    
     /**
      * Creates new form Buscador
      */
     public Buscador() {
-        initComponents();                
-
+        initComponents();
     }
     
     /**
@@ -42,23 +46,24 @@ public class Buscador extends javax.swing.JFrame {
         cb_tipo = new javax.swing.JComboBox();
         modelo2 = new java.awt.Label();
         modelo3 = new java.awt.Label();
-        sld_precioMax = new javax.swing.JSlider();
-        txt_precioMax = new javax.swing.JTextField();
         sld_precioMin = new javax.swing.JSlider();
         txt_precioMin = new javax.swing.JTextField();
+        sld_precioMax = new javax.swing.JSlider();
+        txt_precioMax = new javax.swing.JTextField();
         modelo11 = new java.awt.Label();
         modelo12 = new java.awt.Label();
-        sld_consumoMax = new javax.swing.JSlider();
-        txt_consumoMin = new javax.swing.JTextField();
         sld_consumoMin = new javax.swing.JSlider();
         txt_consumoMax = new javax.swing.JTextField();
+        sld_consumoMax = new javax.swing.JSlider();
+        txt_consumoMin = new javax.swing.JTextField();
         modelo13 = new java.awt.Label();
         modelo14 = new java.awt.Label();
         modelo4 = new java.awt.Label();
         cb_puertas = new javax.swing.JComboBox();
         cb_asientos = new javax.swing.JComboBox();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
+        jSpinner1 = new javax.swing.JSpinner();
+        jScrollPane2 = new javax.swing.JScrollPane(modelsList);
+
         jScrollPane1.setViewportView(jTextPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -149,8 +154,8 @@ public class Buscador extends javax.swing.JFrame {
             }
         });
 
-        modelo10.setName("Potencia  Min"); // NOI18N
-        modelo10.setText("Potencia  Min");
+        modelo10.setName("Potencia Min"); // NOI18N
+        modelo10.setText("Potencia Min");
 
         cb_tipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "Familiar", "Deportivo", "Monovolumen", "Todo-terreno", "Mini" }));
         cb_tipo.setToolTipText("");
@@ -165,35 +170,6 @@ public class Buscador extends javax.swing.JFrame {
 
         modelo3.setName("Numero puertas"); // NOI18N
         modelo3.setText("Numero puertas");
-
-        sld_precioMax.setMaximum(100000);
-        sld_precioMax.setToolTipText("");
-        sld_precioMax.setValue(10000);
-        sld_precioMax.setValueIsAdjusting(true);
-        sld_precioMax.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                sld_precioMaxMouseDragged(evt);
-            }
-        });
-        sld_precioMax.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sld_precioMaxMouseClicked(evt);
-            }
-        });
-        sld_precioMax.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                sld_precioMaxKeyPressed(evt);
-            }
-        });
-
-        txt_precioMax.setEditable(false);
-        txt_precioMax.setText("10000");
-        txt_precioMax.setToolTipText("Ej:  V20");
-        txt_precioMax.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_precioMaxActionPerformed(evt);
-            }
-        });
 
         sld_precioMin.setMaximum(100000);
         sld_precioMin.setToolTipText("");
@@ -224,11 +200,69 @@ public class Buscador extends javax.swing.JFrame {
             }
         });
 
+        sld_precioMax.setMaximum(100000);
+        sld_precioMax.setToolTipText("");
+        sld_precioMax.setValue(10000);
+        sld_precioMax.setValueIsAdjusting(true);
+        sld_precioMax.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                sld_precioMaxMouseDragged(evt);
+            }
+        });
+        sld_precioMax.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sld_precioMaxMouseClicked(evt);
+            }
+        });
+        sld_precioMax.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sld_precioMaxKeyPressed(evt);
+            }
+        });
+
+        txt_precioMax.setEditable(false);
+        txt_precioMax.setText("10000");
+        txt_precioMax.setToolTipText("Ej:  V20");
+        txt_precioMax.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_precioMaxActionPerformed(evt);
+            }
+        });
+
         modelo11.setName("Precio Max"); // NOI18N
         modelo11.setText("Precio Max");
 
         modelo12.setName("Precio Min"); // NOI18N
         modelo12.setText("Precio Min");
+
+        sld_consumoMin.setMaximum(20);
+        sld_consumoMin.setToolTipText("");
+        sld_consumoMin.setValue(5);
+        sld_consumoMin.setValueIsAdjusting(true);
+        sld_consumoMin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sld_consumoMinMouseClicked(evt);
+            }
+        });
+        sld_consumoMin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                sld_consumoMinMouseDragged(evt);
+            }
+        });
+        sld_consumoMin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sld_consumoMinKeyPressed(evt);
+            }
+        });
+
+        txt_consumoMax.setEditable(false);
+        txt_consumoMax.setText("5");
+        txt_consumoMax.setToolTipText("Ej:  V20");
+        txt_consumoMax.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_consumoMaxActionPerformed(evt);
+            }
+        });
 
         sld_consumoMax.setMaximum(20);
         sld_consumoMax.setToolTipText("");
@@ -259,35 +293,6 @@ public class Buscador extends javax.swing.JFrame {
             }
         });
 
-        sld_consumoMin.setMaximum(20);
-        sld_consumoMin.setToolTipText("");
-        sld_consumoMin.setValue(5);
-        sld_consumoMin.setValueIsAdjusting(true);
-        sld_consumoMin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                sld_consumoMinMouseDragged(evt);
-            }
-        });
-        sld_consumoMin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sld_consumoMinMouseClicked(evt);
-            }
-        });
-        sld_consumoMin.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                sld_consumoMinKeyPressed(evt);
-            }
-        });
-
-        txt_consumoMax.setEditable(false);
-        txt_consumoMax.setText("5");
-        txt_consumoMax.setToolTipText("Ej:  V20");
-        txt_consumoMax.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_consumoMaxActionPerformed(evt);
-            }
-        });
-
         modelo13.setName("Consumo Max"); // NOI18N
         modelo13.setText("Consumo Max (l/100km)");
 
@@ -304,25 +309,12 @@ public class Buscador extends javax.swing.JFrame {
             }
         });
 
-        cb_asientos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "2", "3", "4", "5", "6", "7", "8", "9"  }));
+        cb_asientos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
         cb_asientos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_asientosActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1098, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 369, Short.MAX_VALUE)
-        );
-
-        jScrollPane2.setViewportView(jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -333,7 +325,7 @@ public class Buscador extends javax.swing.JFrame {
                 .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -380,13 +372,13 @@ public class Buscador extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sld_precioMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sld_precioMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(sld_precioMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sld_precioMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_precioMin, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-                            .addComponent(txt_precioMax))
-                        .addGap(0, 258, Short.MAX_VALUE))
+                            .addComponent(txt_precioMax, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                            .addComponent(txt_precioMin))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -396,13 +388,13 @@ public class Buscador extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cb_asientos, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(sld_consumoMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txt_consumoMin, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(sld_consumoMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txt_consumoMax, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txt_consumoMax, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(sld_consumoMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_consumoMin, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(215, 215, 215))))
             .addComponent(jScrollPane2)
         );
@@ -415,16 +407,15 @@ public class Buscador extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(sld_precioMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_precioMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(sld_precioMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_precioMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(sld_precioMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_precioMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(sld_precioMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_precioMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cb_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-
                                     .addComponent(modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -444,12 +435,12 @@ public class Buscador extends javax.swing.JFrame {
                                     .addComponent(modelo9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(sld_consumoMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_consumoMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(sld_consumoMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_consumoMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(sld_consumoMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_consumoMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(sld_consumoMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_consumoMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(modelo12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)
@@ -514,26 +505,9 @@ public class Buscador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_tipoActionPerformed
 
-    private void sld_precioMaxMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_precioMaxMouseDragged
-        // TODO add your handling code here:
-     txt_precioMax.setText(String.valueOf(sld_precioMax.getValue()));
-
-    }//GEN-LAST:event_sld_precioMaxMouseDragged
-
-    private void sld_precioMaxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sld_precioMaxKeyPressed
-        // TODO add your handling code here:
-             txt_precioMax.setText(String.valueOf(sld_precioMax.getValue()));
-
-    }//GEN-LAST:event_sld_precioMaxKeyPressed
-
-    private void txt_precioMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_precioMaxActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_txt_precioMaxActionPerformed
-
     private void sld_precioMinMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_precioMinMouseDragged
         // TODO add your handling code here:
-             txt_precioMin.setText(String.valueOf(sld_precioMin.getValue()));
+     txt_precioMin.setText(String.valueOf(sld_precioMin.getValue()));
 
     }//GEN-LAST:event_sld_precioMinMouseDragged
 
@@ -545,24 +519,24 @@ public class Buscador extends javax.swing.JFrame {
 
     private void txt_precioMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_precioMinActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_txt_precioMinActionPerformed
 
-    private void sld_consumoMaxMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_consumoMaxMouseDragged
+    private void sld_precioMaxMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_precioMaxMouseDragged
         // TODO add your handling code here:
-             txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
+             txt_precioMax.setText(String.valueOf(sld_precioMax.getValue()));
 
-    }//GEN-LAST:event_sld_consumoMaxMouseDragged
+    }//GEN-LAST:event_sld_precioMaxMouseDragged
 
-    private void sld_consumoMaxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sld_consumoMaxKeyPressed
+    private void sld_precioMaxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sld_precioMaxKeyPressed
         // TODO add your handling code here:
-             txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
+             txt_precioMax.setText(String.valueOf(sld_precioMax.getValue()));
 
-    }//GEN-LAST:event_sld_consumoMaxKeyPressed
+    }//GEN-LAST:event_sld_precioMaxKeyPressed
 
-    private void txt_consumoMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_consumoMinActionPerformed
+    private void txt_precioMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_precioMaxActionPerformed
         // TODO add your handling code here:
-
-    }//GEN-LAST:event_txt_consumoMinActionPerformed
+    }//GEN-LAST:event_txt_precioMaxActionPerformed
 
     private void sld_consumoMinMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_consumoMinMouseDragged
         // TODO add your handling code here:
@@ -578,7 +552,24 @@ public class Buscador extends javax.swing.JFrame {
 
     private void txt_consumoMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_consumoMaxActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_txt_consumoMaxActionPerformed
+
+    private void sld_consumoMaxMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_consumoMaxMouseDragged
+        // TODO add your handling code here:
+             txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
+
+    }//GEN-LAST:event_sld_consumoMaxMouseDragged
+
+    private void sld_consumoMaxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sld_consumoMaxKeyPressed
+        // TODO add your handling code here:
+             txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
+
+    }//GEN-LAST:event_sld_consumoMaxKeyPressed
+
+    private void txt_consumoMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_consumoMinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_consumoMinActionPerformed
 
     private void cb_modeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_modeloActionPerformed
         // TODO add your handling code here:
@@ -624,19 +615,19 @@ public class Buscador extends javax.swing.JFrame {
                     this.cb_tipo.getSelectedItem().toString().equals("Cualquiera"));
             if(tieneValor) filtro.put("category", this.cb_tipo.getSelectedItem().toString());
 
-        String texto="";
+        String texto = "";
         Iterator iter = (Iterator) filtro.keySet().iterator();
         Set<String> keySet = filtro.keySet();
         Iterator<String> keySetIterator = keySet.iterator();
 
         while(keySetIterator.hasNext()) {
             String key = keySetIterator.next();
-            texto+=key + " - " + filtro.get(key)+" \n";
+            texto += key + " - " + filtro.get(key) + " \n";
         }
         
-        Form formulario_filtro=new Form(filtro);
-        Controller.list(formulario_filtro, jScrollPane2, jScrollPane1);
-        filtro=new HashMap<String, String>();
+        Form formulario_filtro = new Form(filtro);
+        Controller.list(formulario_filtro, modelsList);
+        filtro.clear();
     }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void sld_potenciaMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_potenciaMinMouseClicked
@@ -651,29 +642,29 @@ public class Buscador extends javax.swing.JFrame {
 
     }//GEN-LAST:event_sld_potenciaMaxMouseClicked
 
-    private void sld_consumoMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_consumoMaxMouseClicked
-        // TODO add your handling code here:
-                     txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
-
-    }//GEN-LAST:event_sld_consumoMaxMouseClicked
-
     private void sld_consumoMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_consumoMinMouseClicked
         // TODO add your handling code here:
                      txt_consumoMin.setText(String.valueOf(sld_consumoMin.getValue()));
 
     }//GEN-LAST:event_sld_consumoMinMouseClicked
 
-    private void sld_precioMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_precioMinMouseClicked
+    private void sld_consumoMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_consumoMaxMouseClicked
         // TODO add your handling code here:
-                     txt_precioMin.setText(String.valueOf(sld_precioMin.getValue()));
+                     txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
 
-    }//GEN-LAST:event_sld_precioMinMouseClicked
+    }//GEN-LAST:event_sld_consumoMaxMouseClicked
 
     private void sld_precioMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_precioMaxMouseClicked
         // TODO add your handling code here:
                      txt_precioMax.setText(String.valueOf(sld_precioMax.getValue()));
 
     }//GEN-LAST:event_sld_precioMaxMouseClicked
+
+    private void sld_precioMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_precioMinMouseClicked
+        // TODO add your handling code here:
+                     txt_precioMin.setText(String.valueOf(sld_precioMin.getValue()));
+
+    }//GEN-LAST:event_sld_precioMinMouseClicked
 
     /**
      * @param args the command line arguments
@@ -691,15 +682,11 @@ public class Buscador extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Buscador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Buscador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Buscador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Buscador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
@@ -718,9 +705,9 @@ public class Buscador extends javax.swing.JFrame {
     private javax.swing.JComboBox cb_modelo;
     private javax.swing.JComboBox cb_puertas;
     private javax.swing.JComboBox cb_tipo;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextPane jTextPane1;
     private java.awt.Label modelo;
     private java.awt.Label modelo1;

@@ -4,15 +4,34 @@ import Database.JDBCTemplate;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 /**
  * Controlador de la aplicación
  */
 public class Controller {
     
+    /**
+     * Obtiene un string que representa en SQL una condición para un
+     * determinado par clave => valor
+     * @return String que representa una condición en SQL
+     */
+    private static String getSQLOption(String key, String value){
+        if (key.endsWith("Min")) return key.substring(0, key.lastIndexOf("Min")) + ">=" + value;
+        else if (key.endsWith("Max")) return key.substring(0, key.lastIndexOf("Max")) + "<=" + value;
+        //NOTA: no hay problemas con que sea un tipo de dato distinto a string
+        else return key + "='" + value + "'";
+    }
+    
+    /**
+     * Obtiene un string que representa en SQL un conjunto de condiciones
+     * para determinados pares clave => valor
+     * @return String que representa un conjunto de condiciones en SQL
+     */
     private static String getSQLOptions(Form form){
         if (form.isEmpty()) return "";
         else{
@@ -21,10 +40,11 @@ public class Controller {
             
             //condiciones de la forma campo='valor'
             Iterator<Map.Entry<String, String>> iterator = form.getIterator();
-            res+=iterator.next();
+            aux = iterator.next();
+            res += getSQLOption(aux.getKey(), aux.getValue());
             while (iterator.hasNext()){
                 aux = iterator.next();
-                res+=" AND "+aux.getKey()+"='"+aux.getValue()+"'";
+                res += " AND " + getSQLOption(aux.getKey(), aux.getValue());
             }
             
             return res;
@@ -34,35 +54,23 @@ public class Controller {
     /**
      * Accede al listado de coches
      * @param form Filtro de parámetros
-     * @param panel Panel en el que se mostrarán los resultados
+     * @param modelsList Lista que contiene los resultados de la búsqueda
      */
-    public static void list(Form form, JScrollPane panel, final JScrollPane panelFicha){
+    public static void list(Form form, JTable modelsList){
     	JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
     	String options = getSQLOptions(form);
     	String query = "SELECT * FROM Car "+options;
     	ResultSet rs = template.executeQuery(query).getResultSet();
-    	CarModel car;
-    	CarModel[] models = null;
-    	int sizeVector=0;
+        ArrayList<CarModel> models = new ArrayList<CarModel>();
     	try {
-            rs.first();
-            //calculamos el tamaño que tendrá el vector de modelos
             while(rs.next()){
-                sizeVector++;
-            }
-            models=new CarModel[sizeVector];
-            rs.first();
-            //introducimos cada coche en el vector
-            for(int i=0; i<sizeVector; i++){
-                car = new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
-                        rs.getInt("number_doors"), rs.getInt("cost"), rs.getDouble("consumption"), rs.getInt("number_seats"));
-                models[i] = car;
-                rs.next();
+                models.add(new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
+                        rs.getInt("number_doors"), rs.getInt("cost"), rs.getDouble("consumption"), rs.getInt("number_seats")));
             }
         } catch (SQLException e){}
         
     	//pasamos el vector de modelos a la vista
-    	View.list(models, panel, panelFicha);
+    	View.list(models.toArray(new CarModel[models.size()]), modelsList);
     }
     
     /**

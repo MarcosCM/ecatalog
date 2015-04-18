@@ -109,13 +109,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="sld_precioMin" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="sld_precioMax" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="sld_precioMin" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txt_precioMin" pref="60" max="32767" attributes="0"/>
-                          <Component id="txt_precioMax" max="32767" attributes="0"/>
+                          <Component id="txt_precioMax" pref="60" max="32767" attributes="0"/>
+                          <Component id="txt_precioMin" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -129,14 +129,14 @@
                               <Component id="cb_asientos" min="-2" pref="99" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="sld_consumoMin" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txt_consumoMin" min="-2" pref="32" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <Component id="sld_consumoMax" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="txt_consumoMax" min="-2" pref="32" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="sld_consumoMin" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="txt_consumoMin" min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="215" max="-2" attributes="0"/>
@@ -155,13 +155,13 @@
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="sld_precioMax" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txt_precioMax" min="-2" max="-2" attributes="0"/>
+                                  <Component id="sld_precioMin" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_precioMin" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="sld_precioMin" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txt_precioMin" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="sld_precioMax" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_precioMax" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -193,13 +193,13 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="sld_consumoMax" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txt_consumoMax" min="-2" max="-2" attributes="0"/>
+                                  <Component id="sld_consumoMin" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_consumoMin" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="sld_consumoMin" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txt_consumoMin" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="sld_consumoMax" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_consumoMax" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -348,8 +348,8 @@
     </Component>
     <Component class="java.awt.Label" name="modelo10">
       <Properties>
-        <Property name="name" type="java.lang.String" value="Potencia  Min" noResource="true"/>
-        <Property name="text" type="java.lang.String" value="Potencia  Min"/>
+        <Property name="name" type="java.lang.String" value="Potencia Min" noResource="true"/>
+        <Property name="text" type="java.lang.String" value="Potencia Min"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Potencia Min"/>
@@ -394,29 +394,6 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JSlider" name="sld_precioMax">
-      <Properties>
-        <Property name="maximum" type="int" value="100000"/>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="value" type="int" value="10000"/>
-        <Property name="valueIsAdjusting" type="boolean" value="true"/>
-      </Properties>
-      <Events>
-        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="sld_precioMaxMouseDragged"/>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sld_precioMaxMouseClicked"/>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sld_precioMaxKeyPressed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txt_precioMax">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-        <Property name="text" type="java.lang.String" value="10000"/>
-        <Property name="toolTipText" type="java.lang.String" value="Ej:  V20"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_precioMaxActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JSlider" name="sld_precioMin">
       <Properties>
         <Property name="maximum" type="int" value="100000"/>
@@ -440,6 +417,29 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_precioMinActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JSlider" name="sld_precioMax">
+      <Properties>
+        <Property name="maximum" type="int" value="100000"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="value" type="int" value="10000"/>
+        <Property name="valueIsAdjusting" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="sld_precioMaxMouseDragged"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sld_precioMaxMouseClicked"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sld_precioMaxKeyPressed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_precioMax">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="text" type="java.lang.String" value="10000"/>
+        <Property name="toolTipText" type="java.lang.String" value="Ej:  V20"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_precioMaxActionPerformed"/>
+      </Events>
+    </Component>
     <Component class="java.awt.Label" name="modelo11">
       <Properties>
         <Property name="name" type="java.lang.String" value="Precio Max" noResource="true"/>
@@ -457,6 +457,29 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JSlider" name="sld_consumoMin">
+      <Properties>
+        <Property name="maximum" type="int" value="20"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="value" type="int" value="5"/>
+        <Property name="valueIsAdjusting" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sld_consumoMinMouseClicked"/>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="sld_consumoMinMouseDragged"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sld_consumoMinKeyPressed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_consumoMax">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="text" type="java.lang.String" value="5"/>
+        <Property name="toolTipText" type="java.lang.String" value="Ej:  V20"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_consumoMaxActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSlider" name="sld_consumoMax">
       <Properties>
@@ -479,29 +502,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_consumoMinActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JSlider" name="sld_consumoMin">
-      <Properties>
-        <Property name="maximum" type="int" value="20"/>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="value" type="int" value="5"/>
-        <Property name="valueIsAdjusting" type="boolean" value="true"/>
-      </Properties>
-      <Events>
-        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="sld_consumoMinMouseDragged"/>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sld_consumoMinMouseClicked"/>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sld_consumoMinKeyPressed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txt_consumoMax">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-        <Property name="text" type="java.lang.String" value="5"/>
-        <Property name="toolTipText" type="java.lang.String" value="Ej:  V20"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_consumoMaxActionPerformed"/>
       </Events>
     </Component>
     <Component class="java.awt.Label" name="modelo13">
@@ -573,25 +573,11 @@
     <Component class="javax.swing.JSpinner" name="jSpinner1">
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JScrollPane(modelsList);"/>
+      </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanel1">
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1098" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="369" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-        </Container>
-      </SubComponents>
     </Container>
   </SubComponents>
 </Form>
