@@ -6,8 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Christian
+ * Ventana de la ficha de un coche
  */
 public class CarWindow extends javax.swing.JFrame {
 
