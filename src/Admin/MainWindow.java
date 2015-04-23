@@ -1,14 +1,12 @@
-package Aplicacion;
+package Admin;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 
 /**
  * Ventana del buscador
  */
-public class Buscador extends javax.swing.JFrame {
+public class MainWindow extends javax.swing.JFrame {
     
     private final HashMap<String,String> filtro = new HashMap<String, String>();
     private final DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"Modelo", "Categoría", "Coste", "Potencia", "Combustible", "Consumo", ""}, 0);
@@ -17,7 +15,7 @@ public class Buscador extends javax.swing.JFrame {
     /**
      * Creates new form Buscador
      */
-    public Buscador() {
+    public MainWindow() {
         initComponents();
     }
     
@@ -581,37 +579,25 @@ public class Buscador extends javax.swing.JFrame {
         filtro.put("costMax", this.txt_precioMax.getText());
         filtro.put("costMin", this.txt_precioMin.getText());
 
-        boolean tieneValor=!(this.cb_asientos.getSelectedItem().toString().equals("Todos") || 
+        boolean tieneValor = !(this.cb_asientos.getSelectedItem().toString().equals("Todos") || 
                 this.cb_asientos.getSelectedItem().toString().equals("Cualquiera"));
-        if(tieneValor) filtro.put("numberSeats", this.cb_asientos.getSelectedItem().toString());
+        if(tieneValor) filtro.put("number_seats", this.cb_asientos.getSelectedItem().toString());
 
-        tieneValor=!(this.cb_combustible.getSelectedItem().toString().equals("Todos") || 
+        tieneValor = !(this.cb_combustible.getSelectedItem().toString().equals("Todos") || 
                 this.cb_combustible.getSelectedItem().toString().equals("Cualquiera"));
-        if(tieneValor) filtro.put("fuelType", this.cb_combustible.getSelectedItem().toString());
+        if(tieneValor) filtro.put("fuel_type", this.cb_combustible.getSelectedItem().toString());
 
-        tieneValor=!(this.txt_modelo.getText().trim().isEmpty()|| 
-                this.txt_modelo.getText().equals(""));
+        tieneValor = !(this.txt_modelo.getText().trim().isEmpty());
         if(tieneValor) filtro.put("name", this.txt_modelo.getText());
 
-
-        tieneValor=!(this.cb_puertas.getSelectedItem().toString().equals("Todos") || 
+        tieneValor = !(this.cb_puertas.getSelectedItem().toString().equals("Todos") || 
                 this.cb_puertas.getSelectedItem().toString().equals("Cualquiera"));
-        if(tieneValor) filtro.put("numberDoors", this.cb_puertas.getSelectedItem().toString());
+        if(tieneValor) filtro.put("number_doors", this.cb_puertas.getSelectedItem().toString());
 
-        tieneValor=!(this.cb_tipo.getSelectedItem().toString().equals("Todos") || 
+        tieneValor = !(this.cb_tipo.getSelectedItem().toString().equals("Todos") || 
                 this.cb_tipo.getSelectedItem().toString().equals("Cualquiera"));
         if(tieneValor) filtro.put("category", this.cb_tipo.getSelectedItem().toString());
 
-        String texto = "";
-        Iterator iter = (Iterator) filtro.keySet().iterator();
-        Set<String> keySet = filtro.keySet();
-        Iterator<String> keySetIterator = keySet.iterator();
-
-        while(keySetIterator.hasNext()) {
-            String key = keySetIterator.next();
-            texto += key + " - " + filtro.get(key) + " \n";
-        }
-        
         Form formulario_filtro = new Form(filtro);
         Controller.list(formulario_filtro, modelsList);
         filtro.clear();
@@ -670,8 +656,15 @@ public class Buscador extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Buscador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         
         //</editor-fold>
@@ -680,7 +673,7 @@ public class Buscador extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Buscador().setVisible(true);
+                new MainWindow().setVisible(true);
             }
         });
     }

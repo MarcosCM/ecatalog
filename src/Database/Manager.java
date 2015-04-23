@@ -63,6 +63,7 @@ public class Manager {
                 + "requester_mail   VARCHAR(60) NOT NULL,"
                 + "car_name         VARCHAR(40) NOT NULL,"
                 + "request_date     TIMESTAMP NOT NULL,"
+                + "city             VARCHAR(60) NOT NULL,"
                 + "FOREIGN KEY (car_name)   REFERENCES Car(name),"
                 + "PRIMARY KEY (request_id)"
                 + ")");

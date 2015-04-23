@@ -1,22 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Aplicacion;
+package Admin;
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Christian
  */
-public class Descripcion extends javax.swing.JFrame {
+public class CarWindow extends javax.swing.JFrame {
 
+    /**
+     * Coche del que tiene información esta ventana
+     */
+    private final CarModel car;
+    
     /**
      * Creates new form Descripcion
      * @param car Coche a mostrar en el formulario
      */
-    public Descripcion(CarModel car) {
+    public CarWindow(CarModel car) {
         initComponents();
+        this.car = car;
         campoNombre.setText(car.getName());
         campoAsientos.setText(""+car.getNumberSeats());
         campoCategoria.setText(car.getCategory());
@@ -291,7 +297,20 @@ public class Descripcion extends javax.swing.JFrame {
     }//GEN-LAST:event_cmpNombreContactoActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        // TODO add your handling code here:
+        String name = cmpNombreContacto.getText();
+        String surname = cmpApellidosContacto.getText();
+        String city = cmpCiudadContacto.getText();
+        String mail = cmpMailContacto.getText();
+        if (name.isEmpty() || surname.isEmpty() || city.isEmpty() || mail.isEmpty()) JOptionPane.showMessageDialog(null, "Por favor introduzca valores válidos");
+        else {
+            Form form = new Form();
+            form.setParam("name", name);
+            form.setParam("surname", surname);
+            form.setParam("city", city);
+            form.setParam("mail", mail);
+            Controller.contactRequest(form, this.car.getName());
+            JOptionPane.showMessageDialog(null, "¡Solicitud enviada con éxito!");
+        }
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void campoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreActionPerformed
@@ -316,8 +335,11 @@ public class Descripcion extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Descripcion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CarWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         
         //</editor-fold>
@@ -326,7 +348,17 @@ public class Descripcion extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Descripcion(car).setVisible(true);
+                final CarWindow window = new CarWindow(car);
+                //Cuando se cierre la ventana no se abandonará la aplicación entera
+                window.addWindowListener(new WindowAdapter(){
+                    @Override
+                    public void windowClosing(WindowEvent e){
+                        window.setVisible(false);
+                        window.dispose();
+                    }
+                });
+                window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                window.setVisible(true);
             }
         });
     }

@@ -1,4 +1,4 @@
-package Aplicacion;
+package Admin;
 
 import Database.JDBCTemplate;
 
@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 /**
@@ -21,8 +20,8 @@ public class Controller {
      * @return String que representa una condición en SQL
      */
     private static String getSQLOption(String key, String value){
-        if (key.endsWith("Min")) return key.substring(0, key.lastIndexOf("Min")) + ">=" + value;
-        else if (key.endsWith("Max")) return key.substring(0, key.lastIndexOf("Max")) + "<=" + value;
+        if (key.endsWith("Min")) return key.substring(0, key.lastIndexOf("Min")) + ">='" + value + "'";
+        else if (key.endsWith("Max")) return key.substring(0, key.lastIndexOf("Max")) + "<='" + value + "'";
         //NOTA: no hay problemas con que sea un tipo de dato distinto a string
         else return key + "='" + value + "'";
     }
@@ -74,44 +73,19 @@ public class Controller {
     }
     
     /**
-     * Accede a la ficha de un coche
-     * @param carName Nombre identificador del coche
-     * @param panel Panel en el que se mostrará el coche
-     */
-    public static void view(String carName, JScrollPane panel){
-        JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
-        
-        String query = "SELECT * FROM Car WHERE name='"+carName+"'";
-        //la query sólo devolverá una fila como resultado
-        ResultSet rs = template.executeQuery(query).getResultSet();
-        CarModel car = null;
-        try{
-            car = new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
-                    rs.getInt("number_doors"), rs.getInt("cost"), rs.getDouble("consumption"), rs.getInt("number_seats"));
-        } catch(SQLException e){}
-        
-        //pasamos el coche a la vista
-        View.view(car, panel);
-    }
-    
-    /**
      * Envía una solicitud de contacto para concertar una cita y ver un coche
      * @param form Filtro de parámetros
      * @param carName Nombre identificador del coche que desea ver el cliente
      */
     public static void contactRequest(Form form, String carName){
         JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
-        String insert="INSERT INTO Request VALUES (requests_id.nextval, ";
-        Map.Entry<String, String> aux;
-        Iterator<Map.Entry<String, String>> iterator = form.getIterator();
-        insert+=iterator.next();
-        //requester_name y requester_mail
-        while (iterator.hasNext()){
-            aux = iterator.next();
-            insert+=aux.getValue()+", ";
-        }
+        String insert="INSERT INTO Requests VALUES (requests_id.nextval, ";
+        insert += "'" + form.getParam("name") + " " + form.getParam("surname") + "'";
+        insert += ", '" + form.getParam("mail") + "'";
+        insert += ", '" + carName + "'";
         //momento de la compra
-        insert+=carName+", CURRENT_STAMP);";
+        insert += ", CURRENT_TIMESTAMP";
+        insert += ", '" + form.getParam("city") + "')";
         template.executeQuery(insert);
     }
 }
