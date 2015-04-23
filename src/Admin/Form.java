@@ -1,4 +1,4 @@
-package Aplicacion;
+package Admin;
 
 import java.util.HashMap;
 import java.util.Iterator;

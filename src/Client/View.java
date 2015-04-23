@@ -1,11 +1,10 @@
-package Aplicacion;
+package Client;
 
 import External.ButtonColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -36,19 +35,10 @@ public class View {
                 int row = Integer.valueOf(e.getActionCommand());
                 String name = (String) tableModel.getValueAt(row, 0);
                 CarModel car = new CarModel(name);
-                Descripcion.openWindow(car);
+                CarWindow.openWindow(car);
             }
         };
         ButtonColumn buttonColumn = new ButtonColumn(modelsList, viewMore, tableModel.getColumnCount() - 1);
         buttonColumn.setMnemonic(KeyEvent.VK_D);
-    }
-     
-    /**
-     * Muestra la ficha de un coche
-     * @param model Coche a mostrar
-     * @param panel Panel en el que se mostrará el coche
-     */
-    public static void view(CarModel model, JScrollPane panel){
-        
     }
 }

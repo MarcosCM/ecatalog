@@ -1,4 +1,4 @@
-package Aplicacion;
+package Client;
 
 import Database.Cursor;
 import Database.JDBCTemplate;
@@ -73,24 +73,10 @@ public class CarModel {
     }
 
     /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * @return the fuelType
      */
     public String getFuelType() {
         return fuelType;
-    }
-
-    /**
-     * @param fuelType the fuelType to set
-     */
-    public void setFuelType(String fuelType) {
-        this.fuelType = fuelType;
     }
 
     /**
@@ -101,24 +87,10 @@ public class CarModel {
     }
 
     /**
-     * @param power the power to set
-     */
-    public void setPower(int power) {
-        this.power = power;
-    }
-
-    /**
      * @return the category
      */
     public String getCategory() {
         return category;
-    }
-
-    /**
-     * @param category the category to set
-     */
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     /**
@@ -127,26 +99,12 @@ public class CarModel {
     public int getNumberDoors() {
         return numberDoors;
     }
-
-    /**
-     * @param numberDoors the numberDoors to set
-     */
-    public void setNumberDoors(int numberDoors) {
-        this.numberDoors = numberDoors;
-    }
-
+    
     /**
      * @return the cost
      */
     public int getCost() {
         return cost;
-    }
-
-    /**
-     * @param cost the cost to set
-     */
-    public void setCost(int cost) {
-        this.cost = cost;
     }
 
     /**
@@ -157,45 +115,10 @@ public class CarModel {
     }
 
     /**
-     * @param consumption the consumption to set
-     */
-    public void setConsumption(int consumption) {
-        this.consumption = consumption;
-    }
-
-    /**
      * @return the numberSeats
      */
     public int getNumberSeats() {
         return numberSeats;
-    }
-
-    /**
-     * @param numberSeats the numberSeats to set
-     */
-    public void setNumberSeats(int numberSeats) {
-        this.numberSeats = numberSeats;
-    }
-    
-    /**
-     * Almacena el coche en la base de datos
-     * @return true si se ha almacenado correctamente, false en caso contrario
-     */
-    public boolean store(){
-        JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
-        
-        //probamos a insertar
-        String query = "INSERT INTO Car VALUES ('"+getName()+"', '"+getFuelType()+"', '"+getPower()+"', '"+getCategory()+"', "
-                + "'"+getNumberDoors()+"', '"+getCost()+"', '"+getConsumption()+"', '"+getNumberSeats()+"')";
-        int res = template.executeSentence(query);
-        //si ya existe entonces actualizamos
-        if (res == -1){
-            query = "UPDATE Car SET name='"+getName()+"', fuel_type='"+getFuelType()+"', power='"+getPower()+"', category='"+getCategory()+"', "
-                + "number_doors='"+getNumberDoors()+"', cost='"+getCost()+"', consumption='"+getConsumption()+"', number_seats='"+getNumberSeats()+"' "
-                + "WHERE name=''";
-            res = template.executeSentence(query);
-        }
-        return res != -1;
     }
     
     @Override
