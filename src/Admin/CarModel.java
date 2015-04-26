@@ -18,7 +18,7 @@ public class CarModel {
     private int cost;		// coste
     private double consumption;	// consumo (l/100km)
     private int numberSeats;	// número de asientos
-
+    private boolean destacado;   //si está destacado por el admin
     /**
      * Crea una instancia del modelo lógico a partir de datos existentes en
      * la base de datos.
@@ -39,6 +39,27 @@ public class CarModel {
             cost = Integer.parseInt(rs.getString("cost"));
             consumption = Double.parseDouble(rs.getString("consumption"));
             numberSeats = Integer.parseInt(rs.getString("number_seats"));
+            
+             /*
+            //SI ALFINAL ES SOLO UNA TABLA CON NOMBRE
+            String query = "SELECT * FROM Destacado WHERE name='"+name+"'";
+            Cursor c = template.executeQuery(query);
+            ResultSet rs = c.getResultSet();
+            boolean estaDestacado=rs.next();
+            destacado=estaDestacado;
+            
+            SSI ALFINAL ES UNA TABLA CON TODOS LOS DATOS
+                        String query = "SELECT * FROM Destacado WHERE name='"+name+"'";
+            Cursor c = template.executeQuery(query);
+            ResultSet rs = c.getResultSet();
+            rs.next();
+            //si es un string o algo que sea true o false
+            destacado=Boolean.parseBoolean(rs.getString("destacado"));
+            //si es un entero 1/0
+            if(Integer.parseInt(rs.getString("destacado"))==1) destacado==true;
+             else destacado=false
+
+            */
         } catch (SQLException ex) {}
     }
     
@@ -54,7 +75,7 @@ public class CarModel {
      * @param numberSeats Número de asientos
      */
     public CarModel(String name, String fuelType, int power, String category,
-                int numberDoors, int cost, double consumption, int numberSeats) {
+                int numberDoors, int cost, double consumption, int numberSeats/*,boolean destacado*/) {
         this.name = name;
         this.fuelType=fuelType;
         this.power=power;
@@ -63,6 +84,10 @@ public class CarModel {
         this.cost=cost;
         this.consumption=consumption;
         this.numberSeats=numberSeats;
+        
+        
+        destacado=false;//cambiar esto cuadno se ponga en la BD
+        this.destacado=destacado;
     }
 
     /**
@@ -135,6 +160,13 @@ public class CarModel {
         this.numberDoors = numberDoors;
     }
 
+    public boolean getDestacado() {
+        return destacado;
+    }
+    
+     public void setDestacado(boolean destacado) {
+        this.destacado = destacado;
+    }      
     /**
      * @return the cost
      */
