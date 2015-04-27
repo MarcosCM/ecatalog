@@ -20,16 +20,27 @@ public class Controller {
      *
      * @return String que representa una condición en SQL
      */
-    private static String getSQLOption(String key, String value) {
-        if (key.endsWith("Min")) {
-            return key.substring(0, key.lastIndexOf("Min")) + ">='" + value + "'";
-        } else if (key.endsWith("Max")) {
-            return key.substring(0, key.lastIndexOf("Max")) + "<='" + value + "'";
-        } //NOTA: no hay problemas con que sea un tipo de dato distinto a string
-        else {
-            return key + "='" + value + "'";
+
+    private static String getSQLOption(String key, String value){
+        if (key.endsWith("Min")) return key.substring(0, key.lastIndexOf("Min")) + ">='" + value + "'";
+        else if (key.endsWith("Max")) return key.substring(0, key.lastIndexOf("Max")) + "<='" + value + "'";
+        //NOTA: no hay problemas con que sea un tipo de dato distinto a string
+        else if (key.contains("name")) {
+            String respuesta="";
+
+            String []todos =value.split(" ");
+            for(int i=0; i<todos.length;i++){
+                if(i!=0)respuesta+=" AND ";
+                   respuesta+= key + " like'%" + value + "%'";
+
+            }
+            return respuesta;
         }
+        else return key + "='" + value + "'";
+
     }
+    
+     
 
     /**
      * Obtiene un string que representa en SQL un conjunto de condiciones para
@@ -59,28 +70,38 @@ public class Controller {
 
     /**
      * Accede al listado de coches
-     *
      * @param form Filtro de parámetros
      * @param modelsList Lista que contiene los resultados de la búsqueda
      */
-    public static void list(Form form, JTable modelsList) {
-        JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
-        String options = getSQLOptions(form);
-        String query = "SELECT * FROM Car " + options;
-        ResultSet rs = template.executeQuery(query).getResultSet();
+    public static void list(Form form, JTable modelsList){
         ArrayList<CarModel> models = new ArrayList<CarModel>();
+    	JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
+    	String options = getSQLOptions(form);
+    	String query = "SELECT * FROM Featured_cars "+options;
+        //Primero hay que introducir los que están destacados
+         ResultSet rs = template.executeQuery(query).getResultSet();
         try {
-            while (rs.next()) {
+            while(rs.next()){
                 models.add(new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
-                        rs.getInt("number_doors"), rs.getInt("cost"), rs.getDouble("consumption"), rs.getInt("number_seats")));
+                        rs.getInt("number_doors"), rs.getInt("cost"), rs.getDouble("consumption"), rs.getInt("number_seats"),true));
             }
-        } catch (SQLException e) {
-        }
-
-        //pasamos el vector de modelos a la vista
-        View.list(models.toArray(new CarModel[models.size()]), modelsList);
+        } catch (SQLException e){}
+         options = getSQLOptions(form);
+         query = "SELECT * FROM Car "+options+" AND name not in (SELECT destacados.name FROM Featured_cars AS destacados)";
+         rs = template.executeQuery(query).getResultSet();
+                try {
+            while(rs.next()){
+                models.add(new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
+                        rs.getInt("number_doors"), rs.getInt("cost"), rs.getDouble("consumption"), rs.getInt("number_seats"), false));
+            }
+        } catch (SQLException e){}
+        
+          
+        
+    	//pasamos el vector de modelos a la vista
+    	View.list(models.toArray(new CarModel[models.size()]), modelsList);
     }
-
+    
     /**
      * Envía una solicitud de contacto para concertar una cita y ver un coche
      *

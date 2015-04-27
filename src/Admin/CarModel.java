@@ -18,7 +18,7 @@ public class CarModel {
     private int cost;		// coste
     private double consumption;	// consumo (l/100km)
     private int numberSeats;	// número de asientos
-
+    private boolean destacado;   //si está destacado por el admin
     /**
      * Crea una instancia del modelo lógico a partir de datos existentes en
      * la base de datos.
@@ -39,6 +39,12 @@ public class CarModel {
             cost = Integer.parseInt(rs.getString("cost"));
             consumption = Double.parseDouble(rs.getString("consumption"));
             numberSeats = Integer.parseInt(rs.getString("number_seats"));
+            
+            query = "SELECT * FROM Featured_cars WHERE name='"+name+"'";
+            c = template.executeQuery(query);
+            rs = c.getResultSet();
+            boolean estaDestacado = rs.next();
+            destacado = estaDestacado;
         } catch (SQLException ex) {}
     }
     
@@ -52,17 +58,19 @@ public class CarModel {
      * @param cost Precio
      * @param consumption Consumo
      * @param numberSeats Número de asientos
+     * @param destacado destacado
      */
     public CarModel(String name, String fuelType, int power, String category,
-                int numberDoors, int cost, double consumption, int numberSeats) {
+                int numberDoors, int cost, double consumption, int numberSeats, boolean destacado) {
         this.name = name;
-        this.fuelType=fuelType;
-        this.power=power;
-        this.category=category;
-        this.numberDoors=numberDoors;
-        this.cost=cost;
-        this.consumption=consumption;
-        this.numberSeats=numberSeats;
+        this.fuelType = fuelType;
+        this.power = power;
+        this.category = category;
+        this.numberDoors = numberDoors;
+        this.cost = cost;
+        this.consumption = consumption;
+        this.numberSeats = numberSeats;
+        this.destacado = destacado;
     }
 
     /**
@@ -135,6 +143,19 @@ public class CarModel {
         this.numberDoors = numberDoors;
     }
 
+    /**
+     * @return true si es destacado, false en caso contrario
+     */
+    public boolean getDestacado() {
+        return destacado;
+    }
+    
+    /**
+     * @param destacado true si destacado, false en caso contrario
+     */
+    public void setDestacado(boolean destacado) {
+        this.destacado = destacado;
+    }      
     /**
      * @return the cost
      */
