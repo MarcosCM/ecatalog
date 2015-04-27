@@ -40,33 +40,11 @@ public class CarModel {
             consumption = Double.parseDouble(rs.getString("consumption"));
             numberSeats = Integer.parseInt(rs.getString("number_seats"));
             
-             /*
-<<<<<<< HEAD
-            //SI ALFINAL ES SOLO UNA TABLA CON NOMBRE
-=======
-
->>>>>>> f27a445c1a1412e90110319da7da1ac459e0583d
-            String query = "SELECT * FROM Destacado WHERE name='"+name+"'";
-            Cursor c = template.executeQuery(query);
-            ResultSet rs = c.getResultSet();
-            boolean estaDestacado=rs.next();
-            destacado=estaDestacado;
-<<<<<<< HEAD
-            
-            SSI ALFINAL ES UNA TABLA CON TODOS LOS DATOS
-                        String query = "SELECT * FROM Destacado WHERE name='"+name+"'";
-            Cursor c = template.executeQuery(query);
-            ResultSet rs = c.getResultSet();
-            rs.next();
-            //si es un string o algo que sea true o false
-            destacado=Boolean.parseBoolean(rs.getString("destacado"));
-            //si es un entero 1/0
-            if(Integer.parseInt(rs.getString("destacado"))==1) destacado==true;
-             else destacado=false
-
-=======
->>>>>>> f27a445c1a1412e90110319da7da1ac459e0583d
-            */
+            query = "SELECT * FROM Featured_cars WHERE name='"+name+"'";
+            c = template.executeQuery(query);
+            rs = c.getResultSet();
+            boolean estaDestacado = rs.next();
+            destacado = estaDestacado;
         } catch (SQLException ex) {}
     }
     
@@ -80,21 +58,19 @@ public class CarModel {
      * @param cost Precio
      * @param consumption Consumo
      * @param numberSeats Número de asientos
+     * @param destacado destacado
      */
     public CarModel(String name, String fuelType, int power, String category,
-                int numberDoors, int cost, double consumption, int numberSeats/*,boolean destacado*/) {
+                int numberDoors, int cost, double consumption, int numberSeats, boolean destacado) {
         this.name = name;
-        this.fuelType=fuelType;
-        this.power=power;
-        this.category=category;
-        this.numberDoors=numberDoors;
-        this.cost=cost;
-        this.consumption=consumption;
-        this.numberSeats=numberSeats;
-        
-        
-        destacado=false;//cambiar esto cuadno se ponga en la BD
-        this.destacado=destacado;
+        this.fuelType = fuelType;
+        this.power = power;
+        this.category = category;
+        this.numberDoors = numberDoors;
+        this.cost = cost;
+        this.consumption = consumption;
+        this.numberSeats = numberSeats;
+        this.destacado = destacado;
     }
 
     /**
@@ -167,15 +143,17 @@ public class CarModel {
         this.numberDoors = numberDoors;
     }
 
+    /**
+     * @return true si es destacado, false en caso contrario
+     */
     public boolean getDestacado() {
         return destacado;
     }
     
-<<<<<<< HEAD
-     public void setDestacado(boolean destacado) {
-=======
-     public void setNumberDoors(boolean destacado) {
->>>>>>> f27a445c1a1412e90110319da7da1ac459e0583d
+    /**
+     * @param destacado true si destacado, false en caso contrario
+     */
+    public void setDestacado(boolean destacado) {
         this.destacado = destacado;
     }      
     /**
