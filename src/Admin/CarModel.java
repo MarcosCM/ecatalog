@@ -41,12 +41,17 @@ public class CarModel {
             numberSeats = Integer.parseInt(rs.getString("number_seats"));
             
              /*
+<<<<<<< HEAD
             //SI ALFINAL ES SOLO UNA TABLA CON NOMBRE
+=======
+
+>>>>>>> f27a445c1a1412e90110319da7da1ac459e0583d
             String query = "SELECT * FROM Destacado WHERE name='"+name+"'";
             Cursor c = template.executeQuery(query);
             ResultSet rs = c.getResultSet();
             boolean estaDestacado=rs.next();
             destacado=estaDestacado;
+<<<<<<< HEAD
             
             SSI ALFINAL ES UNA TABLA CON TODOS LOS DATOS
                         String query = "SELECT * FROM Destacado WHERE name='"+name+"'";
@@ -59,6 +64,8 @@ public class CarModel {
             if(Integer.parseInt(rs.getString("destacado"))==1) destacado==true;
              else destacado=false
 
+=======
+>>>>>>> f27a445c1a1412e90110319da7da1ac459e0583d
             */
         } catch (SQLException ex) {}
     }
@@ -164,7 +171,11 @@ public class CarModel {
         return destacado;
     }
     
+<<<<<<< HEAD
      public void setDestacado(boolean destacado) {
+=======
+     public void setNumberDoors(boolean destacado) {
+>>>>>>> f27a445c1a1412e90110319da7da1ac459e0583d
         this.destacado = destacado;
     }      
     /**

@@ -109,12 +109,17 @@ public class Controller {
 
 
 /*
+<<<<<<< HEAD
                     //SI ALFINAL ES SOLO UNA TABLA CON NOMBRE
 
+=======
+        
+>>>>>>> f27a445c1a1412e90110319da7da1ac459e0583d
         //Primero hay que introducir los que están destacados
         options = getSQLOptions2(form);
         String query = "SELECT * FROM Car coche where coche.name in  (SELECT name FROM Destacados)"+options;
          ResultSet rs = template.executeQuery(query).getResultSet();
+<<<<<<< HEAD
         try {
             while(rs.next()){
                 models.add(new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
@@ -138,14 +143,20 @@ public class Controller {
         //poner que destacado sea 1 o true, segun el tipo de dato
         String query = "SELECT * FROM Car coche where destacado ='' "+options;
          ResultSet rs = template.executeQuery(query).getResultSet();
+=======
+>>>>>>> f27a445c1a1412e90110319da7da1ac459e0583d
         try {
             while(rs.next()){
                 models.add(new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
                         rs.getInt("number_doors"), rs.getInt("cost"), rs.getDouble("consumption"), rs.getInt("number_seats")),true);
             }
         } catch (SQLException e){}
+<<<<<<< HEAD
         //poner que destacado sea 0 o false, segun el tipo de dato
         String query = "SELECT * FROM Car coche where destacado ='' "+options;
+=======
+         query = "SELECT * FROM Car coche where coche.name not in (SELECT name FROM Destacados)"+options;
+>>>>>>> f27a445c1a1412e90110319da7da1ac459e0583d
          rs = template.executeQuery(query).getResultSet();
                 try {
             while(rs.next()){
@@ -154,7 +165,10 @@ public class Controller {
             }
         } catch (SQLException e){}
         
+<<<<<<< HEAD
         
+=======
+>>>>>>> f27a445c1a1412e90110319da7da1ac459e0583d
         */
         
         
