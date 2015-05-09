@@ -1,5 +1,6 @@
 package Admin;
 
+import Database.JDBCTemplate;
 import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 
@@ -659,21 +660,20 @@ public class MainWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainWindow().setVisible(true);
+                final MainWindow window = new MainWindow();
+                //Cerrar la conexión con la base de datos al cerrar el programa
+                Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
+                    @Override
+                    public void run(){
+                        JDBCTemplate.getJDBCTemplate().close();
+                   }
+                }));
+                window.setVisible(true);
             }
         });
     }
