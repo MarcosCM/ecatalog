@@ -42,7 +42,7 @@ public class Controller {
      * @return String que representa un conjunto de condiciones en SQL
      */
     private static String getSQLOptions(Form form){
-        String res = "WHERE hidden=0 AND ";
+        String res = "WHERE ";
         if (form.isEmpty()) return res;
         else{
             Map.Entry<String, String> aux;
@@ -143,10 +143,14 @@ public class Controller {
      * Oculta el modelo pasado por parámetro para que el cliente no lo visualice
      * en su aplicación
      * @param model Nombre del modelo
+     * @param hideOrShow true si se desea ocultar el modelo o false si se desea
+     *        mostrar.
      */
-    public static void ocultar(String model){
+    public static void hide(String model, boolean hideOrShow){
         JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
-        
-        //template.executeSentence();
+        String query = "";
+        if(hideOrShow) query = "UPDATE car SET hidden=1 WHERE name='" + model + "'";
+        else query = "UPDATE car SET hidden=0 WHERE name='" + model + "'";
+        template.executeSentence(query);
     }
 }

@@ -18,25 +18,25 @@ public class View {
      * @param models Lista de coches
      * @param modelsList Lista que contiene los resultados de la búsqueda
      */
-    public static void list(CarModel[] models, JTable modelsList) {
+    public static void list(final CarModel[] models, JTable modelsList) {
         final DefaultTableModel tableModel = (DefaultTableModel) modelsList.getModel();
         //limpia la lista
         tableModel.setRowCount(0);
 
         //actualiza la tabla con nuevos coches
         for (final CarModel c : models) {
+            String hidden = "Ocultar";
+            if(c.getHidden()) hidden = "Mostrar";
             tableModel.addRow(new Object[]{c.getName(), c.getCategory(),
                 c.getCost(), c.getPower(), c.getFuelType(), c.getConsumption(),
-                "Ver más", "Borrar", "Ocultar"});
+                "Ver más", "Borrar", hidden});
         }
 
         Action viewMore = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = Integer.valueOf(e.getActionCommand());
-                String name = (String) tableModel.getValueAt(row, 0);
-                CarModel car = new CarModel(name);
-                CarWindow.openWindow(car);
+                CarWindow.openWindow(models[row]);
             }
         };
 
@@ -44,26 +44,33 @@ public class View {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = Integer.valueOf(e.getActionCommand());
-                String name = (String) tableModel.getValueAt(row, 0);
-                Controller.borrar(name);
+                Controller.borrar(models[row].getName());
             }
         };
         
-        Action ocultar = new AbstractAction() {
+        Action hide = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = Integer.valueOf(e.getActionCommand());
-                String name = (String) tableModel.getValueAt(row, 0);
-                Controller.ocultar(name);
+                String name = models[row].getName();
+                models[row].setHidden(!models[row].getHidden());
+                if(models[row].getHidden()){
+                    Controller.hide(name, true);
+                    tableModel.setValueAt("Mostrar", row, tableModel.getColumnCount() - 1);
+                }
+                else{
+                    Controller.hide(name, false);
+                    tableModel.setValueAt("Ocultar", row, tableModel.getColumnCount() - 1);
+                }
             }
         };
         
         ButtonColumn columnViewMore = new ButtonColumn(modelsList, viewMore, tableModel.getColumnCount() - 3);      
         ButtonColumn columnDelete = new ButtonColumn(modelsList, delete, tableModel.getColumnCount() - 2);
-        ButtonColumn columnOcultar = new ButtonColumn(modelsList, ocultar, tableModel.getColumnCount() - 1);
+        ButtonColumn columnHide = new ButtonColumn(modelsList, hide, tableModel.getColumnCount() - 1);
         
         columnViewMore.setMnemonic(KeyEvent.VK_D);
         columnDelete.setMnemonic(KeyEvent.VK_D);
-        columnOcultar.setMnemonic(KeyEvent.VK_D);
+        columnHide.setMnemonic(KeyEvent.VK_D);
     }
 }
