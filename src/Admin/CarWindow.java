@@ -31,7 +31,7 @@ public class CarWindow extends javax.swing.JFrame {
         campoPrecio.setText(""+car.getCost());
         campoPuertas.setText(""+car.getNumberDoors());
         
-        destacado.setSelected(car.getDestacado());
+        destacado.setSelected(car.getFeatured());
         //falta ponerle un boolean si esta destacado o no
     }
 

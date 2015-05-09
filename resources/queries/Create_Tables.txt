@@ -1,0 +1,6 @@
+CREATE TABLE Fuel_Types(name VARCHAR(40) NOT NULL, PRIMARY KEY (name))
+CREATE TABLE Categories(name VARCHAR(40) NOT NULL, PRIMARY KEY (name))
+CREATE TABLE Car(name VARCHAR(80) NOT NULL, fuel_type VARCHAR(40) NOT NULL, power NUMBER(4) NOT NULL, category VARCHAR(40) NOT NULL, number_doors NUMBER(1) NOT NULL, cost NUMBER(7) NOT NULL, consumption NUMBER(5,3) NOT NULL, number_seats NUMBER(1) NOT NULL, hidden NUMBER(1) NOT NULL, FOREIGN KEY (fuel_type) REFERENCES Fuel_Types(name), FOREIGN KEY (category) REFERENCES Categories(name), PRIMARY KEY (name))
+CREATE TABLE Featured_Cars(name VARCHAR(80) NOT NULL, fuel_type VARCHAR(40) NOT NULL, power NUMBER(4) NOT NULL, category VARCHAR(40) NOT NULL, number_doors NUMBER(1) NOT NULL, cost NUMBER(7) NOT NULL, consumption NUMBER(5,3) NOT NULL, number_seats NUMBER(1) NOT NULL, hidden NUMBER(1) NOT NULL, FOREIGN KEY (name) REFERENCES Car(name) ON DELETE CASCADE, PRIMARY KEY (name))
+CREATE TABLE Requests(request_id NUMBER NOT NULL, requester_name VARCHAR(40) NOT NULL, requester_mail VARCHAR(60) NOT NULL, car_name VARCHAR(40) NOT NULL, request_date TIMESTAMP NOT NULL, city VARCHAR(60) NOT NULL, FOREIGN KEY (car_name) REFERENCES Car(name), PRIMARY KEY (request_id))
+CREATE SEQUENCE requests_id
