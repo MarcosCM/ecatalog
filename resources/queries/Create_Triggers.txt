@@ -1,0 +1,1 @@
+CREATE OR REPLACE TRIGGER preUpdateCar AFTER UPDATE ON Car FOR EACH ROW BEGIN UPDATE Featured_Cars SET fuel_type=:NEW.fuel_type, power=:NEW.power, category=:NEW.category, number_doors=:NEW.number_doors, cost=:NEW.cost, consumption=:NEW.consumption, number_seats=:NEW.number_seats, hidden=:NEW.hidden WHERE name=:NEW.name; END;

@@ -15,7 +15,6 @@ public class View {
 
     /**
      * Visualiza una lista de coches
-     *
      * @param models Lista de coches
      * @param modelsList Lista que contiene los resultados de la búsqueda
      */

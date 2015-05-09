@@ -139,7 +139,7 @@ public class JDBCTemplate {
                 } catch (SQLException e2) {}
             }
         }
-        return null;
+        return new Cursor(null);
     }
 
     /**
