@@ -134,4 +134,16 @@ public class Controller {
         String delete = "DELETE FROM Car WHERE name ='" + model + "'";
         template.executeSentence(delete);
     }
+    
+    /**
+     * Oculta el modelo pasado por parámetro para que el cliente no lo visualice
+     * en su aplicación
+     *
+     * @param model Nombre del modelo
+     */
+    public static void ocultar(String model) {
+        JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
+        
+        //template.executeSentence();
+    }
 }

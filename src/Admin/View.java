@@ -26,7 +26,9 @@ public class View {
 
         //actualiza la tabla con nuevos coches
         for (final CarModel c : models) {
-            tableModel.addRow(new Object[]{c.getName(), c.getCategory(), c.getCost(), c.getPower(), c.getFuelType(), c.getConsumption(), "Ver más", "Borrar"});
+            tableModel.addRow(new Object[]{c.getName(), c.getCategory(),
+                c.getCost(), c.getPower(), c.getFuelType(), c.getConsumption(),
+                "Ver más", "Borrar", "Ocultar"});
         }
 
         Action viewMore = new AbstractAction() {
@@ -36,7 +38,6 @@ public class View {
                 String name = (String) tableModel.getValueAt(row, 0);
                 CarModel car = new CarModel(name);
                 CarWindow.openWindow(car);
-
             }
         };
 
@@ -46,13 +47,24 @@ public class View {
                 int row = Integer.valueOf(e.getActionCommand());
                 String name = (String) tableModel.getValueAt(row, 0);
                 Controller.borrar(name);
-
             }
         };
-        ButtonColumn columnViewMore = new ButtonColumn(modelsList, viewMore, tableModel.getColumnCount() - 2);
         
-        ButtonColumn columnDelete = new ButtonColumn(modelsList, delete, tableModel.getColumnCount() - 1);
+        Action ocultar = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = Integer.valueOf(e.getActionCommand());
+                String name = (String) tableModel.getValueAt(row, 0);
+                Controller.ocultar(name);
+            }
+        };
+        
+        ButtonColumn columnViewMore = new ButtonColumn(modelsList, viewMore, tableModel.getColumnCount() - 3);      
+        ButtonColumn columnDelete = new ButtonColumn(modelsList, delete, tableModel.getColumnCount() - 2);
+        ButtonColumn columnOcultar = new ButtonColumn(modelsList, ocultar, tableModel.getColumnCount() - 1);
+        
         columnViewMore.setMnemonic(KeyEvent.VK_D);
         columnDelete.setMnemonic(KeyEvent.VK_D);
+        columnOcultar.setMnemonic(KeyEvent.VK_D);
     }
 }
