@@ -1,6 +1,7 @@
 package Admin;
-
+ 
 import External.ButtonColumn;
+ 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
@@ -22,16 +23,18 @@ public class View {
         final DefaultTableModel tableModel = (DefaultTableModel) modelsList.getModel();
         //limpia la lista
         tableModel.setRowCount(0);
-
         //actualiza la tabla con nuevos coches
+        int i=0;
         for (final CarModel c : models) {
             String hidden = "Ocultar";
             if(c.getHidden()) hidden = "Mostrar";
             tableModel.addRow(new Object[]{c.getName(), c.getCategory(),
                 c.getCost(), c.getPower(), c.getFuelType(), c.getConsumption(),
                 "Ver más", "Borrar", hidden});
+            if(c.getFeatured())  modelsList.setRowHeight(i,modelsList.getRowHeight(i)+10);
+            i++;
         }
-
+  
         Action viewMore = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -72,5 +75,10 @@ public class View {
         columnViewMore.setMnemonic(KeyEvent.VK_D);
         columnDelete.setMnemonic(KeyEvent.VK_D);
         columnHide.setMnemonic(KeyEvent.VK_D);
+        
+      
+     
+         
+
     }
 }
