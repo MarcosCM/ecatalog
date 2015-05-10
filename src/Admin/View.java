@@ -18,21 +18,19 @@ public class View {
      * Visualiza una lista de coches
      * @param models Lista de coches
      * @param modelsList Lista que contiene los resultados de la búsqueda
+     * @param numFeatured Número de coches destacados (los destacados siempre salen al principio)
      */
-    public static void list(final CarModel[] models, JTable modelsList) {
+    public static void list(final CarModel[] models, JTable modelsList, int numFeatured) {
         final DefaultTableModel tableModel = (DefaultTableModel) modelsList.getModel();
         //limpia la lista
         tableModel.setRowCount(0);
         //actualiza la tabla con nuevos coches
-        int i=0;
         for (final CarModel c : models) {
             String hidden = "Ocultar";
             if(c.getHidden()) hidden = "Mostrar";
             tableModel.addRow(new Object[]{c.getName(), c.getCategory(),
                 c.getCost(), c.getPower(), c.getFuelType(), c.getConsumption(),
                 "Ver más", "Borrar", hidden});
-            if(c.getFeatured())  modelsList.setRowHeight(i,modelsList.getRowHeight(i)+10);
-            i++;
         }
   
         Action viewMore = new AbstractAction() {
@@ -76,9 +74,6 @@ public class View {
         columnDelete.setMnemonic(KeyEvent.VK_D);
         columnHide.setMnemonic(KeyEvent.VK_D);
         
-      
-     
-         
-
+        modelsList.setDefaultRenderer(Object.class, new MiRender(numFeatured));
     }
 }
