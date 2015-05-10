@@ -1,6 +1,7 @@
 package Admin;
-
+ 
 import External.ButtonColumn;
+ 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
@@ -17,12 +18,12 @@ public class View {
      * Visualiza una lista de coches
      * @param models Lista de coches
      * @param modelsList Lista que contiene los resultados de la búsqueda
+     * @param numFeatured Número de coches destacados (los destacados siempre salen al principio)
      */
-    public static void list(final CarModel[] models, JTable modelsList) {
+    public static void list(final CarModel[] models, JTable modelsList, int numFeatured) {
         final DefaultTableModel tableModel = (DefaultTableModel) modelsList.getModel();
         //limpia la lista
         tableModel.setRowCount(0);
-
         //actualiza la tabla con nuevos coches
         for (final CarModel c : models) {
             String hidden = "Ocultar";
@@ -31,7 +32,7 @@ public class View {
                 c.getCost(), c.getPower(), c.getFuelType(), c.getConsumption(),
                 "Ver más", "Borrar", hidden});
         }
-
+  
         Action viewMore = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -72,5 +73,7 @@ public class View {
         columnViewMore.setMnemonic(KeyEvent.VK_D);
         columnDelete.setMnemonic(KeyEvent.VK_D);
         columnHide.setMnemonic(KeyEvent.VK_D);
+        
+        modelsList.setDefaultRenderer(Object.class, new MiRender(numFeatured));
     }
 }

@@ -555,6 +555,9 @@
     <Component class="javax.swing.JSpinner" name="jSpinner1">
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
+      </AccessibilityProperties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JScrollPane(modelsList);"/>
       </AuxValues>
