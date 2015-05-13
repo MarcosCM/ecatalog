@@ -14,7 +14,8 @@ public class MainWindow extends javax.swing.JFrame {
     {
         @Override
         public boolean isCellEditable(int row, int column){
-             return false;
+            //true sólo para los botones para arreglar posible bug en ordenadores con Windows 7
+            return this.getColumnName(column).equals("");
         }
     };
     private final javax.swing.JTable modelsList = new javax.swing.JTable(tableModel);
@@ -464,7 +465,6 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         modelo.getAccessibleContext().setAccessibleName("txt_modelo");
-        jScrollPane2.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

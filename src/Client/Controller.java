@@ -72,12 +72,14 @@ public class Controller {
     	String query = "SELECT * FROM Featured_Cars "+options;
         //Primero hay que introducir los que están destacados
         ResultSet rs = template.executeQuery(query).getResultSet();
+        int numFeatured = 0;
         if (rs != null){
             try {
                 while(rs.next()){
                     models.add(new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
                             rs.getInt("number_doors"), rs.getInt("cost"), rs.getDouble("consumption"), rs.getInt("number_seats"),
                             rs.getBoolean("hidden"), true));
+                    numFeatured++;
                 }
             } catch (SQLException e){}
         }
@@ -105,7 +107,7 @@ public class Controller {
         }
         
     	//pasamos el vector de modelos a la vista
-    	View.list(models.toArray(new CarModel[models.size()]), modelsList);
+    	View.list(models.toArray(new CarModel[models.size()]), modelsList, numFeatured);
     }
     
     /**
