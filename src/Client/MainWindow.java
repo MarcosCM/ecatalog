@@ -10,7 +10,14 @@ import javax.swing.table.DefaultTableModel;
 public class MainWindow extends javax.swing.JFrame {
     
     private final HashMap<String,String> filtro = new HashMap<String, String>();
-    private final DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"Modelo", "Categoría", "Coste", "Potencia", "Combustible", "Consumo", ""}, 0);
+    private final DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"Modelo", "Categoría", "Coste", "Potencia", "Combustible", "Consumo", ""}, 0)
+    {
+        @Override
+        public boolean isCellEditable(int row, int column){
+            //true sólo para los botones para arreglar posible bug en ordenadores con Windows 7
+            return this.getColumnName(column).equals("");
+        }
+    };
     private final javax.swing.JTable modelsList = new javax.swing.JTable(tableModel);
     
     /**

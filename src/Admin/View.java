@@ -74,6 +74,6 @@ public class View {
         columnDelete.setMnemonic(KeyEvent.VK_D);
         columnHide.setMnemonic(KeyEvent.VK_D);
         
-        modelsList.setDefaultRenderer(Object.class, new MiRender(numFeatured));
+        modelsList.setDefaultRenderer(Object.class, new FeaturedCarRenderer(numFeatured));
     }
 }

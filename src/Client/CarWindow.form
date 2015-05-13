@@ -34,6 +34,7 @@
                   <Component id="Potencia" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="Categoria" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="Consumo" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="destacado" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -100,7 +101,9 @@
                   <Component id="Precio" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="campoPrecio" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="destacado" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -358,5 +361,14 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JCheckBox" name="destacado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Destacado"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="destacadoActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

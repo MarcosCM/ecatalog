@@ -5,14 +5,14 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
  
-public class MiRender extends DefaultTableCellRenderer{
+public class FeaturedCarRenderer extends DefaultTableCellRenderer{
     
     /**
      * Número de filas a destacar
      */
     private final int numFeatured;
     
-    public MiRender(int numFeatured){
+    public FeaturedCarRenderer(int numFeatured){
         this.numFeatured = numFeatured;
     }
     
