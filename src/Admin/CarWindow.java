@@ -72,6 +72,7 @@ public class CarWindow extends javax.swing.JFrame {
         cmpCiudadContacto = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
         destacado = new javax.swing.JCheckBox();
+        btnModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,7 +100,6 @@ public class CarWindow extends javax.swing.JFrame {
         Precio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Precio.setText("Precio:");
 
-        campoNombre.setEditable(false);
         campoNombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         campoNombre.setBorder(null);
         campoNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -108,31 +108,24 @@ public class CarWindow extends javax.swing.JFrame {
             }
         });
 
-        campoCombustible.setEditable(false);
         campoCombustible.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         campoCombustible.setBorder(null);
 
-        campoPotencia.setEditable(false);
         campoPotencia.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         campoPotencia.setBorder(null);
 
-        campoCategoria.setEditable(false);
         campoCategoria.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         campoCategoria.setBorder(null);
 
-        campoConsumo.setEditable(false);
         campoConsumo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         campoConsumo.setBorder(null);
 
-        campoPuertas.setEditable(false);
         campoPuertas.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         campoPuertas.setBorder(null);
 
-        campoAsientos.setEditable(false);
         campoAsientos.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         campoAsientos.setBorder(null);
 
-        campoPrecio.setEditable(false);
         campoPrecio.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         campoPrecio.setBorder(null);
 
@@ -229,6 +222,13 @@ public class CarWindow extends javax.swing.JFrame {
             }
         });
 
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -254,7 +254,8 @@ public class CarWindow extends javax.swing.JFrame {
                     .addComponent(campoConsumo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(campoPuertas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(campoAsientos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoPrecio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoPrecio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(62, 62, 62)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(362, Short.MAX_VALUE))
@@ -298,9 +299,11 @@ public class CarWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Precio)
                     .addComponent(campoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(destacado)
-                .addGap(97, 97, 97))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(destacado)
+                    .addComponent(btnModificar))
+                .addGap(81, 81, 81))
         );
 
         pack();
@@ -334,6 +337,26 @@ public class CarWindow extends javax.swing.JFrame {
     private void destacadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destacadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_destacadoActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        // TODO add your handling code here:
+        String nombre = campoNombre.getText();
+        String combustible = campoCombustible.getText();
+        String categoria = campoCategoria.getText();
+        if (nombre.equals("") || campoPotencia.getText().equals("") || 
+                campoPrecio.getText().equals("") || campoPuertas.getText().equals("") || 
+                campoConsumo.getText().equals("") || combustible.equals("") ||
+                campoAsientos.getText().equals("") || categoria.equals("")) JOptionPane.showMessageDialog(null, "Por favor introduzca valores válidos");
+        else{
+            int potencia = Integer.parseInt(campoPotencia.getText());
+            int precio = Integer.parseInt(campoPrecio.getText());
+            int puertas = Integer.parseInt(campoPuertas.getText());
+            double consumo = Double.parseDouble(campoConsumo.getText());
+            int asientos = Integer.parseInt(campoAsientos.getText());
+            Controller.modify(car.getName(),nombre,potencia,precio,puertas,consumo,combustible,asientos,categoria);
+        }
+
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     /**
      * Abre una nueva ventana
@@ -391,6 +414,7 @@ public class CarWindow extends javax.swing.JFrame {
     private javax.swing.JLabel Precio;
     private javax.swing.JLabel Puertas;
     private javax.swing.JButton btnEnviar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JTextField campoAsientos;
     private javax.swing.JTextField campoCategoria;
     private javax.swing.JTextField campoCombustible;
