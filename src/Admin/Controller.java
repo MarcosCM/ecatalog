@@ -158,22 +158,9 @@ public class Controller {
     /**
      * Modifica el modelo pasado por parámetro para actualizar los valores
      * pasados por el administrador en la base de datos
-     * @param model Nombre del vehiculo a modificar
-     * @param nombre Nombre del modelo
-     * @param potencia Potencia del modelo
-     * @param precio Precio del modelo
-     * @param puertas Puertas que tiene el modelo
-     * @param consumo Consumo del modelo
-     * @param combustible Combustible del modelo
-     * @param asientos Asientos del modelo
-     * @param categoria Categoria del modelo
+     * @param car Coche a modificar
      */
-    public static void modify(String model,String nombre, int potencia, int precio,
-            int puertas, double consumo, String combustible, int asientos, String categoria){
-        JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
-        String query = "UPDATE car SET name='" + nombre + "', power='" + potencia + "', cost='" + precio + "',"
-                + "number_doors='" + puertas + "', consumption='" + consumo + "', fuel_type='" + combustible + "',"
-                + "number_seats='" + asientos + "', category='" + categoria + "' WHERE name='" + model + "'";
-        template.executeSentence(query);
+    public static void modify(CarModel car){
+        View.modify(car, car.store());
     }
 }

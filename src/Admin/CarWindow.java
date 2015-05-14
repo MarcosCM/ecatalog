@@ -3,7 +3,6 @@ package Admin;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  * Ventana de la ficha de un coche
@@ -60,17 +59,6 @@ public class CarWindow extends javax.swing.JFrame {
         campoPuertas = new javax.swing.JTextField();
         campoAsientos = new javax.swing.JTextField();
         campoPrecio = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
-        Contacto = new javax.swing.JLabel();
-        cmpApellidosContacto = new javax.swing.JTextField();
-        cmpNombreContacto = new javax.swing.JTextField();
-        NombreContacto = new javax.swing.JLabel();
-        ApellidosContacto = new javax.swing.JLabel();
-        MailContacto = new javax.swing.JLabel();
-        cmpMailContacto = new javax.swing.JTextField();
-        CiudadContacto = new javax.swing.JLabel();
-        cmpCiudadContacto = new javax.swing.JTextField();
-        btnEnviar = new javax.swing.JButton();
         destacado = new javax.swing.JCheckBox();
         btnModificar = new javax.swing.JButton();
 
@@ -100,6 +88,7 @@ public class CarWindow extends javax.swing.JFrame {
         Precio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Precio.setText("Precio:");
 
+        campoNombre.setEditable(false);
         campoNombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         campoNombre.setBorder(null);
         campoNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -128,91 +117,6 @@ public class CarWindow extends javax.swing.JFrame {
 
         campoPrecio.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         campoPrecio.setBorder(null);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        Contacto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        Contacto.setText("Contacto");
-
-        cmpApellidosContacto.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-
-        cmpNombreContacto.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        cmpNombreContacto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmpNombreContactoActionPerformed(evt);
-            }
-        });
-
-        NombreContacto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        NombreContacto.setText("Nombre");
-
-        ApellidosContacto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ApellidosContacto.setText("Apellidos");
-
-        MailContacto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MailContacto.setText("Correo Electrónico");
-
-        cmpMailContacto.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-
-        CiudadContacto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        CiudadContacto.setText("Ciudad");
-
-        cmpCiudadContacto.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-
-        btnEnviar.setText("Enviar");
-        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEnviarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(Contacto)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(CiudadContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(btnEnviar))
-                    .addComponent(cmpNombreContacto, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(cmpApellidosContacto)
-                    .addComponent(cmpMailContacto)
-                    .addComponent(cmpCiudadContacto)
-                    .addComponent(ApellidosContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NombreContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MailContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(Contacto)
-                .addGap(4, 4, 4)
-                .addComponent(NombreContacto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmpNombreContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ApellidosContacto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmpApellidosContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(MailContacto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmpMailContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CiudadContacto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmpCiudadContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnEnviar)
-                .addGap(0, 14, Short.MAX_VALUE))
-        );
 
         destacado.setText("Destacado");
         destacado.setToolTipText("");
@@ -256,18 +160,12 @@ public class CarWindow extends javax.swing.JFrame {
                     .addComponent(campoAsientos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(campoPrecio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(362, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(57, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Nombre)
                     .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -309,27 +207,6 @@ public class CarWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmpNombreContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmpNombreContactoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmpNombreContactoActionPerformed
-
-    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        String name = cmpNombreContacto.getText();
-        String surname = cmpApellidosContacto.getText();
-        String city = cmpCiudadContacto.getText();
-        String mail = cmpMailContacto.getText();
-        if (name.isEmpty() || surname.isEmpty() || city.isEmpty() || mail.isEmpty()) JOptionPane.showMessageDialog(null, "Por favor introduzca valores válidos");
-        else {
-            Form form = new Form();
-            form.setParam("name", name);
-            form.setParam("surname", surname);
-            form.setParam("city", city);
-            form.setParam("mail", mail);
-            Controller.contactRequest(form, this.car.getName());
-            JOptionPane.showMessageDialog(null, "¡Solicitud enviada con éxito!");
-        }
-    }//GEN-LAST:event_btnEnviarActionPerformed
-
     private void campoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoNombreActionPerformed
@@ -339,23 +216,16 @@ public class CarWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_destacadoActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
-        String nombre = campoNombre.getText();
-        String combustible = campoCombustible.getText();
-        String categoria = campoCategoria.getText();
-        if (nombre.equals("") || campoPotencia.getText().equals("") || 
-                campoPrecio.getText().equals("") || campoPuertas.getText().equals("") || 
-                campoConsumo.getText().equals("") || combustible.equals("") ||
-                campoAsientos.getText().equals("") || categoria.equals("")) JOptionPane.showMessageDialog(null, "Por favor introduzca valores válidos");
-        else{
-            int potencia = Integer.parseInt(campoPotencia.getText());
-            int precio = Integer.parseInt(campoPrecio.getText());
-            int puertas = Integer.parseInt(campoPuertas.getText());
-            double consumo = Double.parseDouble(campoConsumo.getText());
-            int asientos = Integer.parseInt(campoAsientos.getText());
-            Controller.modify(car.getName(),nombre,potencia,precio,puertas,consumo,combustible,asientos,categoria);
-        }
-
+        car.setName(campoNombre.getText());
+        car.setNumberSeats(Integer.parseInt(campoAsientos.getText()));
+        car.setCategory(campoCategoria.getText());
+        car.setFuelType(campoCombustible.getText());
+        car.setConsumption(Double.parseDouble(campoConsumo.getText()));
+        car.setPower(Integer.parseInt(campoPotencia.getText()));
+        car.setCost(Integer.parseInt(campoPrecio.getText()));
+        car.setNumberDoors(Integer.parseInt(campoPuertas.getText()));
+        car.setFeatured(destacado.isSelected());
+        Controller.modify(car);
     }//GEN-LAST:event_btnModificarActionPerformed
 
     /**
@@ -400,20 +270,14 @@ public class CarWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel ApellidosContacto;
     private javax.swing.JLabel Asientos;
     private javax.swing.JLabel Categoria;
-    private javax.swing.JLabel CiudadContacto;
     private javax.swing.JLabel Combustible;
     private javax.swing.JLabel Consumo;
-    private javax.swing.JLabel Contacto;
-    private javax.swing.JLabel MailContacto;
     private javax.swing.JLabel Nombre;
-    private javax.swing.JLabel NombreContacto;
     private javax.swing.JLabel Potencia;
     private javax.swing.JLabel Precio;
     private javax.swing.JLabel Puertas;
-    private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JTextField campoAsientos;
     private javax.swing.JTextField campoCategoria;
@@ -423,11 +287,6 @@ public class CarWindow extends javax.swing.JFrame {
     private javax.swing.JTextField campoPotencia;
     private javax.swing.JTextField campoPrecio;
     private javax.swing.JTextField campoPuertas;
-    private javax.swing.JTextField cmpApellidosContacto;
-    private javax.swing.JTextField cmpCiudadContacto;
-    private javax.swing.JTextField cmpMailContacto;
-    private javax.swing.JTextField cmpNombreContacto;
     private javax.swing.JCheckBox destacado;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
