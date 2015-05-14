@@ -14,6 +14,9 @@ public class CarWindow extends javax.swing.JFrame {
      */
     private final CarModel car;
 
+    /**
+    * Flag para modificar o introducir
+    */
     private boolean accion;
 
     /**
@@ -26,6 +29,7 @@ public class CarWindow extends javax.swing.JFrame {
         this.accion=accion;
         initComponents();
         if (!accion) {
+
             btnModificar.setText("Introducir");
             campoNombre.setEditable(true);
         }
@@ -269,6 +273,7 @@ public class CarWindow extends javax.swing.JFrame {
      * Abre una nueva ventana
      *
      * @param car Coche a mostrar en la nueva ventana
+     * @param accion Si es true "modificar", si no "introducir"
      */
     public static void openWindow(final CarModel car, boolean accion) {
         /* Set the Nimbus look and feel */

@@ -159,6 +159,7 @@ public class Controller {
      * Modifica el modelo pasado por parámetro para actualizar los valores
      * pasados por el administrador en la base de datos
      * @param car Coche a modificar
+     * @param accion Si es true "modificar", si no "introducir"
      */
     public static void modify(CarModel car, boolean accion){
         View.modify(car, car.store(), accion);
