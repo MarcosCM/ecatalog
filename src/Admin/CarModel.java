@@ -22,6 +22,15 @@ public class CarModel {
     private boolean featured;   // si está destacado por el administrador
     
     /**
+     * Crea un modelo lógico sin datos
+     */
+    public CarModel(){
+        name = "";
+        fuelType = "";
+        category = "";
+    }
+    
+    /**
      * Crea una instancia del modelo lógico a partir de datos existentes en
      * la base de datos.
      * @param name Nombre (clave) del modelo de coche

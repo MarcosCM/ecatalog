@@ -13,23 +13,32 @@ public class CarWindow extends javax.swing.JFrame {
      * Coche del que tiene información esta ventana
      */
     private final CarModel car;
-    
+
+    private boolean accion;
+
     /**
      * Creates new form Descripcion
+     *
      * @param car Coche a mostrar en el formulario
+     * @param accion Si es true "modificar", si no "introducir"
      */
-    public CarWindow(CarModel car) {
+    public CarWindow(CarModel car, boolean accion) {
+        this.accion=accion;
         initComponents();
+        if (!accion) {
+            btnModificar.setText("Introducir");
+            campoNombre.setEditable(true);
+        }
         this.car = car;
         campoNombre.setText(car.getName());
-        campoAsientos.setText(""+car.getNumberSeats());
+        campoAsientos.setText("" + car.getNumberSeats());
         campoCategoria.setText(car.getCategory());
         campoCombustible.setText(car.getFuelType());
-        campoConsumo.setText(""+car.getConsumption());
-        campoPotencia.setText(""+car.getPower());
-        campoPrecio.setText(""+car.getCost());
-        campoPuertas.setText(""+car.getNumberDoors());
-        
+        campoConsumo.setText("" + car.getConsumption());
+        campoPotencia.setText("" + car.getPower());
+        campoPrecio.setText("" + car.getCost());
+        campoPuertas.setText("" + car.getNumberDoors());
+
         destacado.setSelected(car.getFeatured());
         //falta ponerle un boolean si esta destacado o no
     }
@@ -252,14 +261,16 @@ public class CarWindow extends javax.swing.JFrame {
         car.setCost(cost);
         car.setNumberDoors(doors);
         car.setFeatured(destacado.isSelected());
-        Controller.modify(car);
+        Controller.modify(car,accion);
     }//GEN-LAST:event_btnModificarActionPerformed
+
 
     /**
      * Abre una nueva ventana
+     *
      * @param car Coche a mostrar en la nueva ventana
      */
-    public static void openWindow(final CarModel car) {
+    public static void openWindow(final CarModel car, boolean accion) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -276,16 +287,16 @@ public class CarWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(CarWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                final CarWindow window = new CarWindow(car);
+                final CarWindow window = new CarWindow(car, accion);
                 //Cuando se cierre la ventana no se abandonará la aplicación entera
-                window.addWindowListener(new WindowAdapter(){
+                window.addWindowListener(new WindowAdapter() {
                     @Override
-                    public void windowClosing(WindowEvent e){
+                    public void windowClosing(WindowEvent e) {
                         window.setVisible(false);
                         window.dispose();
                     }

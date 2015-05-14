@@ -160,7 +160,7 @@ public class Controller {
      * pasados por el administrador en la base de datos
      * @param car Coche a modificar
      */
-    public static void modify(CarModel car){
-        View.modify(car, car.store());
+    public static void modify(CarModel car, boolean accion){
+        View.modify(car, car.store(), accion);
     }
 }
