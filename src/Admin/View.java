@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,7 +31,7 @@ public class View {
             if(c.getHidden()) hidden = "Mostrar";
             tableModel.addRow(new Object[]{c.getName(), c.getCategory(),
                 c.getCost(), c.getPower(), c.getFuelType(), c.getConsumption(),
-                "Ver más", "Borrar", hidden});
+                "Modificar", "Borrar", hidden});
         }
   
         Action viewMore = new AbstractAction() {
@@ -75,5 +76,17 @@ public class View {
         columnHide.setMnemonic(KeyEvent.VK_D);
         
         modelsList.setDefaultRenderer(Object.class, new FeaturedCarRenderer(numFeatured));
+    }
+    
+    /**
+     * Muestra un mensaje informando del resultado de la operación de modificar
+     * @param car Coche modificado
+     * @param stored true si ha sido actualizado con éxito, false en caso contrario
+     */
+    public static void modify(CarModel car, boolean stored){
+        String msg;
+        if (stored) msg = "¡El coche " + car.getName() + " ha sido actualizado con éxito!";
+        else msg = "No ha sido posible actualizar el coche.\nPor favor, revisa los valores introducidos";
+        JOptionPane.showMessageDialog(null, msg);
     }
 }

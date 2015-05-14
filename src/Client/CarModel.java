@@ -173,7 +173,7 @@ public class CarModel {
     /**
      * @param consumption the consumption to set
      */
-    public void setConsumption(int consumption) {
+    public void setConsumption(double consumption) {
         this.consumption = consumption;
     }
 
@@ -227,23 +227,32 @@ public class CarModel {
         JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
         
         //probamos a insertar
-        String query = "INSERT INTO Car VALUES ('"+getName()+"', '"+getFuelType()+"', '"+getPower()+"', '"+getCategory()+"', "
-                + "'"+getNumberDoors()+"', '"+getCost()+"', '"+getConsumption()+"', '"+getNumberSeats()+"')";
+        String query = "INSERT INTO Car VALUES ('"+getName()+"', '"+getFuelType()+"', "+getPower()+", '"+getCategory()+"', "
+                +getNumberDoors()+", "+getCost()+", "+getConsumption()+", "+getNumberSeats()+", "+(getHidden() ? 1 : 0)+")";
+        System.out.println(query);
         int res = template.executeSentence(query);
         if (getFeatured()){
-            query = "INSERT INTO Featured_Cars VALUES ('"+getName()+"', '"+getFuelType()+"', '"+getPower()+"', '"+getCategory()+"', "
-                + "'"+getNumberDoors()+"', '"+getCost()+"', '"+getConsumption()+"', '"+getNumberSeats()+"')";
+            query = "INSERT INTO Featured_Cars VALUES ('"+getName()+"', '"+getFuelType()+"', "+getPower()+", '"+getCategory()+"', "
+                +getNumberDoors()+", "+getCost()+", "+getConsumption()+", "+getNumberSeats()+", "+(getHidden() ? 1 : 0)+")";
+            System.out.println(query);
             template.executeSentence(query);
         }
         
         //si ya existe entonces actualizamos
         if (res == -1){
-            query = "UPDATE Car SET name='"+getName()+"', fuel_type='"+getFuelType()+"', power='"+getPower()+"', category='"+getCategory()+"', "
-                + "number_doors='"+getNumberDoors()+"', cost='"+getCost()+"', consumption='"+getConsumption()+"', number_seats='"+getNumberSeats()+"' "
-                + "WHERE name=''";
+            query = "UPDATE Car SET fuel_type='"+getFuelType()+"', power="+getPower()+", category='"+getCategory()+"', "
+                + "number_doors="+getNumberDoors()+", cost="+getCost()+", consumption="+getConsumption()+", number_seats="+getNumberSeats()+", hidden="+(getHidden() ? 1 : 0)
+                + " WHERE name='"+getName()+"'";
+            System.out.println(query);
             res = template.executeSentence(query);
             //no es necesario hacer UPDATE en la tabla Featured_Cars ya que el trigger lo hará solo
         }
+        
+        if (!getFeatured()){
+            query = "DELETE FROM Featured_Cars WHERE name='"+getName()+"'";
+            template.executeSentence(query);
+        }
+        
         return res != -1;
     }
     

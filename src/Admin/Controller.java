@@ -155,4 +155,12 @@ public class Controller {
         else query = "UPDATE car SET hidden=0 WHERE name='" + model + "'";
         template.executeSentence(query);
     }
+    /**
+     * Modifica el modelo pasado por parámetro para actualizar los valores
+     * pasados por el administrador en la base de datos
+     * @param car Coche a modificar
+     */
+    public static void modify(CarModel car){
+        View.modify(car, car.store());
+    }
 }
