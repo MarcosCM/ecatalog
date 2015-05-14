@@ -30,8 +30,7 @@ public class CarWindow extends javax.swing.JFrame {
         campoPotencia.setText(""+car.getPower());
         campoPrecio.setText(""+car.getCost());
         campoPuertas.setText(""+car.getNumberDoors());
-        
-        destacado.setSelected(car.getFeatured());
+        campoDestacado.setText(car.getFeatured() ? "Sí" : "No");
         //falta ponerle un boolean si esta destacado o no
     }
 
@@ -52,6 +51,7 @@ public class CarWindow extends javax.swing.JFrame {
         Puertas = new javax.swing.JLabel();
         Asientos = new javax.swing.JLabel();
         Precio = new javax.swing.JLabel();
+        Destacado = new javax.swing.JLabel();
         campoNombre = new javax.swing.JTextField();
         campoCombustible = new javax.swing.JTextField();
         campoPotencia = new javax.swing.JTextField();
@@ -60,6 +60,7 @@ public class CarWindow extends javax.swing.JFrame {
         campoPuertas = new javax.swing.JTextField();
         campoAsientos = new javax.swing.JTextField();
         campoPrecio = new javax.swing.JTextField();
+        campoDestacado = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         Contacto = new javax.swing.JLabel();
         cmpApellidosContacto = new javax.swing.JTextField();
@@ -71,7 +72,6 @@ public class CarWindow extends javax.swing.JFrame {
         CiudadContacto = new javax.swing.JLabel();
         cmpCiudadContacto = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
-        destacado = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,6 +98,9 @@ public class CarWindow extends javax.swing.JFrame {
 
         Precio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Precio.setText("Precio:");
+
+        Destacado.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Destacado.setText("Destacado:");
 
         campoNombre.setEditable(false);
         campoNombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -135,6 +138,10 @@ public class CarWindow extends javax.swing.JFrame {
         campoPrecio.setEditable(false);
         campoPrecio.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         campoPrecio.setBorder(null);
+
+        campoDestacado.setEditable(false);
+        campoDestacado.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        campoDestacado.setBorder(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -221,14 +228,6 @@ public class CarWindow extends javax.swing.JFrame {
                 .addGap(0, 14, Short.MAX_VALUE))
         );
 
-        destacado.setText("Destacado");
-        destacado.setToolTipText("");
-        destacado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                destacadoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,17 +243,18 @@ public class CarWindow extends javax.swing.JFrame {
                     .addComponent(Potencia)
                     .addComponent(Categoria)
                     .addComponent(Consumo)
-                    .addComponent(destacado))
+                    .addComponent(Destacado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(campoNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoCombustible, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoPotencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoCategoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoConsumo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoPuertas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoAsientos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoPrecio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(campoDestacado)
+                    .addComponent(campoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(campoCombustible, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(campoPotencia, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(campoCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(campoConsumo, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(campoPuertas, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(campoAsientos, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(campoPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
                 .addGap(62, 62, 62)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(362, Short.MAX_VALUE))
@@ -299,8 +299,10 @@ public class CarWindow extends javax.swing.JFrame {
                     .addComponent(Precio)
                     .addComponent(campoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(destacado)
-                .addGap(97, 97, 97))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Destacado)
+                    .addComponent(campoDestacado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(102, 102, 102))
         );
 
         pack();
@@ -330,10 +332,6 @@ public class CarWindow extends javax.swing.JFrame {
     private void campoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoNombreActionPerformed
-
-    private void destacadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destacadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_destacadoActionPerformed
 
     /**
      * Abre una nueva ventana
@@ -384,6 +382,7 @@ public class CarWindow extends javax.swing.JFrame {
     private javax.swing.JLabel Combustible;
     private javax.swing.JLabel Consumo;
     private javax.swing.JLabel Contacto;
+    private javax.swing.JLabel Destacado;
     private javax.swing.JLabel MailContacto;
     private javax.swing.JLabel Nombre;
     private javax.swing.JLabel NombreContacto;
@@ -395,6 +394,7 @@ public class CarWindow extends javax.swing.JFrame {
     private javax.swing.JTextField campoCategoria;
     private javax.swing.JTextField campoCombustible;
     private javax.swing.JTextField campoConsumo;
+    private javax.swing.JTextField campoDestacado;
     private javax.swing.JTextField campoNombre;
     private javax.swing.JTextField campoPotencia;
     private javax.swing.JTextField campoPrecio;
@@ -403,7 +403,6 @@ public class CarWindow extends javax.swing.JFrame {
     private javax.swing.JTextField cmpCiudadContacto;
     private javax.swing.JTextField cmpMailContacto;
     private javax.swing.JTextField cmpNombreContacto;
-    private javax.swing.JCheckBox destacado;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
