@@ -216,14 +216,41 @@ public class CarWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_destacadoActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        int seats, power, cost, doors;
+        double consumption;
+        try{
+            seats = Integer.parseInt(campoAsientos.getText());
+        } catch(Exception e){
+            seats = 0;
+        }
+        try{
+            consumption = Double.parseDouble(campoConsumo.getText());
+        } catch(Exception e){
+            consumption = 0.0;
+        }try{
+            power = Integer.parseInt(campoPotencia.getText());
+        } catch(Exception e){
+            power = 0;
+        }
+        try{
+            cost = Integer.parseInt(campoPrecio.getText());
+        } catch(Exception e){
+            cost = 0;
+        }
+        try{
+            doors = Integer.parseInt(campoPuertas.getText());
+        } catch(Exception e){
+            doors = 0;
+        }
+        
         car.setName(campoNombre.getText());
-        car.setNumberSeats(Integer.parseInt(campoAsientos.getText()));
+        car.setNumberSeats(seats);
         car.setCategory(campoCategoria.getText());
         car.setFuelType(campoCombustible.getText());
-        car.setConsumption(Double.parseDouble(campoConsumo.getText()));
-        car.setPower(Integer.parseInt(campoPotencia.getText()));
-        car.setCost(Integer.parseInt(campoPrecio.getText()));
-        car.setNumberDoors(Integer.parseInt(campoPuertas.getText()));
+        car.setConsumption(consumption);
+        car.setPower(power);
+        car.setCost(cost);
+        car.setNumberDoors(doors);
         car.setFeatured(destacado.isSelected());
         Controller.modify(car);
     }//GEN-LAST:event_btnModificarActionPerformed
