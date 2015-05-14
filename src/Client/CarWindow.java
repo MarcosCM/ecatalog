@@ -30,6 +30,9 @@ public class CarWindow extends javax.swing.JFrame {
         campoPotencia.setText(""+car.getPower());
         campoPrecio.setText(""+car.getCost());
         campoPuertas.setText(""+car.getNumberDoors());
+        
+        destacado.setSelected(car.getFeatured());
+        //falta ponerle un boolean si esta destacado o no
     }
 
     /**
@@ -68,6 +71,7 @@ public class CarWindow extends javax.swing.JFrame {
         CiudadContacto = new javax.swing.JLabel();
         cmpCiudadContacto = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
+        destacado = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -217,6 +221,14 @@ public class CarWindow extends javax.swing.JFrame {
                 .addGap(0, 14, Short.MAX_VALUE))
         );
 
+        destacado.setText("Destacado");
+        destacado.setToolTipText("");
+        destacado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                destacadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -231,7 +243,8 @@ public class CarWindow extends javax.swing.JFrame {
                     .addComponent(Combustible)
                     .addComponent(Potencia)
                     .addComponent(Categoria)
-                    .addComponent(Consumo))
+                    .addComponent(Consumo)
+                    .addComponent(destacado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(campoNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -285,7 +298,9 @@ public class CarWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Precio)
                     .addComponent(campoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(112, 112, 112))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(destacado)
+                .addGap(97, 97, 97))
         );
 
         pack();
@@ -315,6 +330,10 @@ public class CarWindow extends javax.swing.JFrame {
     private void campoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoNombreActionPerformed
+
+    private void destacadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destacadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_destacadoActionPerformed
 
     /**
      * Abre una nueva ventana
@@ -384,6 +403,7 @@ public class CarWindow extends javax.swing.JFrame {
     private javax.swing.JTextField cmpCiudadContacto;
     private javax.swing.JTextField cmpMailContacto;
     private javax.swing.JTextField cmpNombreContacto;
+    private javax.swing.JCheckBox destacado;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

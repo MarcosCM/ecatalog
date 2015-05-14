@@ -464,7 +464,6 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         modelo.getAccessibleContext().setAccessibleName("txt_modelo");
-        jScrollPane2.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
