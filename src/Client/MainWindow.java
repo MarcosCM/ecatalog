@@ -94,9 +94,9 @@ public class MainWindow extends javax.swing.JFrame {
         modelo9.setName("Potencia Max"); // NOI18N
         modelo9.setText("Potencia Max");
 
-        sld_potenciaMax.setMaximum(200);
+        sld_potenciaMax.setMaximum(500);
         sld_potenciaMax.setToolTipText("");
-        sld_potenciaMax.setValue(200);
+        sld_potenciaMax.setValue(500);
         sld_potenciaMax.setValueIsAdjusting(true);
         sld_potenciaMax.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -115,7 +115,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         txt_potenciaMax.setEditable(false);
-        txt_potenciaMax.setText("200");
+        txt_potenciaMax.setText("500");
         txt_potenciaMax.setToolTipText("Ej:  V20");
         txt_potenciaMax.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,7 +254,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         txt_consumoMax.setEditable(false);
-        txt_consumoMax.setText("20");
+        txt_consumoMax.setText("40");
         txt_consumoMax.setToolTipText("Ej:  V20");
         txt_consumoMax.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,8 +262,9 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        sld_consumoMax.setMaximum(20);
+        sld_consumoMax.setMaximum(40);
         sld_consumoMax.setToolTipText("");
+        sld_consumoMax.setValue(40);
         sld_consumoMax.setValueIsAdjusting(true);
         sld_consumoMax.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
