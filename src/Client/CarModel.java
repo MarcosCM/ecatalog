@@ -2,8 +2,6 @@ package Client;
 
 import Database.Cursor;
 import Database.JDBCTemplate;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -246,9 +244,10 @@ public class CarModel {
     public boolean store(){
         JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
         int res = -1;
-        
         try{
-            String query = "INSERT INTO Car VALUES (?,?,?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO Car"
+                    + " (name, fuel_type, power, category, number_doors, cost, consumption, number_seats, hidden, img) VALUES"
+                    + " (?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = template.getConnection().prepareStatement(query);
             ps.setString(1, getName());
             ps.setString(2, getFuelType());
@@ -262,42 +261,53 @@ public class CarModel {
             ps.setBytes(10, getImg());
             
             //probamos a insertar
-            res = ps.executeUpdate();
-            if (getFeatured()){
-                query = "INSERT INTO Featured_Cars VALUES (?,?,?,?,?,?,?,?,?,?)";
-                try{
-                    ps = template.getConnection().prepareStatement(query);
-                    ps.setString(1, getName());
-                    ps.setString(2, getFuelType());
-                    ps.setInt(3, getPower());
-                    ps.setString(4, getCategory());
-                    ps.setInt(5, getNumberDoors());
-                    ps.setInt(6, getCost());
-                    ps.setDouble(7, getConsumption());
-                    ps.setInt(8, getNumberSeats());
-                    ps.setBoolean(9, getHidden());
-                    ps.setBytes(10, getImg());
-                } catch(Exception e){}
+            try{
                 res = ps.executeUpdate();
+            } catch(SQLException e){
+                res = -1;
+            }
+            
+            if (getFeatured()){
+                query = "INSERT INTO Featured_Cars"
+                        + " (name, fuel_type, power, category, number_doors, cost, consumption, number_seats, hidden, img) VALUES"
+                        + " (?,?,?,?,?,?,?,?,?,?)";
+                ps = template.getConnection().prepareStatement(query);
+                ps.setString(1, getName());
+                ps.setString(2, getFuelType());
+                ps.setInt(3, getPower());
+                ps.setString(4, getCategory());
+                ps.setInt(5, getNumberDoors());
+                ps.setInt(6, getCost());
+                ps.setDouble(7, getConsumption());
+                ps.setInt(8, getNumberSeats());
+                ps.setBoolean(9, getHidden());
+                ps.setBytes(10, getImg());
+                try{
+                    res = ps.executeUpdate();
+                } catch(SQLException e){
+                    res = -1;
+                }
             }
 
             //si ya existe entonces actualizamos
             if (res == -1){
                 query = "UPDATE Car SET fuel_type = ?, power = ?, category = ?, number_doors = ?, cost = ?, consumption = ?, number_seats = ?, hidden = ?, img = ? WHERE name = ?";
+                ps = template.getConnection().prepareStatement(query);
+                ps.setString(1, getFuelType());
+                ps.setInt(2, getPower());
+                ps.setString(3, getCategory());
+                ps.setInt(4, getNumberDoors());
+                ps.setInt(5, getCost());
+                ps.setDouble(6, getConsumption());
+                ps.setInt(7, getNumberSeats());
+                ps.setBoolean(8, getHidden());
+                ps.setBytes(9, getImg());
+                ps.setString(10, getName());
                 try{
-                    ps = template.getConnection().prepareStatement(query);
-                    ps.setString(1, getFuelType());
-                    ps.setInt(2, getPower());
-                    ps.setString(3, getCategory());
-                    ps.setInt(4, getNumberDoors());
-                    ps.setInt(5, getCost());
-                    ps.setDouble(6, getConsumption());
-                    ps.setInt(7, getNumberSeats());
-                    ps.setBoolean(8, getHidden());
-                    ps.setBytes(9, getImg());
-                    ps.setString(10, getName());
-                } catch(Exception e){}
-                res = ps.executeUpdate();
+                    res = ps.executeUpdate();
+                } catch(SQLException e){
+                    res = -1;
+                }
                 //no es necesario hacer UPDATE en la tabla Featured_Cars ya que el trigger lo hará solo
             }
 
@@ -305,7 +315,9 @@ public class CarModel {
                 query = "DELETE FROM Featured_Cars WHERE name='"+getName()+"'";
                 template.executeSentence(query);
             }
-        } catch(Exception e){}
+        } catch(Exception e){
+            res = -1;
+        }
         
         return res != -1;
     }
