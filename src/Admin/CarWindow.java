@@ -17,7 +17,7 @@ public class CarWindow extends javax.swing.JFrame {
     /**
     * Flag para modificar o introducir
     */
-    private boolean accion;
+    private final boolean accion;
 
     /**
      * Creates new form Descripcion
