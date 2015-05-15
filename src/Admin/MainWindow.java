@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 public class MainWindow extends javax.swing.JFrame {
     
     private final HashMap<String,String> filtro = new HashMap<String, String>();
-    private final DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"Modelo", "Categoría", "Coste", "Potencia", "Combustible", "Consumo", "", "", ""}, 0)
+    private final DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"Modelo", "Categoría", "Precio (€)", "Potencia(CV)", "Combustible", "Consumo(L/100km)", "", "", ""}, 0)
     {
         @Override
         public boolean isCellEditable(int row, int column){
@@ -94,7 +94,7 @@ public class MainWindow extends javax.swing.JFrame {
         modelo1.setText("Tipo combustible");
 
         modelo9.setName("Potencia Max"); // NOI18N
-        modelo9.setText("Potencia Max");
+        modelo9.setText("Potencia Max (CV)");
 
         sld_potenciaMax.setMaximum(500);
         sld_potenciaMax.setToolTipText("");
@@ -155,7 +155,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         modelo10.setName("Potencia Min"); // NOI18N
-        modelo10.setText("Potencia Min");
+        modelo10.setText("Potencia Min (CV)");
 
         cb_tipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "Familiar", "Deportivo", "Monovolumen", "Todo-terreno", "Mini" }));
         cb_tipo.setToolTipText("");
@@ -230,10 +230,10 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         modelo11.setName("Precio Max"); // NOI18N
-        modelo11.setText("Precio Max");
+        modelo11.setText("Precio Max (€)");
 
         modelo12.setName("Precio Min"); // NOI18N
-        modelo12.setText("Precio Min");
+        modelo12.setText("Precio Min (€)");
 
         sld_consumoMin.setMaximum(20);
         sld_consumoMin.setToolTipText("");
@@ -266,7 +266,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         sld_consumoMax.setMaximum(40);
         sld_consumoMax.setToolTipText("");
-        sld_consumoMax.setValue(40);
         sld_consumoMax.setValueIsAdjusting(true);
         sld_consumoMax.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -294,10 +293,10 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         modelo13.setName("Consumo Max"); // NOI18N
-        modelo13.setText("Consumo Max (l/100km)");
+        modelo13.setText("Consumo Max (L/100km)");
 
         modelo14.setName("Consumo Min"); // NOI18N
-        modelo14.setText("Consumo Min (l/100km)");
+        modelo14.setText("Consumo Min (L/100km)");
 
         modelo4.setName("Numero asientos"); // NOI18N
         modelo4.setText("Numero asientos");
@@ -340,7 +339,7 @@ public class MainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -421,7 +420,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(86, 86, 86)
                                 .addComponent(btn_introducir, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(211, Short.MAX_VALUE))))
+                        .addContainerGap(209, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

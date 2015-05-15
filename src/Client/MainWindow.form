@@ -288,7 +288,7 @@
     <Component class="java.awt.Label" name="modelo9">
       <Properties>
         <Property name="name" type="java.lang.String" value="Potencia Max" noResource="true"/>
-        <Property name="text" type="java.lang.String" value="Potencia Max"/>
+        <Property name="text" type="java.lang.String" value="Potencia Max(CV)"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
@@ -343,7 +343,7 @@
     <Component class="java.awt.Label" name="modelo10">
       <Properties>
         <Property name="name" type="java.lang.String" value="Potencia Min" noResource="true"/>
-        <Property name="text" type="java.lang.String" value="Potencia Min"/>
+        <Property name="text" type="java.lang.String" value="Potencia Min(CV)"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
@@ -434,7 +434,7 @@
     <Component class="java.awt.Label" name="modelo11">
       <Properties>
         <Property name="name" type="java.lang.String" value="Precio Max" noResource="true"/>
-        <Property name="text" type="java.lang.String" value="Precio Max"/>
+        <Property name="text" type="java.lang.String" value="Precio Max(&#x20ac;)"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
@@ -443,7 +443,7 @@
     <Component class="java.awt.Label" name="modelo12">
       <Properties>
         <Property name="name" type="java.lang.String" value="Precio Min" noResource="true"/>
-        <Property name="text" type="java.lang.String" value="Precio Min"/>
+        <Property name="text" type="java.lang.String" value="Precio Min(&#x20ac;)"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
@@ -476,7 +476,6 @@
       <Properties>
         <Property name="maximum" type="int" value="40"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="value" type="int" value="40"/>
         <Property name="valueIsAdjusting" type="boolean" value="true"/>
       </Properties>
       <Events>
@@ -498,7 +497,7 @@
     <Component class="java.awt.Label" name="modelo13">
       <Properties>
         <Property name="name" type="java.lang.String" value="Consumo Max" noResource="true"/>
-        <Property name="text" type="java.lang.String" value="Consumo Max (l/100km)"/>
+        <Property name="text" type="java.lang.String" value="Consumo Max (L/100km)"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
@@ -507,7 +506,7 @@
     <Component class="java.awt.Label" name="modelo14">
       <Properties>
         <Property name="name" type="java.lang.String" value="Consumo Min" noResource="true"/>
-        <Property name="text" type="java.lang.String" value="Consumo Min (l/100km)"/>
+        <Property name="text" type="java.lang.String" value="Consumo Min (L/100km)"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>

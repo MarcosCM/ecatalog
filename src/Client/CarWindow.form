@@ -130,7 +130,7 @@
     <Component class="javax.swing.JLabel" name="Potencia">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="2"/>
-        <Property name="text" type="java.lang.String" value="Potencia:"/>
+        <Property name="text" type="java.lang.String" value="Potencia(CV):"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="Categoria">
@@ -142,7 +142,7 @@
     <Component class="javax.swing.JLabel" name="Consumo">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="2"/>
-        <Property name="text" type="java.lang.String" value="Consumo:"/>
+        <Property name="text" type="java.lang.String" value="Consumo(L/100km):"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="Puertas">
@@ -160,7 +160,7 @@
     <Component class="javax.swing.JLabel" name="Precio">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="2"/>
-        <Property name="text" type="java.lang.String" value="Precio:"/>
+        <Property name="text" type="java.lang.String" value="Precio(&#x20ac;):"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="campoNombre">
