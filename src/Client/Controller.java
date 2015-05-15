@@ -5,6 +5,7 @@ import Database.JDBCTemplate;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 import javax.swing.JTable;
@@ -65,7 +66,7 @@ public class Controller {
      * @param form Filtro de parámetros
      * @param modelsList Lista que contiene los resultados de la búsqueda
      */
-    public static void list(Form form, JTable modelsList){
+    public static void list(Form form, JTable modelsList, boolean order){
     	ArrayList<CarModel> models = new ArrayList<CarModel>();
     	JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
     	String options = getSQLOptions(form);
@@ -78,7 +79,7 @@ public class Controller {
                 while(rs.next()){
                     models.add(new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
                             rs.getInt("number_doors"), rs.getInt("cost"), rs.getDouble("consumption"), rs.getInt("number_seats"),
-                            rs.getBoolean("hidden"), true, rs.getBytes("img")));
+                            rs.getBoolean("hidden"), true));
                     numFeatured++;
                 }
             } catch (SQLException e){}
@@ -101,11 +102,11 @@ public class Controller {
                 while(rs.next()){
                     models.add(new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
                             rs.getInt("number_doors"), rs.getInt("cost"), rs.getDouble("consumption"), rs.getInt("number_seats"),
-                            rs.getBoolean("hidden"), false, rs.getBytes("img")));
+                            rs.getBoolean("hidden"), false));
                 }
             } catch (SQLException e){}
         }
-        
+        if(order)Collections.sort(models);
     	//pasamos el vector de modelos a la vista
     	View.list(models.toArray(new CarModel[models.size()]), modelsList, numFeatured);
     }

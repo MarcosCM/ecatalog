@@ -8,8 +8,8 @@ import java.sql.SQLException;
 /**
  * Modelo lógico de un coche
  */
-public class CarModel {
-
+public class CarModel implements Comparable {
+    
     private String name;	// nombre del coche
     private String fuelType;	// tipo de combustible
     private int power;		// potencia (cv)
@@ -20,25 +20,26 @@ public class CarModel {
     private int numberSeats;	// número de asientos
     private boolean hidden;     // si está oculto por el administrador
     private boolean featured;   // si está destacado por el administrador
-    
+
     /**
      * Crea un modelo lógico sin datos
      */
-    public CarModel(){
+    public CarModel() {
         name = "";
         fuelType = "";
         category = "";
     }
-    
+
     /**
-     * Crea una instancia del modelo lógico a partir de datos existentes en
-     * la base de datos.
+     * Crea una instancia del modelo lógico a partir de datos existentes en la
+     * base de datos.
+     *
      * @param name Nombre (clave) del modelo de coche
      */
-    public CarModel(String name){
+    public CarModel(String name) {
         this.name = name;
         JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
-        String query = "SELECT * FROM Car WHERE name='"+name+"'";
+        String query = "SELECT * FROM Car WHERE name='" + name + "'";
         Cursor c = template.executeQuery(query);
         ResultSet rs = c.getResultSet();
         try {
@@ -52,15 +53,18 @@ public class CarModel {
             numberSeats = Integer.parseInt(rs.getString("number_seats"));
             hidden = Boolean.parseBoolean("hidden");
             
-            query = "SELECT * FROM Featured_cars WHERE name='"+name+"'";
+            query = "SELECT * FROM Featured_cars WHERE name='" + name + "'";
             c = template.executeQuery(query);
             rs = c.getResultSet();
-            featured = rs.next();
-        } catch (SQLException ex) {}
+            boolean estaDestacado = rs.next();
+            featured = estaDestacado;
+        } catch (SQLException ex) {
+        }
     }
-    
+
     /**
      * Crea una instancia del modelo lógico
+     *
      * @param name Nombre del coche
      * @param fuelType Tipo de combustible
      * @param power Potencia
@@ -73,8 +77,8 @@ public class CarModel {
      * @param featured Destacado
      */
     public CarModel(String name, String fuelType, int power, String category,
-                int numberDoors, int cost, double consumption, int numberSeats,
-                boolean hidden, boolean featured) {
+            int numberDoors, int cost, double consumption, int numberSeats,
+            boolean hidden, boolean featured) {
         this.name = name;
         this.fuelType = fuelType;
         this.power = power;
@@ -156,7 +160,7 @@ public class CarModel {
     public void setNumberDoors(int numberDoors) {
         this.numberDoors = numberDoors;
     }
-    
+
     /**
      * @return the cost
      */
@@ -198,66 +202,67 @@ public class CarModel {
     public void setNumberSeats(int numberSeats) {
         this.numberSeats = numberSeats;
     }
-    
+
     /**
      * @return true si es oculto, false en caso contrario
      */
     public boolean getHidden() {
         return hidden;
     }
-    
+
     /**
      * @param hidden true si oculto, false en caso contrario
      */
     public void setHidden(boolean hidden) {
         this.hidden = hidden;
     }
-    
+
     /**
      * @return true si es destacado, false en caso contrario
      */
     public boolean getFeatured() {
         return featured;
     }
-    
+
     /**
      * @param featured true si destacado, false en caso contrario
      */
     public void setFeatured(boolean featured) {
         this.featured = featured;
     }
-    
+
     /**
      * Almacena el coche en la base de datos
+     *
      * @return true si se ha almacenado correctamente, false en caso contrario
      */
-    public boolean store(){
+    public boolean store() {
         JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
-        
+
         //probamos a insertar
-        String query = "INSERT INTO Car VALUES ('"+getName()+"', '"+getFuelType()+"', "+getPower()+", '"+getCategory()+"', "
-                +getNumberDoors()+", "+getCost()+", "+getConsumption()+", "+getNumberSeats()+", "+(getHidden() ? 1 : 0)+")";
+        String query = "INSERT INTO Car VALUES ('" + getName() + "', '" + getFuelType() + "', " + getPower() + ", '" + getCategory() + "', "
+                + getNumberDoors() + ", " + getCost() + ", " + getConsumption() + ", " + getNumberSeats() + ", " + (getHidden() ? 1 : 0) + ")";
         System.out.println(query);
         int res = template.executeSentence(query);
-        if (getFeatured()){
-            query = "INSERT INTO Featured_Cars VALUES ('"+getName()+"', '"+getFuelType()+"', "+getPower()+", '"+getCategory()+"', "
-                +getNumberDoors()+", "+getCost()+", "+getConsumption()+", "+getNumberSeats()+", "+(getHidden() ? 1 : 0)+")";
+        if (getFeatured()) {
+            query = "INSERT INTO Featured_Cars VALUES ('" + getName() + "', '" + getFuelType() + "', " + getPower() + ", '" + getCategory() + "', "
+                    + getNumberDoors() + ", " + getCost() + ", " + getConsumption() + ", " + getNumberSeats() + ", " + (getHidden() ? 1 : 0) + ")";
             System.out.println(query);
             template.executeSentence(query);
         }
-        
+
         //si ya existe entonces actualizamos
-        if (res == -1){
-            query = "UPDATE Car SET fuel_type='"+getFuelType()+"', power="+getPower()+", category='"+getCategory()+"', "
-                + "number_doors="+getNumberDoors()+", cost="+getCost()+", consumption="+getConsumption()+", number_seats="+getNumberSeats()+", hidden="+(getHidden() ? 1 : 0)
-                + " WHERE name='"+getName()+"'";
+        if (res == -1) {
+            query = "UPDATE Car SET fuel_type='" + getFuelType() + "', power=" + getPower() + ", category='" + getCategory() + "', "
+                    + "number_doors=" + getNumberDoors() + ", cost=" + getCost() + ", consumption=" + getConsumption() + ", number_seats=" + getNumberSeats() + ", hidden=" + (getHidden() ? 1 : 0)
+                    + " WHERE name='" + getName() + "'";
             System.out.println(query);
             res = template.executeSentence(query);
             //no es necesario hacer UPDATE en la tabla Featured_Cars ya que el trigger lo hará solo
         }
         
-        if (!getFeatured()){
-            query = "DELETE FROM Featured_Cars WHERE name='"+getName()+"'";
+        if (!getFeatured()) {
+            query = "DELETE FROM Featured_Cars WHERE name='" + getName() + "'";
             template.executeSentence(query);
         }
         
@@ -265,9 +270,19 @@ public class CarModel {
     }
     
     @Override
-    public String toString(){
-        return name + " - " + category + " - " + cost + " euros - " + power + " CV - " +
-                fuelType + " - " + consumption + " l/100 km - " + numberDoors + " puertas - " + 
-                numberSeats + " asientos" + " - destacado: " + featured;
+    public String toString() {
+        return name + " - " + category + " - " + cost + " euros - " + power + " CV - "
+                + fuelType + " - " + consumption + " l/100 km - " + numberDoors + " puertas - "
+                + numberSeats + " asientos" + " - destacado: " + featured;
+    }
+    
+
+
+    @Override
+    public int compareTo(Object o) {
+        CarModel car = (CarModel) o;
+        String nameModel = car.getName();
+        /* For Ascending order*/
+        return this.name.compareToIgnoreCase(nameModel);
     }
 }
