@@ -165,6 +165,14 @@ public class JDBCTemplate {
         }
         return res;
     }
+    
+    /**
+     * Obtiene la conexión con la base de datos
+     * @return Conexión con la base de datos
+     */
+    public Connection getConnection(){
+    	return connection;
+    }
 
     @Override
     public String toString() {

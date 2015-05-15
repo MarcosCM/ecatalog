@@ -55,8 +55,7 @@ public class CarModel {
             query = "SELECT * FROM Featured_cars WHERE name='"+name+"'";
             c = template.executeQuery(query);
             rs = c.getResultSet();
-            boolean estaDestacado = rs.next();
-            featured = estaDestacado;
+            featured = rs.next();
         } catch (SQLException ex) {}
     }
     

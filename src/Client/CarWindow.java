@@ -1,15 +1,19 @@
 package Client;
 
+import java.awt.BorderLayout;
+import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
  * Ventana de la ficha de un coche
  */
 public class CarWindow extends javax.swing.JFrame {
-
+    
     /**
      * Coche del que tiene información esta ventana
      */
@@ -20,8 +24,8 @@ public class CarWindow extends javax.swing.JFrame {
      * @param car Coche a mostrar en el formulario
      */
     public CarWindow(CarModel car) {
-        initComponents();
         this.car = car;
+        initComponents();
         campoNombre.setText(car.getName());
         campoAsientos.setText(""+car.getNumberSeats());
         campoCategoria.setText(car.getCategory());
@@ -30,10 +34,8 @@ public class CarWindow extends javax.swing.JFrame {
         campoPotencia.setText(""+car.getPower());
         campoPrecio.setText(""+car.getCost());
         campoPuertas.setText(""+car.getNumberDoors());
-        campoDestacado.setText(car.getFeatured() ? "Sí" : "No");
-        //falta ponerle un boolean si esta destacado o no
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,7 +53,6 @@ public class CarWindow extends javax.swing.JFrame {
         Puertas = new javax.swing.JLabel();
         Asientos = new javax.swing.JLabel();
         Precio = new javax.swing.JLabel();
-        Destacado = new javax.swing.JLabel();
         campoNombre = new javax.swing.JTextField();
         campoCombustible = new javax.swing.JTextField();
         campoPotencia = new javax.swing.JTextField();
@@ -60,8 +61,7 @@ public class CarWindow extends javax.swing.JFrame {
         campoPuertas = new javax.swing.JTextField();
         campoAsientos = new javax.swing.JTextField();
         campoPrecio = new javax.swing.JTextField();
-        campoDestacado = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
+        formularioContacto = new javax.swing.JPanel();
         Contacto = new javax.swing.JLabel();
         cmpApellidosContacto = new javax.swing.JTextField();
         cmpNombreContacto = new javax.swing.JTextField();
@@ -72,6 +72,8 @@ public class CarWindow extends javax.swing.JFrame {
         CiudadContacto = new javax.swing.JLabel();
         cmpCiudadContacto = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
+        imagenCoche = new javax.swing.JPanel(new BorderLayout());
+        imagen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,9 +100,6 @@ public class CarWindow extends javax.swing.JFrame {
 
         Precio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Precio.setText("Precio:");
-
-        Destacado.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        Destacado.setText("Destacado:");
 
         campoNombre.setEditable(false);
         campoNombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -139,11 +138,7 @@ public class CarWindow extends javax.swing.JFrame {
         campoPrecio.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         campoPrecio.setBorder(null);
 
-        campoDestacado.setEditable(false);
-        campoDestacado.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        campoDestacado.setBorder(null);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        formularioContacto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         Contacto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Contacto.setText("Contacto");
@@ -180,18 +175,18 @@ public class CarWindow extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout formularioContactoLayout = new javax.swing.GroupLayout(formularioContacto);
+        formularioContacto.setLayout(formularioContactoLayout);
+        formularioContactoLayout.setHorizontalGroup(
+            formularioContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(formularioContactoLayout.createSequentialGroup()
                 .addComponent(Contacto)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(formularioContactoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(formularioContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(CiudadContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(formularioContactoLayout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(btnEnviar))
                     .addComponent(cmpNombreContacto, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
@@ -203,9 +198,9 @@ public class CarWindow extends javax.swing.JFrame {
                     .addComponent(MailContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        formularioContactoLayout.setVerticalGroup(
+            formularioContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(formularioContactoLayout.createSequentialGroup()
                 .addComponent(Contacto)
                 .addGap(4, 4, 4)
                 .addComponent(NombreContacto)
@@ -228,69 +223,98 @@ public class CarWindow extends javax.swing.JFrame {
                 .addGap(0, 14, Short.MAX_VALUE))
         );
 
+        imagenCoche.setPreferredSize(new java.awt.Dimension(200, 140));
+
+        imagen.setPreferredSize(new java.awt.Dimension(200, 140));
+        imagen.setIcon(new ImageIcon(this.getToolkit().createImage(car.getImg()).getScaledInstance((int) imagen.getPreferredSize().getWidth(), (int) imagen.getPreferredSize().getHeight(), Image.SCALE_SMOOTH)));
+
+        javax.swing.GroupLayout imagenCocheLayout = new javax.swing.GroupLayout(imagenCoche);
+        imagenCoche.setLayout(imagenCocheLayout);
+        imagenCocheLayout.setHorizontalGroup(
+            imagenCocheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(imagenCocheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(imagenCocheLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(imagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        imagenCocheLayout.setVerticalGroup(
+            imagenCocheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(imagenCocheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(imagenCocheLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(imagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Puertas)
-                    .addComponent(Asientos)
-                    .addComponent(Precio)
-                    .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Combustible)
-                    .addComponent(Potencia)
-                    .addComponent(Categoria)
-                    .addComponent(Consumo)
-                    .addComponent(Destacado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(campoDestacado)
-                    .addComponent(campoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .addComponent(campoCombustible, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .addComponent(campoPotencia, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .addComponent(campoCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .addComponent(campoConsumo, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .addComponent(campoPuertas, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .addComponent(campoAsientos, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .addComponent(campoPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
-                .addGap(62, 62, 62)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(362, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Puertas)
+                            .addComponent(Asientos)
+                            .addComponent(Precio)
+                            .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Combustible)
+                            .addComponent(Potencia)
+                            .addComponent(Categoria)
+                            .addComponent(Consumo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(campoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(campoCombustible, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(campoPotencia, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(campoCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(campoConsumo, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(campoPuertas, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(campoAsientos, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(campoPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)))
+                    .addComponent(imagenCoche, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addComponent(formularioContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Nombre)
-                    .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Combustible)
-                    .addComponent(campoCombustible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Potencia)
-                    .addComponent(campoPotencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Categoria)
-                    .addComponent(campoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Consumo)
-                    .addComponent(campoConsumo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Puertas)
-                    .addComponent(campoPuertas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(imagenCoche, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Nombre)
+                            .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Combustible)
+                            .addComponent(campoCombustible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Potencia)
+                            .addComponent(campoPotencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Categoria)
+                            .addComponent(campoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Consumo)
+                            .addComponent(campoConsumo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Puertas)
+                            .addComponent(campoPuertas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(formularioContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Asientos)
                     .addComponent(campoAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -298,11 +322,7 @@ public class CarWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Precio)
                     .addComponent(campoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Destacado)
-                    .addComponent(campoDestacado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(102, 102, 102))
+                .addGap(31, 31, 31))
         );
 
         pack();
@@ -382,7 +402,6 @@ public class CarWindow extends javax.swing.JFrame {
     private javax.swing.JLabel Combustible;
     private javax.swing.JLabel Consumo;
     private javax.swing.JLabel Contacto;
-    private javax.swing.JLabel Destacado;
     private javax.swing.JLabel MailContacto;
     private javax.swing.JLabel Nombre;
     private javax.swing.JLabel NombreContacto;
@@ -394,7 +413,6 @@ public class CarWindow extends javax.swing.JFrame {
     private javax.swing.JTextField campoCategoria;
     private javax.swing.JTextField campoCombustible;
     private javax.swing.JTextField campoConsumo;
-    private javax.swing.JTextField campoDestacado;
     private javax.swing.JTextField campoNombre;
     private javax.swing.JTextField campoPotencia;
     private javax.swing.JTextField campoPrecio;
@@ -403,6 +421,8 @@ public class CarWindow extends javax.swing.JFrame {
     private javax.swing.JTextField cmpCiudadContacto;
     private javax.swing.JTextField cmpMailContacto;
     private javax.swing.JTextField cmpNombreContacto;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel formularioContacto;
+    private javax.swing.JLabel imagen;
+    private javax.swing.JPanel imagenCoche;
     // End of variables declaration//GEN-END:variables
 }
