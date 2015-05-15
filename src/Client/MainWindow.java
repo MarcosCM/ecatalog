@@ -66,7 +66,6 @@ public class MainWindow extends javax.swing.JFrame {
         modelo4 = new java.awt.Label();
         cb_puertas = new javax.swing.JComboBox();
         cb_asientos = new javax.swing.JComboBox();
-        jSpinner1 = new javax.swing.JSpinner();
         jScrollPane2 = new javax.swing.JScrollPane(modelsList);
         txt_modelo = new javax.swing.JTextField();
 
@@ -693,7 +692,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox cb_tipo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextPane jTextPane1;
     private java.awt.Label modelo;
     private java.awt.Label modelo1;

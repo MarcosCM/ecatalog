@@ -78,7 +78,7 @@ public class Controller {
                 while(rs.next()){
                     models.add(new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
                             rs.getInt("number_doors"), rs.getInt("cost"), rs.getDouble("consumption"), rs.getInt("number_seats"),
-                            rs.getBoolean("hidden"), true));
+                            rs.getBoolean("hidden"), true, rs.getBytes("img")));
                     numFeatured++;
                 }
             } catch (SQLException e){}
@@ -101,7 +101,7 @@ public class Controller {
                 while(rs.next()){
                     models.add(new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
                             rs.getInt("number_doors"), rs.getInt("cost"), rs.getDouble("consumption"), rs.getInt("number_seats"),
-                            rs.getBoolean("hidden"), false));
+                            rs.getBoolean("hidden"), false, rs.getBytes("img")));
                 }
             } catch (SQLException e){}
         }
