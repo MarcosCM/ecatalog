@@ -65,6 +65,7 @@ public class Controller {
      * Accede al listado de coches
      * @param form Filtro de parámetros
      * @param modelsList Lista que contiene los resultados de la búsqueda
+     * @param order true para ordenar por nombre, false en caso contrario
      */
     public static void list(Form form, JTable modelsList, boolean order){
         ArrayList<CarModel> models = new ArrayList<CarModel>();
@@ -79,7 +80,7 @@ public class Controller {
                 while(rs.next()){
                     models.add(new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
                             rs.getInt("number_doors"), rs.getInt("cost"), rs.getDouble("consumption"), rs.getInt("number_seats"),
-                            rs.getBoolean("hidden"), true));
+                            rs.getBoolean("hidden"), true, rs.getBytes("img")));
                     numFeatured++;
                 }
             } catch (SQLException e){}
@@ -102,11 +103,11 @@ public class Controller {
                 while(rs.next()){
                     models.add(new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
                             rs.getInt("number_doors"), rs.getInt("cost"), rs.getDouble("consumption"), rs.getInt("number_seats"),
-                            rs.getBoolean("hidden"), false));
+                            rs.getBoolean("hidden"), false, rs.getBytes("img")));
                 }
             } catch (SQLException e){}
         }
-        if(order)Collections.sort(models);
+        if(order) Collections.sort(models);
     	//pasamos el vector de modelos a la vista
     	View.list(models.toArray(new CarModel[models.size()]), modelsList, numFeatured);
     }
