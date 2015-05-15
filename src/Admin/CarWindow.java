@@ -84,13 +84,13 @@ public class CarWindow extends javax.swing.JFrame {
         Combustible.setText("Combustible:");
 
         Potencia.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        Potencia.setText("Potencia:");
+        Potencia.setText("Potencia(CV):");
 
         Categoria.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Categoria.setText("Categoria:");
 
         Consumo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        Consumo.setText("Consumo:");
+        Consumo.setText("Consumo(L/100km):");
 
         Puertas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Puertas.setText("Numero de puertas:");
@@ -99,7 +99,7 @@ public class CarWindow extends javax.swing.JFrame {
         Asientos.setText("Numero de asientos:");
 
         Precio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        Precio.setText("Precio:");
+        Precio.setText("Precio(€):");
 
         campoNombre.setEditable(false);
         campoNombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
