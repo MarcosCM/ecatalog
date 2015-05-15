@@ -2,6 +2,7 @@ package Admin;
 
 import Database.Cursor;
 import Database.JDBCTemplate;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -20,6 +21,7 @@ public class CarModel {
     private int numberSeats;	// número de asientos
     private boolean hidden;     // si está oculto por el administrador
     private boolean featured;   // si está destacado por el administrador
+    private byte[] img;         // imagen del coche en bytes
     
     /**
      * Crea un modelo lógico sin datos
@@ -51,6 +53,7 @@ public class CarModel {
             consumption = Double.parseDouble(rs.getString("consumption"));
             numberSeats = Integer.parseInt(rs.getString("number_seats"));
             hidden = Boolean.parseBoolean("hidden");
+            img = rs.getBytes("img");
             
             query = "SELECT * FROM Featured_cars WHERE name='"+name+"'";
             c = template.executeQuery(query);
@@ -71,10 +74,11 @@ public class CarModel {
      * @param numberSeats Número de asientos
      * @param hidden Oculto
      * @param featured Destacado
+     * @param img Imagen en bytes
      */
     public CarModel(String name, String fuelType, int power, String category,
                 int numberDoors, int cost, double consumption, int numberSeats,
-                boolean hidden, boolean featured) {
+                boolean hidden, boolean featured, byte[] img) {
         this.name = name;
         this.fuelType = fuelType;
         this.power = power;
@@ -85,6 +89,7 @@ public class CarModel {
         this.numberSeats = numberSeats;
         this.hidden = hidden;
         this.featured = featured;
+        this.img = img;
     }
 
     /**
@@ -228,37 +233,99 @@ public class CarModel {
     }
     
     /**
+     * @return imagen en bytes
+     */
+    public byte[] getImg() {
+        return img;
+    }
+    
+    /**
+     * @param img imagen en bytes
+     */
+    public void setImg(byte[] img) {
+        this.img = img;
+    }
+    
+    /**
      * Almacena el coche en la base de datos
      * @return true si se ha almacenado correctamente, false en caso contrario
      */
     public boolean store(){
         JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
-        
-        //probamos a insertar
-        String query = "INSERT INTO Car VALUES ('"+getName()+"', '"+getFuelType()+"', "+getPower()+", '"+getCategory()+"', "
-                +getNumberDoors()+", "+getCost()+", "+getConsumption()+", "+getNumberSeats()+", "+(getHidden() ? 1 : 0)+")";
-        System.out.println(query);
-        int res = template.executeSentence(query);
-        if (getFeatured()){
-            query = "INSERT INTO Featured_Cars VALUES ('"+getName()+"', '"+getFuelType()+"', "+getPower()+", '"+getCategory()+"', "
-                +getNumberDoors()+", "+getCost()+", "+getConsumption()+", "+getNumberSeats()+", "+(getHidden() ? 1 : 0)+")";
-            System.out.println(query);
-            template.executeSentence(query);
-        }
-        
-        //si ya existe entonces actualizamos
-        if (res == -1){
-            query = "UPDATE Car SET fuel_type='"+getFuelType()+"', power="+getPower()+", category='"+getCategory()+"', "
-                + "number_doors="+getNumberDoors()+", cost="+getCost()+", consumption="+getConsumption()+", number_seats="+getNumberSeats()+", hidden="+(getHidden() ? 1 : 0)
-                + " WHERE name='"+getName()+"'";
-            System.out.println(query);
-            res = template.executeSentence(query);
-            //no es necesario hacer UPDATE en la tabla Featured_Cars ya que el trigger lo hará solo
-        }
-        
-        if (!getFeatured()){
-            query = "DELETE FROM Featured_Cars WHERE name='"+getName()+"'";
-            template.executeSentence(query);
+        int res = -1;
+        try{
+            String query = "INSERT INTO Car"
+                    + " (name, fuel_type, power, category, number_doors, cost, consumption, number_seats, hidden, img) VALUES"
+                    + " (?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement ps = template.getConnection().prepareStatement(query);
+            ps.setString(1, getName());
+            ps.setString(2, getFuelType());
+            ps.setInt(3, getPower());
+            ps.setString(4, getCategory());
+            ps.setInt(5, getNumberDoors());
+            ps.setInt(6, getCost());
+            ps.setDouble(7, getConsumption());
+            ps.setInt(8, getNumberSeats());
+            ps.setBoolean(9, getHidden());
+            ps.setBytes(10, getImg());
+            
+            //probamos a insertar
+            try{
+                res = ps.executeUpdate();
+            } catch(SQLException e){
+                res = -1;
+            }
+            
+            if (getFeatured()){
+                query = "INSERT INTO Featured_Cars"
+                        + " (name, fuel_type, power, category, number_doors, cost, consumption, number_seats, hidden, img) VALUES"
+                        + " (?,?,?,?,?,?,?,?,?,?)";
+                ps = template.getConnection().prepareStatement(query);
+                ps.setString(1, getName());
+                ps.setString(2, getFuelType());
+                ps.setInt(3, getPower());
+                ps.setString(4, getCategory());
+                ps.setInt(5, getNumberDoors());
+                ps.setInt(6, getCost());
+                ps.setDouble(7, getConsumption());
+                ps.setInt(8, getNumberSeats());
+                ps.setBoolean(9, getHidden());
+                ps.setBytes(10, getImg());
+                try{
+                    res = ps.executeUpdate();
+                } catch(SQLException e){
+                    res = -1;
+                }
+            }
+
+            //si ya existe entonces actualizamos
+            if (res == -1){
+                query = "UPDATE Car SET fuel_type = ?, power = ?, category = ?, number_doors = ?, cost = ?, consumption = ?, number_seats = ?, hidden = ?, img = ? WHERE name = ?";
+                ps = template.getConnection().prepareStatement(query);
+                ps.setString(1, getFuelType());
+                ps.setInt(2, getPower());
+                ps.setString(3, getCategory());
+                ps.setInt(4, getNumberDoors());
+                ps.setInt(5, getCost());
+                ps.setDouble(6, getConsumption());
+                ps.setInt(7, getNumberSeats());
+                ps.setBoolean(8, getHidden());
+                ps.setBytes(9, getImg());
+                ps.setString(10, getName());
+                try{
+                    res = ps.executeUpdate();
+                } catch(SQLException e){
+                    res = -1;
+                }
+                //no es necesario hacer UPDATE en la tabla Featured_Cars ya que el trigger lo hará solo
+            }
+
+            if (!getFeatured()){
+                query = "DELETE FROM Featured_Cars WHERE name='"+getName()+"'";
+                template.executeSentence(query);
+            }
+        } catch(Exception e){
+            res = -1;
         }
         
         return res != -1;
