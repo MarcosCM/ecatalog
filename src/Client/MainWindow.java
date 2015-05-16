@@ -1,30 +1,58 @@
 package Client;
 
 import Database.JDBCTemplate;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 /**
  * Ventana del buscador
  */
 public class MainWindow extends javax.swing.JFrame {
-    
-    private final HashMap<String,String> filtro = new HashMap<String, String>();
-    private final DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"Modelo", "Categoría", "Coste", "Potencia", "Combustible", "Consumo", ""}, 0)
-    {
+
+    private final HashMap<String, String> filtro = new HashMap<String, String>();
+    private final DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"Modelo", "Categoría", "Precio(€)", "Potencia(CV)", "Combustible", "Consumo(L/100km)"
+        + "", ""}, 0) {
         @Override
-        public boolean isCellEditable(int row, int column){
+        public boolean isCellEditable(int row, int column) {
             //true sólo para los botones para arreglar posible bug en ordenadores con Windows 7
             return this.getColumnName(column).equals("");
         }
     };
     private final javax.swing.JTable modelsList = new javax.swing.JTable(tableModel);
+    private int numFeatured = 0; //numero de coches destacados
+    private boolean ordenation=false;//tipo de ordenacion
     
     /**
      * Creates new form Buscador
      */
     public MainWindow() {
         initComponents();
+        modelsList.getTableHeader().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int col = modelsList.columnAtPoint(e.getPoint());
+                String name = modelsList.getColumnName(col);
+                if (!name.equals("")){
+                    //si la columna es un campo de un modelo
+                    Vector<Vector<Object>> vector = (Vector<Vector<Object>>) tableModel.getDataVector();
+                    Vector<Vector<Object>> vectorAux = new Vector<Vector<Object>>();
+                    while(numFeatured<vector.size()){
+                        /*
+                        * no ordenan los modelos que estan destacados, estos
+                        * siguen quedando en el top de la tabla
+                        */
+                        vectorAux.add(vector.remove(numFeatured));
+                    }
+                    Collections.sort(vectorAux, new ComparatorModels(col ,ordenation));
+                    ordenation=!ordenation;
+                    vector.addAll(vectorAux);
+                }
+            }
+        });
     }
     
     /**
@@ -69,7 +97,6 @@ public class MainWindow extends javax.swing.JFrame {
         jSpinner1 = new javax.swing.JSpinner();
         jScrollPane2 = new javax.swing.JScrollPane(modelsList);
         txt_modelo = new javax.swing.JTextField();
-        ordenar = new javax.swing.JCheckBox();
 
         jScrollPane1.setViewportView(jTextPane1);
 
@@ -94,7 +121,7 @@ public class MainWindow extends javax.swing.JFrame {
         modelo1.setText("Tipo combustible");
 
         modelo9.setName("Potencia Max"); // NOI18N
-        modelo9.setText("Potencia Max");
+        modelo9.setText("Potencia Max(CV)");
 
         sld_potenciaMax.setMaximum(500);
         sld_potenciaMax.setToolTipText("");
@@ -155,7 +182,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         modelo10.setName("Potencia Min"); // NOI18N
-        modelo10.setText("Potencia Min");
+        modelo10.setText("Potencia Min(CV)");
 
         cb_tipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "Familiar", "Deportivo", "Monovolumen", "Todo-terreno", "Mini" }));
         cb_tipo.setToolTipText("");
@@ -230,10 +257,10 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         modelo11.setName("Precio Max"); // NOI18N
-        modelo11.setText("Precio Max");
+        modelo11.setText("Precio Max(€)");
 
         modelo12.setName("Precio Min"); // NOI18N
-        modelo12.setText("Precio Min");
+        modelo12.setText("Precio Min(€)");
 
         sld_consumoMin.setMaximum(20);
         sld_consumoMin.setToolTipText("");
@@ -266,7 +293,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         sld_consumoMax.setMaximum(40);
         sld_consumoMax.setToolTipText("");
-        sld_consumoMax.setValue(40);
         sld_consumoMax.setValueIsAdjusting(true);
         sld_consumoMax.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -294,10 +320,10 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         modelo13.setName("Consumo Max"); // NOI18N
-        modelo13.setText("Consumo Max (l/100km)");
+        modelo13.setText("Consumo Max (L/100km)");
 
         modelo14.setName("Consumo Min"); // NOI18N
-        modelo14.setText("Consumo Min (l/100km)");
+        modelo14.setText("Consumo Min (L/100km)");
 
         modelo4.setName("Numero asientos"); // NOI18N
         modelo4.setText("Numero asientos");
@@ -317,13 +343,6 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         txt_modelo.setToolTipText("introduce modelo a buscar");
-
-        ordenar.setText("Ordenar por Modelo");
-        ordenar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ordenarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -368,9 +387,7 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(cb_combustible, 0, 166, Short.MAX_VALUE)
                                     .addComponent(txt_modelo))
-                                .addGap(18, 18, 18)
-                                .addComponent(ordenar)
-                                .addGap(13, 13, 13)))
+                                .addGap(152, 152, 152)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(modelo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -427,10 +444,8 @@ public class MainWindow extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txt_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(ordenar)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                                    .addComponent(txt_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cb_combustible, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(modelo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -490,7 +505,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void sld_potenciaMaxMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_potenciaMaxMouseDragged
         // TODO add your handling code here:
-         txt_potenciaMax.setText(String.valueOf(sld_potenciaMax.getValue()));
+        txt_potenciaMax.setText(String.valueOf(sld_potenciaMax.getValue()));
     }//GEN-LAST:event_sld_potenciaMaxMouseDragged
 
     private void sld_potenciaMinMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_potenciaMinMouseDragged
@@ -500,12 +515,12 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void txt_potenciaMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_potenciaMinActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_txt_potenciaMinActionPerformed
 
     private void sld_potenciaMinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sld_potenciaMinKeyPressed
         // TODO add your handling code here:
-                txt_potenciaMin.setText(String.valueOf(sld_potenciaMin.getValue()));
+        txt_potenciaMin.setText(String.valueOf(sld_potenciaMin.getValue()));
 
     }//GEN-LAST:event_sld_potenciaMinKeyPressed
 
@@ -520,13 +535,13 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void sld_precioMinMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_precioMinMouseDragged
         // TODO add your handling code here:
-     txt_precioMin.setText(String.valueOf(sld_precioMin.getValue()));
+        txt_precioMin.setText(String.valueOf(sld_precioMin.getValue()));
 
     }//GEN-LAST:event_sld_precioMinMouseDragged
 
     private void sld_precioMinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sld_precioMinKeyPressed
         // TODO add your handling code here:
-             txt_precioMin.setText(String.valueOf(sld_precioMin.getValue()));
+        txt_precioMin.setText(String.valueOf(sld_precioMin.getValue()));
 
     }//GEN-LAST:event_sld_precioMinKeyPressed
 
@@ -537,13 +552,13 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void sld_precioMaxMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_precioMaxMouseDragged
         // TODO add your handling code here:
-             txt_precioMax.setText(String.valueOf(sld_precioMax.getValue()));
+        txt_precioMax.setText(String.valueOf(sld_precioMax.getValue()));
 
     }//GEN-LAST:event_sld_precioMaxMouseDragged
 
     private void sld_precioMaxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sld_precioMaxKeyPressed
         // TODO add your handling code here:
-             txt_precioMax.setText(String.valueOf(sld_precioMax.getValue()));
+        txt_precioMax.setText(String.valueOf(sld_precioMax.getValue()));
 
     }//GEN-LAST:event_sld_precioMaxKeyPressed
 
@@ -553,13 +568,13 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void sld_consumoMinMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_consumoMinMouseDragged
         // TODO add your handling code here:
-             txt_consumoMin.setText(String.valueOf(sld_consumoMin.getValue()));
+        txt_consumoMin.setText(String.valueOf(sld_consumoMin.getValue()));
 
     }//GEN-LAST:event_sld_consumoMinMouseDragged
 
     private void sld_consumoMinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sld_consumoMinKeyPressed
         // TODO add your handling code here:
-             txt_consumoMin.setText(String.valueOf(sld_consumoMin.getValue()));
+        txt_consumoMin.setText(String.valueOf(sld_consumoMin.getValue()));
 
     }//GEN-LAST:event_sld_consumoMinKeyPressed
 
@@ -570,13 +585,13 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void sld_consumoMaxMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_consumoMaxMouseDragged
         // TODO add your handling code here:
-             txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
+        txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
 
     }//GEN-LAST:event_sld_consumoMaxMouseDragged
 
     private void sld_consumoMaxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sld_consumoMaxKeyPressed
         // TODO add your handling code here:
-             txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
+        txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
 
     }//GEN-LAST:event_sld_consumoMaxKeyPressed
 
@@ -602,69 +617,75 @@ public class MainWindow extends javax.swing.JFrame {
         filtro.put("costMax", this.txt_precioMax.getText());
         filtro.put("costMin", this.txt_precioMin.getText());
 
-        boolean tieneValor = !(this.cb_asientos.getSelectedItem().toString().equals("Todos") || 
-                this.cb_asientos.getSelectedItem().toString().equals("Cualquiera"));
-        if(tieneValor) filtro.put("number_seats", this.cb_asientos.getSelectedItem().toString());
+        boolean tieneValor = !(this.cb_asientos.getSelectedItem().toString().equals("Todos")
+                || this.cb_asientos.getSelectedItem().toString().equals("Cualquiera"));
+        if (tieneValor) {
+            filtro.put("number_seats", this.cb_asientos.getSelectedItem().toString());
+        }
 
-        tieneValor = !(this.cb_combustible.getSelectedItem().toString().equals("Todos") || 
-                this.cb_combustible.getSelectedItem().toString().equals("Cualquiera"));
-        if(tieneValor) filtro.put("fuel_type", this.cb_combustible.getSelectedItem().toString());
+        tieneValor = !(this.cb_combustible.getSelectedItem().toString().equals("Todos")
+                || this.cb_combustible.getSelectedItem().toString().equals("Cualquiera"));
+        if (tieneValor) {
+            filtro.put("fuel_type", this.cb_combustible.getSelectedItem().toString());
+        }
 
         tieneValor = !(this.txt_modelo.getText().trim().isEmpty());
-        if(tieneValor) filtro.put("name", this.txt_modelo.getText());
+        if (tieneValor) {
+            filtro.put("name", this.txt_modelo.getText());
+        }
 
-        tieneValor = !(this.cb_puertas.getSelectedItem().toString().equals("Todos") || 
-                this.cb_puertas.getSelectedItem().toString().equals("Cualquiera"));
-        if(tieneValor) filtro.put("number_doors", this.cb_puertas.getSelectedItem().toString());
+        tieneValor = !(this.cb_puertas.getSelectedItem().toString().equals("Todos")
+                || this.cb_puertas.getSelectedItem().toString().equals("Cualquiera"));
+        if (tieneValor) {
+            filtro.put("number_doors", this.cb_puertas.getSelectedItem().toString());
+        }
 
-        tieneValor = !(this.cb_tipo.getSelectedItem().toString().equals("Todos") || 
-                this.cb_tipo.getSelectedItem().toString().equals("Cualquiera"));
-        if(tieneValor) filtro.put("category", this.cb_tipo.getSelectedItem().toString());
+        tieneValor = !(this.cb_tipo.getSelectedItem().toString().equals("Todos")
+                || this.cb_tipo.getSelectedItem().toString().equals("Cualquiera"));
+        if (tieneValor) {
+            filtro.put("category", this.cb_tipo.getSelectedItem().toString());
+        }
 
         Form formulario_filtro = new Form(filtro);
-        Controller.list(formulario_filtro, modelsList, ordenar.isSelected());
+        numFeatured = Controller.list(formulario_filtro, modelsList);
         filtro.clear();
     }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void sld_potenciaMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_potenciaMinMouseClicked
         // TODO add your handling code here:
-                     txt_potenciaMin.setText(String.valueOf(sld_potenciaMin.getValue()));
+        txt_potenciaMin.setText(String.valueOf(sld_potenciaMin.getValue()));
 
     }//GEN-LAST:event_sld_potenciaMinMouseClicked
 
     private void sld_potenciaMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_potenciaMaxMouseClicked
         // TODO add your handling code here:
-                     txt_potenciaMax.setText(String.valueOf(sld_potenciaMax.getValue()));
+        txt_potenciaMax.setText(String.valueOf(sld_potenciaMax.getValue()));
 
     }//GEN-LAST:event_sld_potenciaMaxMouseClicked
 
     private void sld_consumoMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_consumoMinMouseClicked
         // TODO add your handling code here:
-                     txt_consumoMin.setText(String.valueOf(sld_consumoMin.getValue()));
+        txt_consumoMin.setText(String.valueOf(sld_consumoMin.getValue()));
 
     }//GEN-LAST:event_sld_consumoMinMouseClicked
 
     private void sld_consumoMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_consumoMaxMouseClicked
         // TODO add your handling code here:
-                     txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
+        txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
 
     }//GEN-LAST:event_sld_consumoMaxMouseClicked
 
     private void sld_precioMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_precioMaxMouseClicked
         // TODO add your handling code here:
-                     txt_precioMax.setText(String.valueOf(sld_precioMax.getValue()));
+        txt_precioMax.setText(String.valueOf(sld_precioMax.getValue()));
 
     }//GEN-LAST:event_sld_precioMaxMouseClicked
 
     private void sld_precioMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_precioMinMouseClicked
         // TODO add your handling code here:
-                     txt_precioMin.setText(String.valueOf(sld_precioMin.getValue()));
+        txt_precioMin.setText(String.valueOf(sld_precioMin.getValue()));
 
     }//GEN-LAST:event_sld_precioMinMouseClicked
-
-    private void ordenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordenarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ordenarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -693,11 +714,11 @@ public class MainWindow extends javax.swing.JFrame {
             public void run() {
                 final MainWindow window = new MainWindow();
                 //Cerrar la conexión con la base de datos al cerrar el programa
-                Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
+                Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
                     @Override
-                    public void run(){
+                    public void run() {
                         JDBCTemplate.getJDBCTemplate().close();
-                   }
+                    }
                 }));
                 window.setVisible(true);
             }
@@ -725,7 +746,6 @@ public class MainWindow extends javax.swing.JFrame {
     private java.awt.Label modelo3;
     private java.awt.Label modelo4;
     private java.awt.Label modelo9;
-    private javax.swing.JCheckBox ordenar;
     private javax.swing.JSlider sld_consumoMax;
     private javax.swing.JSlider sld_consumoMin;
     private javax.swing.JSlider sld_potenciaMax;

@@ -66,9 +66,11 @@ public class Controller {
      * @param form Filtro de parámetros
      * @param modelsList Lista que contiene los resultados de la búsqueda
      * @param order true para ordenar por nombre, false en caso contrario
+     * @return Número de destacados
      */
-    public static void list(Form form, JTable modelsList, boolean order){
+    public static int list(Form form, JTable modelsList){
     	ArrayList<CarModel> models = new ArrayList<CarModel>();
+
     	JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
     	String options = getSQLOptions(form);
     	String query = "SELECT * FROM Featured_Cars "+options;
@@ -107,9 +109,12 @@ public class Controller {
                 }
             } catch (SQLException e){}
         }
-        if(order) Collections.sort(models);
+
+
     	//pasamos el vector de modelos a la vista
     	View.list(models.toArray(new CarModel[models.size()]), modelsList, numFeatured);
+        //devolvemos el número de destacados
+        return numFeatured;
     }
     
     /**
