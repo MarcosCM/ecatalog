@@ -65,7 +65,6 @@ public class Controller {
      * Accede al listado de coches
      * @param form Filtro de parámetros
      * @param modelsList Lista que contiene los resultados de la búsqueda
-     * @param order true para ordenar por nombre, false en caso contrario
      * @return Número de destacados
      */
     public static int list(Form form, JTable modelsList){
