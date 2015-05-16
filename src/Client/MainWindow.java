@@ -1,31 +1,57 @@
 package Client;
 
 import Database.JDBCTemplate;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 /**
  * Ventana del buscador
  */
 public class MainWindow extends javax.swing.JFrame {
-    
-    private final HashMap<String,String> filtro = new HashMap<String, String>();
+    private final HashMap<String, String> filtro = new HashMap<String, String>();
     private final DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"Modelo", "Categoría", "Precio(€)", "Potencia(CV)", "Combustible", "Consumo(L/100km)"
-            + "", ""}, 0)
-    {
+        + "", ""}, 0) {
         @Override
-        public boolean isCellEditable(int row, int column){
+        public boolean isCellEditable(int row, int column) {
             //true sólo para los botones para arreglar posible bug en ordenadores con Windows 7
             return this.getColumnName(column).equals("");
         }
     };
     private final javax.swing.JTable modelsList = new javax.swing.JTable(tableModel);
+    private int numFeatured = 0; //numero de coches destacados
+    private boolean ordenation=false;//tipo de ordenacion
     
     /**
      * Creates new form Buscador
      */
     public MainWindow() {
         initComponents();
+        modelsList.getTableHeader().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int col = modelsList.columnAtPoint(e.getPoint());
+                String name = modelsList.getColumnName(col);
+                if (!name.equals("")){
+                    //si la columna es un campo de un modelo
+                    Vector<Vector<Object>> vector = (Vector<Vector<Object>>) tableModel.getDataVector();
+                    Vector<Vector<Object>> vectorAux = new Vector<Vector<Object>>();
+                    while(numFeatured<vector.size()){
+                        /*
+                        * no ordenan los modelos que estan destacados, estos
+                        * siguen quedando en el top de la tabla
+                        */
+                        vectorAux.add(vector.remove(numFeatured));
+                    }
+                    Collections.sort(vectorAux, new ComparatorModels(col ,ordenation));
+                    ordenation=!ordenation;
+                    vector.addAll(vectorAux);
+                }
+            }
+        });
     }
     
     /**
@@ -67,10 +93,8 @@ public class MainWindow extends javax.swing.JFrame {
         modelo4 = new java.awt.Label();
         cb_puertas = new javax.swing.JComboBox();
         cb_asientos = new javax.swing.JComboBox();
-        jSpinner1 = new javax.swing.JSpinner();
         jScrollPane2 = new javax.swing.JScrollPane(modelsList);
         txt_modelo = new javax.swing.JTextField();
-        ordenar = new javax.swing.JCheckBox();
 
         jScrollPane1.setViewportView(jTextPane1);
 
@@ -101,14 +125,14 @@ public class MainWindow extends javax.swing.JFrame {
         sld_potenciaMax.setToolTipText("");
         sld_potenciaMax.setValue(500);
         sld_potenciaMax.setValueIsAdjusting(true);
-        sld_potenciaMax.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sld_potenciaMaxMouseClicked(evt);
-            }
-        });
         sld_potenciaMax.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 sld_potenciaMaxMouseDragged(evt);
+            }
+        });
+        sld_potenciaMax.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sld_potenciaMaxMouseClicked(evt);
             }
         });
         sld_potenciaMax.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -130,14 +154,14 @@ public class MainWindow extends javax.swing.JFrame {
         sld_potenciaMin.setToolTipText("");
         sld_potenciaMin.setValue(0);
         sld_potenciaMin.setValueIsAdjusting(true);
-        sld_potenciaMin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sld_potenciaMinMouseClicked(evt);
-            }
-        });
         sld_potenciaMin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 sld_potenciaMinMouseDragged(evt);
+            }
+        });
+        sld_potenciaMin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sld_potenciaMinMouseClicked(evt);
             }
         });
         sld_potenciaMin.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -176,14 +200,14 @@ public class MainWindow extends javax.swing.JFrame {
         sld_precioMin.setToolTipText("");
         sld_precioMin.setValue(0);
         sld_precioMin.setValueIsAdjusting(true);
-        sld_precioMin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sld_precioMinMouseClicked(evt);
-            }
-        });
         sld_precioMin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 sld_precioMinMouseDragged(evt);
+            }
+        });
+        sld_precioMin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sld_precioMinMouseClicked(evt);
             }
         });
         sld_precioMin.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -205,14 +229,14 @@ public class MainWindow extends javax.swing.JFrame {
         sld_precioMax.setToolTipText("");
         sld_precioMax.setValue(100000);
         sld_precioMax.setValueIsAdjusting(true);
-        sld_precioMax.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sld_precioMaxMouseClicked(evt);
-            }
-        });
         sld_precioMax.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 sld_precioMaxMouseDragged(evt);
+            }
+        });
+        sld_precioMax.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sld_precioMaxMouseClicked(evt);
             }
         });
         sld_precioMax.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -240,14 +264,14 @@ public class MainWindow extends javax.swing.JFrame {
         sld_consumoMin.setToolTipText("");
         sld_consumoMin.setValue(0);
         sld_consumoMin.setValueIsAdjusting(true);
-        sld_consumoMin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sld_consumoMinMouseClicked(evt);
-            }
-        });
         sld_consumoMin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 sld_consumoMinMouseDragged(evt);
+            }
+        });
+        sld_consumoMin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sld_consumoMinMouseClicked(evt);
             }
         });
         sld_consumoMin.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -268,14 +292,14 @@ public class MainWindow extends javax.swing.JFrame {
         sld_consumoMax.setMaximum(40);
         sld_consumoMax.setToolTipText("");
         sld_consumoMax.setValueIsAdjusting(true);
-        sld_consumoMax.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sld_consumoMaxMouseClicked(evt);
-            }
-        });
         sld_consumoMax.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 sld_consumoMaxMouseDragged(evt);
+            }
+        });
+        sld_consumoMax.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sld_consumoMaxMouseClicked(evt);
             }
         });
         sld_consumoMax.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -318,36 +342,23 @@ public class MainWindow extends javax.swing.JFrame {
 
         txt_modelo.setToolTipText("introduce modelo a buscar");
 
-        ordenar.setText("Ordenar por Modelo");
-        ordenar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ordenarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(modelo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(modelo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(modelo10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(modelo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(modelo9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txt_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(ordenar))
                             .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -361,101 +372,115 @@ public class MainWindow extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(txt_potenciaMax, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(modelo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(42, 42, 42)
-                                .addComponent(cb_puertas, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(modelo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(modelo13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(modelo14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(modelo12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(modelo11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(modelo11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(sld_consumoMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(sld_consumoMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(sld_precioMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(sld_precioMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(sld_consumoMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txt_consumoMax, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(sld_precioMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txt_precioMax, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(modelo14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(sld_consumoMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_consumoMin, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(modelo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cb_puertas, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(modelo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cb_asientos, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(258, 258, 258)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_consumoMax, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_asientos, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_consumoMin, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_precioMax, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_precioMin, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 554, Short.MAX_VALUE))
+                        .addGap(254, 254, 254))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(367, 367, 367)
+                            .addComponent(modelo12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(76, 76, 76)
+                            .addComponent(sld_precioMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txt_precioMin, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(65, 65, 65)
+                            .addComponent(txt_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(609, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sld_precioMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_precioMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(modelo12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sld_precioMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_precioMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(modelo11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(sld_precioMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(sld_consumoMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(modelo14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txt_consumoMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_consumoMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(sld_consumoMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(modelo13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(txt_precioMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cb_asientos)
-                                .addComponent(modelo4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(modelo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cb_puertas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22))
+                                    .addComponent(sld_precioMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_precioMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sld_consumoMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_consumoMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txt_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(ordenar))
-                            .addComponent(modelo12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cb_combustible, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(modelo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(modelo11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(modelo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_potenciaMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sld_potenciaMin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(modelo10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txt_potenciaMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(sld_potenciaMin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(modelo10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(modelo14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(sld_potenciaMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(modelo9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_potenciaMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(txt_potenciaMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(modelo13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txt_consumoMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sld_consumoMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(modelo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)))
+                        .addGap(36, 36, 36))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cb_asientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_puertas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(modelo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(modelo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -470,7 +495,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void sld_potenciaMaxMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_potenciaMaxMouseDragged
         // TODO add your handling code here:
-         txt_potenciaMax.setText(String.valueOf(sld_potenciaMax.getValue()));
+        txt_potenciaMax.setText(String.valueOf(sld_potenciaMax.getValue()));
     }//GEN-LAST:event_sld_potenciaMaxMouseDragged
 
     private void sld_potenciaMinMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_potenciaMinMouseDragged
@@ -480,12 +505,12 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void txt_potenciaMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_potenciaMinActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_txt_potenciaMinActionPerformed
 
     private void sld_potenciaMinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sld_potenciaMinKeyPressed
         // TODO add your handling code here:
-                txt_potenciaMin.setText(String.valueOf(sld_potenciaMin.getValue()));
+        txt_potenciaMin.setText(String.valueOf(sld_potenciaMin.getValue()));
 
     }//GEN-LAST:event_sld_potenciaMinKeyPressed
 
@@ -500,13 +525,13 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void sld_precioMinMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_precioMinMouseDragged
         // TODO add your handling code here:
-     txt_precioMin.setText(String.valueOf(sld_precioMin.getValue()));
+        txt_precioMin.setText(String.valueOf(sld_precioMin.getValue()));
 
     }//GEN-LAST:event_sld_precioMinMouseDragged
 
     private void sld_precioMinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sld_precioMinKeyPressed
         // TODO add your handling code here:
-             txt_precioMin.setText(String.valueOf(sld_precioMin.getValue()));
+        txt_precioMin.setText(String.valueOf(sld_precioMin.getValue()));
 
     }//GEN-LAST:event_sld_precioMinKeyPressed
 
@@ -517,13 +542,13 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void sld_precioMaxMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_precioMaxMouseDragged
         // TODO add your handling code here:
-             txt_precioMax.setText(String.valueOf(sld_precioMax.getValue()));
+        txt_precioMax.setText(String.valueOf(sld_precioMax.getValue()));
 
     }//GEN-LAST:event_sld_precioMaxMouseDragged
 
     private void sld_precioMaxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sld_precioMaxKeyPressed
         // TODO add your handling code here:
-             txt_precioMax.setText(String.valueOf(sld_precioMax.getValue()));
+        txt_precioMax.setText(String.valueOf(sld_precioMax.getValue()));
 
     }//GEN-LAST:event_sld_precioMaxKeyPressed
 
@@ -533,13 +558,13 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void sld_consumoMinMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_consumoMinMouseDragged
         // TODO add your handling code here:
-             txt_consumoMin.setText(String.valueOf(sld_consumoMin.getValue()));
+        txt_consumoMin.setText(String.valueOf(sld_consumoMin.getValue()));
 
     }//GEN-LAST:event_sld_consumoMinMouseDragged
 
     private void sld_consumoMinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sld_consumoMinKeyPressed
         // TODO add your handling code here:
-             txt_consumoMin.setText(String.valueOf(sld_consumoMin.getValue()));
+        txt_consumoMin.setText(String.valueOf(sld_consumoMin.getValue()));
 
     }//GEN-LAST:event_sld_consumoMinKeyPressed
 
@@ -550,13 +575,13 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void sld_consumoMaxMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_consumoMaxMouseDragged
         // TODO add your handling code here:
-             txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
+        txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
 
     }//GEN-LAST:event_sld_consumoMaxMouseDragged
 
     private void sld_consumoMaxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sld_consumoMaxKeyPressed
         // TODO add your handling code here:
-             txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
+        txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
 
     }//GEN-LAST:event_sld_consumoMaxKeyPressed
 
@@ -582,69 +607,75 @@ public class MainWindow extends javax.swing.JFrame {
         filtro.put("costMax", this.txt_precioMax.getText());
         filtro.put("costMin", this.txt_precioMin.getText());
 
-        boolean tieneValor = !(this.cb_asientos.getSelectedItem().toString().equals("Todos") || 
-                this.cb_asientos.getSelectedItem().toString().equals("Cualquiera"));
-        if(tieneValor) filtro.put("number_seats", this.cb_asientos.getSelectedItem().toString());
+        boolean tieneValor = !(this.cb_asientos.getSelectedItem().toString().equals("Todos")
+                || this.cb_asientos.getSelectedItem().toString().equals("Cualquiera"));
+        if (tieneValor) {
+            filtro.put("number_seats", this.cb_asientos.getSelectedItem().toString());
+        }
 
-        tieneValor = !(this.cb_combustible.getSelectedItem().toString().equals("Todos") || 
-                this.cb_combustible.getSelectedItem().toString().equals("Cualquiera"));
-        if(tieneValor) filtro.put("fuel_type", this.cb_combustible.getSelectedItem().toString());
+        tieneValor = !(this.cb_combustible.getSelectedItem().toString().equals("Todos")
+                || this.cb_combustible.getSelectedItem().toString().equals("Cualquiera"));
+        if (tieneValor) {
+            filtro.put("fuel_type", this.cb_combustible.getSelectedItem().toString());
+        }
 
         tieneValor = !(this.txt_modelo.getText().trim().isEmpty());
-        if(tieneValor) filtro.put("name", this.txt_modelo.getText());
+        if (tieneValor) {
+            filtro.put("name", this.txt_modelo.getText());
+        }
 
-        tieneValor = !(this.cb_puertas.getSelectedItem().toString().equals("Todos") || 
-                this.cb_puertas.getSelectedItem().toString().equals("Cualquiera"));
-        if(tieneValor) filtro.put("number_doors", this.cb_puertas.getSelectedItem().toString());
+        tieneValor = !(this.cb_puertas.getSelectedItem().toString().equals("Todos")
+                || this.cb_puertas.getSelectedItem().toString().equals("Cualquiera"));
+        if (tieneValor) {
+            filtro.put("number_doors", this.cb_puertas.getSelectedItem().toString());
+        }
 
-        tieneValor = !(this.cb_tipo.getSelectedItem().toString().equals("Todos") || 
-                this.cb_tipo.getSelectedItem().toString().equals("Cualquiera"));
-        if(tieneValor) filtro.put("category", this.cb_tipo.getSelectedItem().toString());
+        tieneValor = !(this.cb_tipo.getSelectedItem().toString().equals("Todos")
+                || this.cb_tipo.getSelectedItem().toString().equals("Cualquiera"));
+        if (tieneValor) {
+            filtro.put("category", this.cb_tipo.getSelectedItem().toString());
+        }
 
         Form formulario_filtro = new Form(filtro);
-        Controller.list(formulario_filtro, modelsList, ordenar.isSelected());
+        numFeatured = Controller.list(formulario_filtro, modelsList);
         filtro.clear();
     }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void sld_potenciaMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_potenciaMinMouseClicked
         // TODO add your handling code here:
-                     txt_potenciaMin.setText(String.valueOf(sld_potenciaMin.getValue()));
+        txt_potenciaMin.setText(String.valueOf(sld_potenciaMin.getValue()));
 
     }//GEN-LAST:event_sld_potenciaMinMouseClicked
 
     private void sld_potenciaMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_potenciaMaxMouseClicked
         // TODO add your handling code here:
-                     txt_potenciaMax.setText(String.valueOf(sld_potenciaMax.getValue()));
+        txt_potenciaMax.setText(String.valueOf(sld_potenciaMax.getValue()));
 
     }//GEN-LAST:event_sld_potenciaMaxMouseClicked
 
     private void sld_consumoMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_consumoMinMouseClicked
         // TODO add your handling code here:
-                     txt_consumoMin.setText(String.valueOf(sld_consumoMin.getValue()));
+        txt_consumoMin.setText(String.valueOf(sld_consumoMin.getValue()));
 
     }//GEN-LAST:event_sld_consumoMinMouseClicked
 
     private void sld_consumoMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_consumoMaxMouseClicked
         // TODO add your handling code here:
-                     txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
+        txt_consumoMax.setText(String.valueOf(sld_consumoMax.getValue()));
 
     }//GEN-LAST:event_sld_consumoMaxMouseClicked
 
     private void sld_precioMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_precioMaxMouseClicked
         // TODO add your handling code here:
-                     txt_precioMax.setText(String.valueOf(sld_precioMax.getValue()));
+        txt_precioMax.setText(String.valueOf(sld_precioMax.getValue()));
 
     }//GEN-LAST:event_sld_precioMaxMouseClicked
 
     private void sld_precioMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sld_precioMinMouseClicked
         // TODO add your handling code here:
-                     txt_precioMin.setText(String.valueOf(sld_precioMin.getValue()));
+        txt_precioMin.setText(String.valueOf(sld_precioMin.getValue()));
 
     }//GEN-LAST:event_sld_precioMinMouseClicked
-
-    private void ordenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordenarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ordenarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -673,11 +704,11 @@ public class MainWindow extends javax.swing.JFrame {
             public void run() {
                 final MainWindow window = new MainWindow();
                 //Cerrar la conexión con la base de datos al cerrar el programa
-                Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
+                Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
                     @Override
-                    public void run(){
+                    public void run() {
                         JDBCTemplate.getJDBCTemplate().close();
-                   }
+                    }
                 }));
                 window.setVisible(true);
             }
@@ -692,7 +723,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox cb_tipo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextPane jTextPane1;
     private java.awt.Label modelo;
     private java.awt.Label modelo1;
@@ -705,7 +735,6 @@ public class MainWindow extends javax.swing.JFrame {
     private java.awt.Label modelo3;
     private java.awt.Label modelo4;
     private java.awt.Label modelo9;
-    private javax.swing.JCheckBox ordenar;
     private javax.swing.JSlider sld_consumoMax;
     private javax.swing.JSlider sld_consumoMin;
     private javax.swing.JSlider sld_potenciaMax;

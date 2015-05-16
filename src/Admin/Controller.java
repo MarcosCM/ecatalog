@@ -65,11 +65,9 @@ public class Controller {
      * Accede al listado de coches
      * @param form Filtro de parámetros
      * @param modelsList Lista que contiene los resultados de la búsqueda
-     * @param order true para ordenar por nombre, false en caso contrario
      */
-    public static void list(Form form, JTable modelsList, boolean order){
-        ArrayList<CarModel> modelsF = new ArrayList<CarModel>();
-        ArrayList<CarModel> modelsC = new ArrayList<CarModel>();
+    public static void list(Form form, JTable modelsList){
+        ArrayList<CarModel> models = new ArrayList<CarModel>();
     	JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
     	String options = getSQLOptions(form);
     	String query = "SELECT * FROM Featured_Cars "+options;
@@ -79,7 +77,7 @@ public class Controller {
         if (rs != null){
             try {
                 while(rs.next()){
-                    modelsF.add(new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
+                    models.add(new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
                             rs.getInt("number_doors"), rs.getInt("cost"), rs.getDouble("consumption"), rs.getInt("number_seats"),
                             rs.getBoolean("hidden"), true, rs.getBytes("img")));
                     numFeatured++;
@@ -89,10 +87,10 @@ public class Controller {
         
         options = getSQLOptions(form);
         String inClause = "";
-        if (!modelsF.isEmpty()){
-            CarModel lastCar = modelsF.get(modelsF.size()-1);
+        if (!models.isEmpty()){
+            CarModel lastCar = models.get(models.size()-1);
             CarModel pointer = null;
-            Iterator<CarModel> iterator = modelsF.iterator();
+            Iterator<CarModel> iterator = models.iterator();
             inClause = " AND name NOT IN (";
             while (iterator.hasNext() && (pointer = iterator.next()) != lastCar) inClause += "'"+pointer.getName() + "', ";
             inClause += (pointer == null ? ")" : "'"+pointer.getName()+"')");
@@ -102,16 +100,14 @@ public class Controller {
         if (rs != null){
             try {
                 while(rs.next()){
-                    modelsC.add(new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
+                    models.add(new CarModel(rs.getString("name"), rs.getString("fuel_type"), rs.getInt("power"), rs.getString("category"),
                             rs.getInt("number_doors"), rs.getInt("cost"), rs.getDouble("consumption"), rs.getInt("number_seats"),
                             rs.getBoolean("hidden"), false, rs.getBytes("img")));
                 }
             } catch (SQLException e){}
         }
-        if(order) Collections.sort(modelsC);
-        modelsF.addAll(modelsC);
     	//pasamos el vector de modelos a la vista
-    	View.list(modelsF.toArray(new CarModel[modelsF.size()]), modelsList, numFeatured);
+    	View.list(models.toArray(new CarModel[models.size()]), modelsList, numFeatured);
     }
     
     /**

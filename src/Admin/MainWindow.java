@@ -69,7 +69,6 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane(modelsList);
         txt_modelo = new javax.swing.JTextField();
         btn_introducir = new java.awt.Button();
-        ordenar = new javax.swing.JCheckBox();
 
         jScrollPane1.setViewportView(jTextPane1);
 
@@ -100,14 +99,14 @@ public class MainWindow extends javax.swing.JFrame {
         sld_potenciaMax.setToolTipText("");
         sld_potenciaMax.setValue(500);
         sld_potenciaMax.setValueIsAdjusting(true);
-        sld_potenciaMax.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sld_potenciaMaxMouseClicked(evt);
-            }
-        });
         sld_potenciaMax.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 sld_potenciaMaxMouseDragged(evt);
+            }
+        });
+        sld_potenciaMax.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sld_potenciaMaxMouseClicked(evt);
             }
         });
         sld_potenciaMax.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -129,14 +128,14 @@ public class MainWindow extends javax.swing.JFrame {
         sld_potenciaMin.setToolTipText("");
         sld_potenciaMin.setValue(0);
         sld_potenciaMin.setValueIsAdjusting(true);
-        sld_potenciaMin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sld_potenciaMinMouseClicked(evt);
-            }
-        });
         sld_potenciaMin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 sld_potenciaMinMouseDragged(evt);
+            }
+        });
+        sld_potenciaMin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sld_potenciaMinMouseClicked(evt);
             }
         });
         sld_potenciaMin.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -326,13 +325,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        ordenar.setText("Ordenar por modelo");
-        ordenar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ordenarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -358,14 +350,11 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addComponent(sld_potenciaMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_potenciaMax, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cb_combustible, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(28, 28, 28)
-                                .addComponent(ordenar))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cb_combustible, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
+                        .addGap(90, 90, 90)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(modelo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(modelo11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -405,13 +394,11 @@ public class MainWindow extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ordenar))
+                        .addComponent(txt_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_precioMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(sld_precioMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -617,7 +604,7 @@ public class MainWindow extends javax.swing.JFrame {
         if(tieneValor) filtro.put("category", this.cb_tipo.getSelectedItem().toString());
 
         Form formulario_filtro = new Form(filtro);
-        Controller.list(formulario_filtro, modelsList, ordenar.isSelected());
+        Controller.list(formulario_filtro, modelsList);
         filtro.clear();
     }//GEN-LAST:event_btn_buscarActionPerformed
 
@@ -661,10 +648,6 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         CarWindow.openWindow(new CarModel(), false);
     }//GEN-LAST:event_btn_introducirActionPerformed
-
-    private void ordenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordenarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ordenarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -725,7 +708,6 @@ public class MainWindow extends javax.swing.JFrame {
     private java.awt.Label modelo3;
     private java.awt.Label modelo4;
     private java.awt.Label modelo9;
-    private javax.swing.JCheckBox ordenar;
     private javax.swing.JSlider sld_consumoMax;
     private javax.swing.JSlider sld_consumoMin;
     private javax.swing.JSlider sld_potenciaMax;

@@ -64,17 +64,13 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txt_potenciaMax" min="-2" pref="41" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cb_combustible" min="-2" pref="166" max="-2" attributes="0"/>
-                                  <Component id="txt_modelo" min="-2" pref="166" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="ordenar" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                              <Component id="cb_combustible" min="-2" pref="166" max="-2" attributes="0"/>
+                              <Component id="txt_modelo" min="-2" pref="166" max="-2" attributes="0"/>
                           </Group>
                           <Component id="cb_tipo" alignment="0" min="-2" pref="166" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="modelo3" min="-2" max="-2" attributes="0"/>
                           <Component id="modelo11" min="-2" max="-2" attributes="0"/>
@@ -126,14 +122,11 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="modelo" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txt_modelo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ordenar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="txt_modelo" min="-2" max="-2" attributes="0"/>
                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                           <Component id="txt_precioMin" min="-2" max="-2" attributes="0"/>
                           <Component id="sld_precioMin" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -279,8 +272,8 @@
         <Property name="valueIsAdjusting" type="boolean" value="true"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sld_potenciaMaxMouseClicked"/>
         <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="sld_potenciaMaxMouseDragged"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sld_potenciaMaxMouseClicked"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sld_potenciaMaxKeyPressed"/>
       </Events>
     </Component>
@@ -302,8 +295,8 @@
         <Property name="valueIsAdjusting" type="boolean" value="true"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sld_potenciaMinMouseClicked"/>
         <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="sld_potenciaMinMouseDragged"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sld_potenciaMinMouseClicked"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="sld_potenciaMinKeyPressed"/>
       </Events>
     </Component>
@@ -557,14 +550,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_introducirActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="ordenar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Ordenar por modelo"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ordenarActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

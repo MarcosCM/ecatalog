@@ -9,7 +9,7 @@ import java.sql.SQLException;
 /**
  * Modelo lógico de un coche
  */
-public class CarModel implements Comparable {
+public class CarModel {
     
     private String name;	// nombre del coche
     private String fuelType;	// tipo de combustible
@@ -343,11 +343,4 @@ public class CarModel implements Comparable {
                 + numberSeats + " asientos" + " - destacado: " + featured;
     }
 
-    @Override
-    public int compareTo(Object o) {
-        CarModel car = (CarModel) o;
-        String nameModel = car.getName();
-        /* For Ascending order*/
-        return this.name.compareToIgnoreCase(nameModel);
-    }
 }
