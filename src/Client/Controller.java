@@ -69,7 +69,6 @@ public class Controller {
      */
     public static int list(Form form, JTable modelsList){
     	ArrayList<CarModel> models = new ArrayList<CarModel>();
-
     	JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
     	String options = getSQLOptions(form);
     	String query = "SELECT * FROM Featured_Cars "+options;
@@ -108,7 +107,6 @@ public class Controller {
                 }
             } catch (SQLException e){}
         }
-
 
     	//pasamos el vector de modelos a la vista
     	View.list(models.toArray(new CarModel[models.size()]), modelsList, numFeatured);
