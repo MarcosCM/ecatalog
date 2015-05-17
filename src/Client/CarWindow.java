@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -225,7 +227,17 @@ public class CarWindow extends javax.swing.JFrame {
         imagenCoche.setPreferredSize(new java.awt.Dimension(200, 140));
 
         imagen.setPreferredSize(new java.awt.Dimension(200, 140));
-        imagen.setIcon(new ImageIcon(this.getToolkit().createImage(car.getImg()).getScaledInstance((int) imagen.getPreferredSize().getWidth(), (int) imagen.getPreferredSize().getHeight(), Image.SCALE_SMOOTH)));
+        Image img = null;
+        if (car.getImg() != null) img = this.getToolkit().createImage(car.getImg());
+        else{
+            try{
+                File f = new File("resources/images/no_photo.jpg");
+                img = ImageIO.read(f);
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        imagen.setIcon(new ImageIcon(img.getScaledInstance((int) imagen.getPreferredSize().getWidth(), (int) imagen.getPreferredSize().getHeight(), Image.SCALE_SMOOTH)));
 
         javax.swing.GroupLayout imagenCocheLayout = new javax.swing.GroupLayout(imagenCoche);
         imagenCoche.setLayout(imagenCocheLayout);
