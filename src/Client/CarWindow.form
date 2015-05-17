@@ -39,19 +39,19 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="campoNombre" alignment="0" pref="139" max="32767" attributes="0"/>
-                          <Component id="campoCombustible" alignment="0" pref="139" max="32767" attributes="0"/>
-                          <Component id="campoPotencia" alignment="0" pref="139" max="32767" attributes="0"/>
-                          <Component id="campoCategoria" alignment="0" pref="139" max="32767" attributes="0"/>
-                          <Component id="campoConsumo" alignment="0" pref="139" max="32767" attributes="0"/>
-                          <Component id="campoPuertas" alignment="0" pref="139" max="32767" attributes="0"/>
-                          <Component id="campoAsientos" alignment="0" pref="139" max="32767" attributes="0"/>
-                          <Component id="campoPrecio" alignment="0" pref="139" max="32767" attributes="0"/>
+                          <Component id="campoCategoria" alignment="0" pref="178" max="32767" attributes="0"/>
+                          <Component id="campoConsumo" alignment="0" pref="178" max="32767" attributes="0"/>
+                          <Component id="campoPuertas" alignment="0" pref="178" max="32767" attributes="0"/>
+                          <Component id="campoAsientos" alignment="0" pref="178" max="32767" attributes="0"/>
+                          <Component id="campoPrecio" alignment="0" pref="178" max="32767" attributes="0"/>
+                          <Component id="campoCombustible" max="32767" attributes="0"/>
+                          <Component id="campoNombre" alignment="0" max="32767" attributes="0"/>
+                          <Component id="campoPotencia" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="imagenCoche" pref="242" max="32767" attributes="0"/>
+                  <Component id="imagenCoche" pref="281" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Component id="formularioContacto" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
