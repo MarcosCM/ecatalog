@@ -1,5 +1,6 @@
 package Database;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
 
@@ -69,7 +70,8 @@ public class JDBCTemplate {
         if (singleton == null){
             Properties prop = new Properties();
             try {
-                prop.load(JDBCTemplate.class.getResourceAsStream("database.properties"));
+                InputStream in = JDBCTemplate.class.getResourceAsStream("database.properties");
+                prop.load(in);
                 singleton = configureOracle(prop);
             } catch (Exception e) {
                 System.err.println(e.getMessage());

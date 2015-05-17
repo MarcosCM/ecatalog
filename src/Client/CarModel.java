@@ -272,7 +272,8 @@ public class CarModel {
             ps.setDouble(7, getConsumption());
             ps.setInt(8, getNumberSeats());
             ps.setBoolean(9, getHidden());
-            ps.setBytes(10, getImg());
+            if (img == null) ps.setNull(10, java.sql.Types.BLOB);
+            else ps.setBytes(10, getImg());
             
             //probamos a insertar
             try{
@@ -295,7 +296,8 @@ public class CarModel {
                 ps.setDouble(7, getConsumption());
                 ps.setInt(8, getNumberSeats());
                 ps.setBoolean(9, getHidden());
-                ps.setBytes(10, getImg());
+                if (img == null) ps.setNull(10, java.sql.Types.BLOB);
+                else ps.setBytes(10, getImg());
                 try{
                     res = ps.executeUpdate();
                 } catch(SQLException e){
@@ -315,7 +317,8 @@ public class CarModel {
                 ps.setDouble(6, getConsumption());
                 ps.setInt(7, getNumberSeats());
                 ps.setBoolean(8, getHidden());
-                ps.setBytes(9, getImg());
+                if (img == null) ps.setNull(9, java.sql.Types.BLOB);
+                else ps.setBytes(9, getImg());
                 ps.setString(10, getName());
                 try{
                     res = ps.executeUpdate();
@@ -342,5 +345,4 @@ public class CarModel {
                 + fuelType + " - " + consumption + " l/100 km - " + numberDoors + " puertas - "
                 + numberSeats + " asientos" + " - destacado: " + featured;
     }
-
 }

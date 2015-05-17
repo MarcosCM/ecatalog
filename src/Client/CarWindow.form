@@ -411,7 +411,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="imagen.setIcon(new ImageIcon(this.getToolkit().createImage(car.getImg()).getScaledInstance((int) imagen.getPreferredSize().getWidth(), (int) imagen.getPreferredSize().getHeight(), Image.SCALE_SMOOTH)));"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="Image img = null;&#xa;if (car.getImg() != null) img = this.getToolkit().createImage(car.getImg());&#xa;else{&#xa;    try{&#xa;        File f = new File(&quot;resources/images/no_photo.jpg&quot;);&#xa;        img = ImageIO.read(f);&#xa;    } catch(Exception e){&#xa;        e.printStackTrace();&#xa;    }&#xa;}&#xa;imagen.setIcon(new ImageIcon(img.getScaledInstance((int) imagen.getPreferredSize().getWidth(), (int) imagen.getPreferredSize().getHeight(), Image.SCALE_SMOOTH)));"/>
           </AuxValues>
         </Component>
       </SubComponents>

@@ -2,13 +2,50 @@ package Admin;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * Ventana de la ficha de un coche
  */
 public class CarWindow extends javax.swing.JFrame {
-
+    /*
+     * Copyright (c) 1995, 2008, Oracle and/or its affiliates. All rights reserved.
+     *
+     * Redistribution and use in source and binary forms, with or without
+     * modification, are permitted provided that the following conditions
+     * are met:
+     *
+     *   - Redistributions of source code must retain the above copyright
+     *     notice, this list of conditions and the following disclaimer.
+     *
+     *   - Redistributions in binary form must reproduce the above copyright
+     *     notice, this list of conditions and the following disclaimer in the
+     *     documentation and/or other materials provided with the distribution.
+     *
+     *   - Neither the name of Oracle or the names of its
+     *     contributors may be used to endorse or promote products derived
+     *     from this software without specific prior written permission.
+     *
+     * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+     * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+     * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+     * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+     * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+     * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+     * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+     * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+     * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+     * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+     * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     * 
+     * Source code of imagenFileChooser based in FileChooser Swing tutorial: https://docs.oracle.com/javase/tutorial/uiswing/components/filechooser.html
+     */
+    
     /**
      * Coche del que tiene información esta ventana
      */
@@ -18,6 +55,11 @@ public class CarWindow extends javax.swing.JFrame {
     * Flag para modificar o introducir
     */
     private final boolean accion;
+    
+    /**
+     * Panel con la imagen del coche a subir al servidor
+     */
+    private final JFileChooser imageFileChooser;
 
     /**
      * Creates new form Descripcion
@@ -28,8 +70,12 @@ public class CarWindow extends javax.swing.JFrame {
     public CarWindow(CarModel car, boolean accion) {
         this.accion=accion;
         initComponents();
+        imageFileChooser = new JFileChooser();
+        /*
+         * Toolkit.createImage sólo soporta determinados formatos de imagen
+         */
+        imageFileChooser.setFileFilter(new FileNameExtensionFilter("GIF, JPG o PNG", "gif", "jpg", "jpeg", "png"));
         if (!accion) {
-
             btnModificar.setText("Introducir");
             campoNombre.setEditable(true);
         }
@@ -42,9 +88,8 @@ public class CarWindow extends javax.swing.JFrame {
         campoPotencia.setText("" + car.getPower());
         campoPrecio.setText("" + car.getCost());
         campoPuertas.setText("" + car.getNumberDoors());
-
+        sobreescribirImagen.setSelected(false);
         destacado.setSelected(car.getFeatured());
-        //falta ponerle un boolean si esta destacado o no
     }
 
     /**
@@ -74,6 +119,11 @@ public class CarWindow extends javax.swing.JFrame {
         campoPrecio = new javax.swing.JTextField();
         destacado = new javax.swing.JCheckBox();
         btnModificar = new javax.swing.JButton();
+        campoImagen = new javax.swing.JTextField();
+        Imagen = new javax.swing.JLabel();
+        btnImagen = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        sobreescribirImagen = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,39 +196,70 @@ public class CarWindow extends javax.swing.JFrame {
             }
         });
 
+        campoImagen.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        campoImagen.setBorder(null);
+
+        Imagen.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Imagen.setText("Imagen:");
+
+        btnImagen.setText("Buscar");
+        btnImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImagenActionPerformed(evt);
+            }
+        });
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
+        sobreescribirImagen.setText("Sobreescribir imagen");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Puertas)
-                    .addComponent(Asientos)
-                    .addComponent(Precio)
-                    .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Combustible)
-                    .addComponent(Potencia)
-                    .addComponent(Categoria)
-                    .addComponent(Consumo)
-                    .addComponent(destacado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(campoNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoCombustible, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoPotencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoCategoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoConsumo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoPuertas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoAsientos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoPrecio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(116, Short.MAX_VALUE))
+                    .addComponent(sobreescribirImagen)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Puertas)
+                            .addComponent(Asientos)
+                            .addComponent(Precio)
+                            .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Combustible)
+                            .addComponent(Potencia)
+                            .addComponent(Categoria)
+                            .addComponent(Consumo)
+                            .addComponent(Imagen)
+                            .addComponent(destacado))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(campoNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoCombustible, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoPotencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoCategoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoConsumo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoPuertas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoAsientos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoPrecio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoImagen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnImagen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLimpiar)))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(57, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Nombre)
                     .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -210,11 +291,19 @@ public class CarWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Precio)
                     .addComponent(campoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Imagen)
+                    .addComponent(campoImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnImagen)
+                    .addComponent(btnLimpiar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sobreescribirImagen)
+                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(destacado)
                     .addComponent(btnModificar))
-                .addGap(81, 81, 81))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
@@ -265,8 +354,35 @@ public class CarWindow extends javax.swing.JFrame {
         car.setCost(cost);
         car.setNumberDoors(doors);
         car.setFeatured(destacado.isSelected());
+        if (sobreescribirImagen.isSelected()){
+            byte[] imgBytes = null;
+            if (!campoImagen.getText().equals("")){
+                try {
+                    imgBytes = Files.readAllBytes((new File(campoImagen.getText())).toPath());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            car.setImg(imgBytes);
+        }
         Controller.modify(car,accion);
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
+        //Handle open button action.
+        int returnVal = imageFileChooser.showOpenDialog(btnImagen);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = imageFileChooser.getSelectedFile();
+            //This is where a real application would open the file.
+            campoImagen.setText(file.getPath());
+        } else {
+            campoImagen.setText("");
+        }
+    }//GEN-LAST:event_btnImagenActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        campoImagen.setText("");
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
 
     /**
@@ -317,19 +433,24 @@ public class CarWindow extends javax.swing.JFrame {
     private javax.swing.JLabel Categoria;
     private javax.swing.JLabel Combustible;
     private javax.swing.JLabel Consumo;
+    private javax.swing.JLabel Imagen;
     private javax.swing.JLabel Nombre;
     private javax.swing.JLabel Potencia;
     private javax.swing.JLabel Precio;
     private javax.swing.JLabel Puertas;
+    private javax.swing.JButton btnImagen;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JTextField campoAsientos;
     private javax.swing.JTextField campoCategoria;
     private javax.swing.JTextField campoCombustible;
     private javax.swing.JTextField campoConsumo;
+    private javax.swing.JTextField campoImagen;
     private javax.swing.JTextField campoNombre;
     private javax.swing.JTextField campoPotencia;
     private javax.swing.JTextField campoPrecio;
     private javax.swing.JTextField campoPuertas;
     private javax.swing.JCheckBox destacado;
+    private javax.swing.JCheckBox sobreescribirImagen;
     // End of variables declaration//GEN-END:variables
 }
