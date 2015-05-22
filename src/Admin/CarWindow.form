@@ -291,7 +291,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="sobreescribirImagen">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Sobreescribir imagen"/>
+        <Property name="text" type="java.lang.String" value="Sobrescribir imagen"/>
       </Properties>
     </Component>
   </SubComponents>
