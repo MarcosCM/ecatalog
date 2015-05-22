@@ -216,7 +216,7 @@ public class CarWindow extends javax.swing.JFrame {
             }
         });
 
-        sobreescribirImagen.setText("Sobreescribir imagen");
+        sobreescribirImagen.setText("Sobrescribir imagen");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
