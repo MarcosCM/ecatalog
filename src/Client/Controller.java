@@ -64,9 +64,10 @@ public class Controller {
      * Accede al listado de coches
      * @param form Filtro de parámetros
      * @param modelsList Lista que contiene los resultados de la búsqueda
-     * @return Número de destacados
+     * @return Array de objetos donde el primer objeto es el número de destacados
+     * y el segundo objeto es un array con los coches que no están destacados.
      */
-    public static int list(Form form, JTable modelsList){
+    public static Object[] list(Form form, JTable modelsList){
     	ArrayList<CarModel> models = new ArrayList<CarModel>();
     	JDBCTemplate template = JDBCTemplate.getJDBCTemplate();
     	String options = getSQLOptions(form);
@@ -108,9 +109,10 @@ public class Controller {
         }
 
     	//pasamos el vector de modelos a la vista
-    	View.list(models.toArray(new CarModel[models.size()]), modelsList, numFeatured);
-        //devolvemos el número de destacados
-        return numFeatured;
+        CarModel[] modelsArr = models.toArray(new CarModel[models.size()]);
+    	View.list(modelsArr, modelsList, numFeatured);
+        //devolvemos el número de destacados y el array de modelos
+        return new Object[]{numFeatured, modelsArr};
     }
     
     /**

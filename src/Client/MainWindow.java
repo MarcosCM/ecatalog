@@ -3,6 +3,7 @@ package Client;
 import Database.JDBCTemplate;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Vector;
@@ -25,6 +26,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
     };
     private final javax.swing.JTable modelsList = new javax.swing.JTable(tableModel);
+    private CarModel[] models = null;
     private int numFeatured = 0;        //numero de coches destacados
     private boolean ordenation = false; //tipo de ordenacion
     
@@ -51,7 +53,8 @@ public class MainWindow extends javax.swing.JFrame {
                         */
                         vectorAux.add(vector.remove(numFeatured));
                     }
-                    Collections.sort(vectorAux, new ComparatorModels(col, ordenation));
+                    Collections.sort(vectorAux, new ComparatorDataVector(col, ordenation));
+                    Arrays.sort(models, new ComparatorArrayModels(col, ordenation));
                     ordenation = !ordenation;
                     vector.addAll(vectorAux);
                 }
@@ -636,7 +639,9 @@ public class MainWindow extends javax.swing.JFrame {
         }
 
         Form formulario_filtro = new Form(filtro);
-        numFeatured = Controller.list(formulario_filtro, modelsList);
+        Object[] res = Controller.list(formulario_filtro, modelsList);
+        numFeatured = (int) res[0];
+        models = (CarModel[]) res[1];
         filtro.clear();
     }//GEN-LAST:event_btn_buscarActionPerformed
 
