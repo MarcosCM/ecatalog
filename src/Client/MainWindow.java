@@ -121,7 +121,12 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        cb_combustible.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "Gasolina", "Gasoil" }));
+        cb_combustible.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "Gasolina", "Diesel" }));
+        cb_combustible.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_combustibleActionPerformed(evt);
+            }
+        });
 
         tipo_combustible.setName("Modelo"); // NOI18N
         tipo_combustible.setText("Tipo combustible");
@@ -190,7 +195,7 @@ public class MainWindow extends javax.swing.JFrame {
         potencia_min.setName("Potencia Min"); // NOI18N
         potencia_min.setText("Potencia Min(CV)");
 
-        cb_tipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "Familiar", "Deportivo", "Monovolumen", "Todo-terreno", "Mini" }));
+        cb_tipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cualquiera", "Familiar", "Deportivo", "Monovolumen", "Berlina", "Todo-terreno", "Mini" }));
         cb_tipo.setToolTipText("");
         cb_tipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -680,6 +685,10 @@ public class MainWindow extends javax.swing.JFrame {
         txt_precioMin.setText(String.valueOf(sld_precioMin.getValue()));
 
     }//GEN-LAST:event_sld_precioMinMouseClicked
+
+    private void cb_combustibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_combustibleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_combustibleActionPerformed
 
     /**
      * @param args the command line arguments

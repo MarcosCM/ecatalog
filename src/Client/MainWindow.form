@@ -235,14 +235,13 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="cb_combustible">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Cualquiera"/>
-            <StringItem index="1" value="Gasolina"/>
-            <StringItem index="2" value="Gasoil"/>
-          </StringArray>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;Cualquiera&quot;, &quot;Gasolina&quot;, &quot;Diesel&quot; })" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_combustibleActionPerformed"/>
+      </Events>
     </Component>
     <Component class="java.awt.Label" name="tipo_combustible">
       <Properties>
@@ -319,15 +318,8 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="cb_tipo">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="6">
-            <StringItem index="0" value="Cualquiera"/>
-            <StringItem index="1" value="Familiar"/>
-            <StringItem index="2" value="Deportivo"/>
-            <StringItem index="3" value="Monovolumen"/>
-            <StringItem index="4" value="Todo-terreno"/>
-            <StringItem index="5" value="Mini"/>
-          </StringArray>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;Cualquiera&quot;, &quot;Familiar&quot;, &quot;Deportivo&quot;, &quot;Monovolumen&quot;, &quot;Berlina&quot;, &quot;Todo-terreno&quot;, &quot;Mini&quot; })" type="code"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
