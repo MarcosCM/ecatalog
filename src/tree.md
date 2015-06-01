@@ -1,5 +1,6 @@
 # Source
 Fuentes:
-* **Aplicacion**: Buscador
+* **Admin**: Aplicación del administrador
+* **Cliente**: Aplicación del cliente
 * **Database**: API - Database
 * **External**: Librerías externas (no propias)
